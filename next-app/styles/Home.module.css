@@ -2,8 +2,29 @@
   padding: 0 2rem;
 }
 
+.header {
+  background-color: #ffffff;
+  min-height: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  margin: 5px;
+}
+
+.header-logo {
+  height: 75px;
+  pointer-events: none;
+}
+
+.footer-logo {
+  margin-left: 0.5rem;
+}
+
 .main {
-  min-height: 100vh;
+  min-height: 80vh;
   padding: 4rem 0;
   flex: 1;
   display: flex;
@@ -103,9 +124,14 @@
   line-height: 1.5;
 }
 
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
+.about {
+  margin: 5px;
+  padding: 5px;
+  text-align: justify;
+  width: 600px;
+  /* border-color: #0092ac;
+    border-width: 0.1em;
+    border-style: dotted; */
 }
 
 @media (max-width: 600px) {
