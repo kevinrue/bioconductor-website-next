@@ -93,6 +93,17 @@ Initial configuration:
 - `Ctrl` + `Shift` + `D`: Open the 'Run and Debug' panel.
 - Click on 'select the create a launch.json file link'.
 - Change the port of the url from `8080` to `3000`.
+- Add the following lines to the file `.gitignore`:
+
+```bash
+### VisualStudioCode ###
+# From <https://stackoverflow.com/a/57749909>
+.vscode/*      # Maybe .vscode/**/* instead - see comments
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+```
 
 Usage:
 
