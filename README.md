@@ -47,6 +47,16 @@ To fix this issue, open the file `.eslintrc.js` and add the following lines in t
 
 Source: <https://github.com/eslint/eslint/issues/13008>
 
+Additional rules can be defined in the `"rules"` section of the `.eslintrc.js` file.
+
+For instance, `"no-extra-semi"` can be added to raise an error when two consecutive semi colons (i.e., `;;`) are detected.
+
+```yaml
+"rules": {
+        "no-extra-semi":"error"
+    }
+```
+
 ## Set up for contributors
 
 - Clone repository from GitHub.
