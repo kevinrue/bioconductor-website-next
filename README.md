@@ -20,7 +20,7 @@ ESlint may report a problem stating `'React' must be in scope when using JSX`.
 
 To fix this message, open the file `.eslintrc.js` and add the line `"plugin:react/jsx-runtime",` in the `extends` section.
 
-```
+```yaml
     "extends": [
         "plugin:react/jsx-runtime",
     ],
@@ -28,6 +28,24 @@ To fix this message, open the file `.eslintrc.js` and add the line `"plugin:reac
 
 Source:
 <https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md#when-not-to-use-it>.
+
+ESlint may report a problem stating `'module' is not defined`.
+
+To fix this issue, open the file `.eslintrc.js` and add the following lines in the `"files"` and `"env"` fields in the `"overrides"` section.
+
+```yaml
+    "overrides": [{
+        "files": [
+            ".eslintrc.js",
+        ],
+        "env": {
+            "node": true,
+            "browser": false,
+        },
+    }],
+```
+
+Source: <https://github.com/eslint/eslint/issues/13008>
 
 ## Set up for contributors
 
@@ -48,7 +66,7 @@ Application:
 
 Initial configuration:
 
-- (Terminal) `npm install -g eslint`: 
+- (Terminal) `npm install -g eslint`:
 
 In Visual Studio Code, the 'Problems' panel lists syntax erors detected by active linting extensions.
 
