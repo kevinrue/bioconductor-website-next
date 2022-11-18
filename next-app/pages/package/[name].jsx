@@ -9,7 +9,7 @@ const Package = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Bioconductor - Home</title>
+        <title>{name} - Package landing page</title>
         <meta
           name="description"
           content="Work in progress by Kevin Rue-Albrecht"
