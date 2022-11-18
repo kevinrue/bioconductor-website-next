@@ -1,6 +1,6 @@
+import styles from "../../styles/Package.module.css";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import styles from "../../styles/Package.module.css";
 
 const Package = () => {
   const router = useRouter();

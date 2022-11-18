@@ -15,8 +15,8 @@ export default function Main() {
             src="/bioconductor_logo_rgb.svg"
             className={styles["navbar-logo"]}
             alt="Bioconductor Logo"
-            width={300}
-            height={100}
+            width={260}
+            height={75}
           />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -24,6 +24,9 @@ export default function Main() {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <NavDropdown title="Packages" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/packages">All packages</NavDropdown.Item>
+              <div className="dropdown-divider"></div>
+              <NavDropdown.Header>Featured</NavDropdown.Header>
               <NavDropdown.Item href="/package/iSEE">iSEE</NavDropdown.Item>
               <NavDropdown.Item href="/package/iSEEu">iSEEu</NavDropdown.Item>
             </NavDropdown>

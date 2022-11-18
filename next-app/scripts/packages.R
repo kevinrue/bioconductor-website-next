@@ -1,0 +1,30 @@
+library(BiocManager)
+# library(jsonlite)
+# library(stringr)
+
+bioc_packages <- BiocManager::available()
+
+# json_packages <- jsonlite::toJSON(bioc_packages)
+# json_packages <- stringr::str_replace(json_packages, "\\[", "\\[\n  ")
+# json_packages <- stringr::str_replace_all(json_packages, ",", ",\n  ")
+# json_packages <- stringr::str_replace_all(json_packages, ",", ",\n  ")
+# cat(stringr::str_sub(json_packages, 1, 30))
+# cat(stringr::str_sub(json_packages, str_length(json_packages) - 30))
+write(json_packages, "packages.json")
+file.copy("packages.json", "/Users/kevin/Git/bioconductor-website-react/next-app/json/", overwrite = TRUE)
+# str(bioc_packages)
+# length(unique(bioc_packages))
+# jsonlite::write_json(bioc_packages, path = "packages.json")
+# file.edit("packages.json")
+# file.copy("packages.json", "/Users/kevin/Git/bioconductor-website-react/next-app/json/")
+# x <- jsonlite::read_json("packages.json")
+# str(x)
+# jsonlite::toJSON(bioc_packages)
+# str(jsonlite::toJSON(bioc_packages))
+# as.character(jsonlite::toJSON(bioc_packages))
+# 
+# str(stringr::str_wrap(jsonlite::toJSON(bioc_packages), width = 10))
+# 
+# str(strsplit(jsonlite::toJSON(bioc_packages), ",")[[1]])
+# 
+# str(stringr::str_replace_all(jsonlite::toJSON(bioc_packages), "\\[", "\\[\n"))
