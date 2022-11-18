@@ -2,6 +2,9 @@
 // <https://vercel.com/guides/loading-static-file-nextjs-api-route>
 import styles from "../styles/Packages.module.css";
 import Head from "next/head";
+import Link from "next/link";
+// <https://react-data-table-component.netlify.app/?path=/docs/getting-started-examples--page>
+import DataTable from "react-data-table-component";
 //useSWR allows the use of SWR inside function components
 import useSWR from "swr";
 import Layout from "../components/layout";
@@ -19,11 +22,17 @@ export default function Packages() {
   //Handle the loading state
   if (!data) return <div>Loading...</div>;
   //Handle the ready state and display the result contained in the data object mapped to the structure of the json file
-  const listItems = JSON.parse(data).name.map((name: string) => (
-    <li key={name}>
-      <a href={`/package/${name}`}>{name}</a>
-    </li>
-  ));
+  const table_columns = [
+    {
+      name: "Name",
+      selector: (row: any) => row.name,
+    },
+  ];
+
+  const table_data = JSON.parse(data).name.map((name: string) => ({
+    name: <Link className={styles.link} href={`/package/${name}`}>{name}</Link>,
+  }));
+
   return (
     <Layout>
       <div className={styles.container}>
@@ -36,8 +45,8 @@ export default function Packages() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <main className={styles.main}>
-          <h1>Overview</h1>
-          <ul>{listItems}</ul>
+          <h1>Packages</h1>
+          <DataTable columns={table_columns} data={table_data} pagination />
         </main>
       </div>
     </Layout>

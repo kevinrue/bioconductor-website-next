@@ -13,3 +13,9 @@
   justify-content: left;
   align-items: left;
 }
+
+.link {
+  color: #1a81c2;
+  text-decoration: none;
+  font-style: italic;
+}
