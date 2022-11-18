@@ -30,6 +30,9 @@ export default function Main() {
               <NavDropdown.Item href="/package/iSEE">iSEE</NavDropdown.Item>
               <NavDropdown.Item href="/package/iSEEu">iSEEu</NavDropdown.Item>
             </NavDropdown>
+            <NavDropdown title="Blog" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/post/example">Example</NavDropdown.Item>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>
