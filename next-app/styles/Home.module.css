@@ -4,10 +4,6 @@
   /* background-clip: padding-box; */
 }
 
-.footer-logo {
-  margin-left: 0.5rem;
-}
-
 .main {
   min-height: 80vh;
   padding: 4rem 0;
@@ -16,6 +12,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.footer-logo {
+  margin-left: 0.5rem;
 }
 
 .title a {
