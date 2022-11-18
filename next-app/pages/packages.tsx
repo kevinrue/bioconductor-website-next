@@ -37,7 +37,7 @@ export default function Packages() {
         </Head>
         <main className={styles.main}>
           <h1>Overview</h1>
-          {listItems}
+          <ul>{listItems}</ul>
         </main>
       </div>
     </Layout>
