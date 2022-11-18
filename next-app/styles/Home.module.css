@@ -1,20 +1,14 @@
 .container {
   padding: 0 2rem;
+  /* background-color: white; */
+  /* background-clip: content-box; */
 }
 
-.header {
-  background-color: #ffffff;
-  min-height: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  margin: 5px;
+.navbar {
+  width: 100%;
 }
 
-.header-logo {
+.navbar-logo {
   height: 75px;
   pointer-events: none;
 }
