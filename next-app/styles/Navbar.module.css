@@ -1,0 +1,8 @@
+.navbar {
+  width: 100%;
+}
+
+.navbar-logo {
+  height: 75px;
+  pointer-events: none;
+}

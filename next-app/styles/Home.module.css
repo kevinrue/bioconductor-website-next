@@ -1,16 +1,7 @@
 .container {
   padding: 0 2rem;
-  /* background-color: white; */
-  /* background-clip: content-box; */
-}
-
-.navbar {
-  width: 100%;
-}
-
-.navbar-logo {
-  height: 75px;
-  pointer-events: none;
+  background-color: aliceblue;
+  /* background-clip: padding-box; */
 }
 
 .footer-logo {
@@ -25,24 +16,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.footer {
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  color: inherit;
-  text-decoration: none;
 }
 
 .title a {

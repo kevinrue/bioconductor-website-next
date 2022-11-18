@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import Image from "next/image";
+import Head from "next/head";
 import styles from "../../styles/Package.module.css";
 
 const Package = () => {
@@ -8,8 +8,18 @@ const Package = () => {
 
   return (
     <div className={styles.container}>
-      <h1>{name}</h1>
-      <p>Insert package information here.</p>
+      <Head>
+        <title>Bioconductor - Home</title>
+        <meta
+          name="description"
+          content="Work in progress by Kevin Rue-Albrecht"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main className={styles.main}>
+        <h1>{name}</h1>
+        <p>Insert package information here.</p>
+      </main>
     </div>
   );
 };
