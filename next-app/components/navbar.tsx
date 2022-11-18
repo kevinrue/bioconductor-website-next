@@ -26,9 +26,8 @@ export default function Main() {
             <NavDropdown title="Packages" id="basic-nav-dropdown">
               <NavDropdown.Item href="/packages">All packages</NavDropdown.Item>
               <div className="dropdown-divider"></div>
-              <NavDropdown.Header>Featured</NavDropdown.Header>
-              <NavDropdown.Item href="/package/iSEE">iSEE</NavDropdown.Item>
-              <NavDropdown.Item href="/package/iSEEu">iSEEu</NavDropdown.Item>
+              <NavDropdown.Header>Example</NavDropdown.Header>
+              <NavDropdown.Item href="/package/Biobase">Biobase</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Blog" id="basic-nav-dropdown">
               <NavDropdown.Item href="/post/example">Example</NavDropdown.Item>
