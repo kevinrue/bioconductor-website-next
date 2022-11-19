@@ -9,20 +9,18 @@ const Package = () => {
 
   return (
     <Layout>
-      <div className={styles.container}>
-        <Head>
-          <title>{name} - Package landing page</title>
-          <meta
-            name="description"
-            content="Work in progress by Kevin Rue-Albrecht"
-          />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <main className={styles.main}>
-          <h1>{name}</h1>
-          <p>Insert package information here.</p>
-        </main>
-      </div>
+      <Head>
+        <title>{name} - Package landing page</title>
+        <meta
+          name="description"
+          content="Work in progress by Kevin Rue-Albrecht"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main className={styles.main}>
+        <h1>{name}</h1>
+        <p>Insert package information here.</p>
+      </main>
     </Layout>
   );
 };

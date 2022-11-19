@@ -2,6 +2,20 @@
   width: 100%;
 }
 
-.navbar-logo {
+.logo {
   pointer-events: none;
 }
+
+.link,
+.link>a {
+  font-style: normal;
+}
+
+.link:hover,
+.link>a:hover {
+  color: #87b13f;
+}
+
+/* .navbar-nav .show > .nav-link, .navbar-nav .nav-link.active {
+  color:#87b13f !important;
+} */

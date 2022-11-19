@@ -1,9 +1,3 @@
-.container {
-  padding: 0 2rem;
-  background-color: aliceblue;
-  background-clip: padding-box;
-}
-
 .main {
   min-height: 80vh;
   padding: 1rem 25px;

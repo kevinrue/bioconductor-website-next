@@ -1,9 +1,3 @@
-.container {
-  padding: 0 2rem;
-  background-color: aliceblue;
-  background-clip: padding-box;
-}
-
 .main {
   min-height: 80vh;
   padding: 1rem 25px;
@@ -14,13 +8,6 @@
   align-items: left;
 }
 
-.post a,
-.link {
-  color: #1a81c2;
-  text-decoration: none;
+.author {
   font-style: italic;
-}
-
-.link {
-  font-weight: bold;
 }

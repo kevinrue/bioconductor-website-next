@@ -1,7 +1,7 @@
 ---
 title: "Example post"
 date: "2022-11-18"
-author: "kevinrue"
+author: "Kevin Rue-Albrecht"
 ---
 
 This website is a proof of concept demonstrating the transition of the existing [Bioconductor][bioconductor-org] website to a [Node.js][node-js] application using the [Next.js][next-js] full-stack framework.

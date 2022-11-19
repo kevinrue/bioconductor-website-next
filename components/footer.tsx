@@ -1,12 +1,18 @@
 import styles from "../styles/Footer.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Main() {
   return (
     <footer className={styles.footer}>
-      <a href="https://nextjs.org/" target="_blank" rel="noopener noreferrer">
+      <Link
+        className={styles.link}
+        href="https://nextjs.org/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Developed using{" "}
-        <span className={styles["footer-logo"]}>
+        <span>
           <Image
             src="/next-black.svg"
             alt="Next Logo"
@@ -14,7 +20,7 @@ export default function Main() {
             height={50}
           />
         </span>
-      </a>
+      </Link>
     </footer>
   );
 }
