@@ -97,10 +97,8 @@
   margin: 5px;
   padding: 5px;
   text-align: justify;
-  width: 600px;
-  /* border-color: #0092ac;
-    border-width: 0.1em;
-    border-style: dotted; */
+  width: auto;
+  max-width: 600px;
 }
 
 @media (max-width: 600px) {
