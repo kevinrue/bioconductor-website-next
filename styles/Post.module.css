@@ -11,3 +11,9 @@
 .author {
   font-style: italic;
 }
+
+.contents {
+  border-radius: 25px;
+  background-color: white;
+  padding: 20px 2em;
+}

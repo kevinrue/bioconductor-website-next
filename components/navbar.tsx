@@ -29,7 +29,8 @@ export default function Main() {
               <NavDropdown.Item className={styles.link} href="/package/Biobase">Biobase</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown className={styles.link} title="Blog" id="basic-nav-dropdown">
-              <NavDropdown.Item className={styles.link} href="/post/example">Example</NavDropdown.Item>
+              <NavDropdown.Header>Example</NavDropdown.Header>
+              <NavDropdown.Item className={styles.link} href="/post/how-to-add-posts">How to Add Posts On This Website</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

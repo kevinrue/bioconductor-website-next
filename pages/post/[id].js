@@ -26,7 +26,7 @@ export default function Post({ postData }) {
           By {postData.author}
         </p>
         <br />
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+        <div className={styles.contents} dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </main>
     </Layout>
   );
