@@ -43,7 +43,7 @@ export default function Main() {
               title="Blog"
               id="basic-nav-dropdown"
             >
-              <NavDropdown.Header>How-to's</NavDropdown.Header>
+              <NavDropdown.Header>How-to&apos;s</NavDropdown.Header>
               <NavDropdown.Item
                 className={styles.link}
                 href="/posts/add-a-post"
