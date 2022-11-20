@@ -10,6 +10,12 @@
 
 .author {
   font-style: italic;
+  margin-bottom: 1em;
+}
+
+.date {
+  font-size: small;
+  margin-top: 1em;
 }
 
 .contents {

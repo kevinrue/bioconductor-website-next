@@ -4,7 +4,7 @@ import styles from "../../styles/Post.module.css";
 import Layout from "../../components/layout";
 import Head from "next/head";
 import Link from "next/link";
-import { getAllPostIds, getPostData } from "../../lib/post";
+import { getAllPostIds, getPostData } from "../../lib/posts";
 
 export default function Post({ postData }) {
   return (
@@ -19,14 +19,14 @@ export default function Post({ postData }) {
       </Head>
       <main className={styles.main}>
         <h1>{postData.title}</h1>
-        <br />
-        <h4>{postData.date}</h4>
-        <br />
-        <p className={styles.author}>
-          By {postData.author}
+        <p className={styles.author}>By {postData.author}</p>
+        <div
+          className={styles.contents}
+          dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+        />
+        <p className={styles.date}>
+          Created on {postData.created} (Last updated: {postData.edited})
         </p>
-        <br />
-        <div className={styles.contents} dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </main>
     </Layout>
   );

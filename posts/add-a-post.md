@@ -1,7 +1,8 @@
 ---
-title: "How to Add Posts On This Website"
-date: "2022-11-19"
+title: "How to - Add a Post"
 author: "Kevin Rue-Albrecht"
+created: "2022-11-18"
+edited: "2022-11-20"
 ---
 
 ## Introduction
@@ -14,17 +15,18 @@ The contents of the post itself are written in Markdown in this [file][github-po
 
 ## How Posts Work In This Application
 
-When accessing the URI `/post/[id]`, the application attempts to parse the file `/posts/[id].md`.
-The application expects the Markdown file to contain a YAML header with the fields `title`, `date`, and `author`,
+When accessing the URI `/posts/[id]`, the application attempts to parse the file `/posts/[id].md`.
+The application expects the Markdown file to contain a YAML header with the fields `title`, `author`, `added` and `edited`,
 followed by the contents of the post in Markdown.
 
-Title, date, and author metadata are displayed in dedicated components of the page, while the contents of the post are converted to HTML and displayed _as-is_.
+Title, author, date of first creation, and date of last editing metadata in the YAML header are displayed in dedicated components of the page,
+while the body of the post is converted from Markdown to HTML and displayed _as-is_.
 
 ## How _You_ Can Add A Post
 
 As a result, adding a new post is achieved by adding a new Markdown file in the `/posts/[id].md`, following the requirements described above.
 
-The post will then be accessible at the URI `/post/[id]`.
+The post will then be accessible at the URI `/posts/[id]`.
 
 <!-- Links -->
 

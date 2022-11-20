@@ -21,16 +21,41 @@ export default function Main() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link className={styles.link} href="/">Home</Nav.Link>
-            <NavDropdown className={styles.link} title="Packages" id="basic-nav-dropdown">
-              <NavDropdown.Item className={styles.link} href="/packages">All packages</NavDropdown.Item>
+            <Nav.Link className={styles.link} href="/">
+              Home
+            </Nav.Link>
+            <NavDropdown
+              className={styles.link}
+              title="Packages"
+              id="basic-nav-dropdown"
+            >
+              <NavDropdown.Item className={styles.link} href="/packages">
+                All packages
+              </NavDropdown.Item>
               <div className="dropdown-divider"></div>
               <NavDropdown.Header>Example</NavDropdown.Header>
-              <NavDropdown.Item className={styles.link} href="/package/Biobase">Biobase</NavDropdown.Item>
+              <NavDropdown.Item className={styles.link} href="/package/Biobase">
+                Biobase
+              </NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown className={styles.link} title="Blog" id="basic-nav-dropdown">
-              <NavDropdown.Header>Example</NavDropdown.Header>
-              <NavDropdown.Item className={styles.link} href="/post/how-to-add-posts">How to Add Posts On This Website</NavDropdown.Item>
+            <NavDropdown
+              className={styles.link}
+              title="Blog"
+              id="basic-nav-dropdown"
+            >
+              <NavDropdown.Header>How-to's</NavDropdown.Header>
+              <NavDropdown.Item
+                className={styles.link}
+                href="/posts/add-a-post"
+              >
+                Add a Post
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                className={styles.link}
+                href="/posts/add-a-search-bar"
+              >
+                Add a Search Bar
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

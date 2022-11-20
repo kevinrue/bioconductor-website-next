@@ -102,9 +102,7 @@ export default function Packages() {
       </Head>
       <main className={styles.main}>
         <h1>Packages</h1>
-        <Box
-          sx={{ display: "flex", flexWrap: 'wrap', gap: 3 }}
-        >
+        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
           <Box>
             <h4>Filters</h4>
             <hr />
