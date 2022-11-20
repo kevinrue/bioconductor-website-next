@@ -47,14 +47,18 @@ const paginationComponentOptions = {
 };
 
 const filterPackageNamePattern = (name: string, pattern: string) => {
-  var matcher = new RegExp(pattern);
+  try {
+    var matcher = new RegExp(pattern);
+  }
+  catch(err) {
+    return(true);
+  }
   if (matcher.test(name)) {
     return true;
   } else {
     return false;
   }
 };
-// console.log(["A", "A1", "B"].filter(name => filterPackageNamePattern(name, "A")));
 
 export default function Packages() {
   //Set up SWR to run the fetcher function when calling "/api/staticdata"
