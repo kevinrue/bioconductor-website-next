@@ -9,8 +9,8 @@ import { useState } from "react";
 //useSWR allows the use of SWR inside function components
 import useSWR from "swr";
 import Layout from "../components/layout";
-import useDebounce from '../lib/useDebounce';
-import Grid from "@mui/material/Grid";
+import useDebounce from "../lib/useDebounce";
+import { Box } from "@mui/system";
 import TextField from "@mui/material/TextField";
 
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
@@ -50,9 +50,8 @@ const paginationComponentOptions = {
 const filterPackageNamePattern = (name: string, pattern: string) => {
   try {
     var matcher = new RegExp(pattern);
-  }
-  catch(err) {
-    return(true);
+  } catch (err) {
+    return true;
   }
   if (matcher.test(name)) {
     return true;
@@ -74,7 +73,9 @@ export default function Packages() {
   if (!data) return <div>Loading...</div>;
 
   const table_data = JSON.parse(data)
-    .name.filter((name: string) => filterPackageNamePattern(name, debouncedPackageSearchString))
+    .name.filter((name: string) =>
+      filterPackageNamePattern(name, debouncedPackageSearchString)
+    )
     .map((name: string) => ({
       name: (
         <Link className={styles.link} href={`/package/${name}`}>
@@ -101,8 +102,10 @@ export default function Packages() {
       </Head>
       <main className={styles.main}>
         <h1>Packages</h1>
-        <Grid container spacing={2}>
-          <Grid item xs={2}>
+        <Box
+          sx={{ display: "flex", flexWrap: 'wrap', gap: 3 }}
+        >
+          <Box>
             <h4>Filters</h4>
             <hr />
             <TextField
@@ -112,8 +115,8 @@ export default function Packages() {
               onChange={handleChangePackageSearchString}
               value={packageSearchString}
             />
-          </Grid>
-          <Grid item xs={10}>
+          </Box>
+          <Box sx={{ flexGrow: 1 }}>
             <DataTable
               columns={table_columns}
               data={table_data}
@@ -122,8 +125,8 @@ export default function Packages() {
               // <https://stackoverflow.com/questions/66980280/how-to-sort-react-data-table-component-by-column-number>
               defaultSortFieldId="package_name"
             />
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </main>
     </Layout>
   );
