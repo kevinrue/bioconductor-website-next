@@ -9,6 +9,7 @@ import { useState } from "react";
 //useSWR allows the use of SWR inside function components
 import useSWR from "swr";
 import Layout from "../components/layout";
+import useDebounce from '../lib/useDebounce';
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 
@@ -64,6 +65,7 @@ export default function Packages() {
   //Set up SWR to run the fetcher function when calling "/api/staticdata"
   //There are 3 possible states: (1) loading when data is null (2) ready when the data is returned (3) error when there was an error fetching the data
   const [packageSearchString, setPackageSearchString] = useState("");
+  const debouncedPackageSearchString = useDebounce(packageSearchString, 500);
   const { data, error } = useSWR("/api/packages", fetcher);
 
   //Handle the error state
@@ -72,7 +74,7 @@ export default function Packages() {
   if (!data) return <div>Loading...</div>;
 
   const table_data = JSON.parse(data)
-    .name.filter((name: string) => filterPackageNamePattern(name, packageSearchString))
+    .name.filter((name: string) => filterPackageNamePattern(name, debouncedPackageSearchString))
     .map((name: string) => ({
       name: (
         <Link className={styles.link} href={`/package/${name}`}>
