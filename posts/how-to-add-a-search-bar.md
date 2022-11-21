@@ -8,7 +8,7 @@ edited: "2022-11-20"
 ## Introduction
 
 This post uses the example of the text input component on the page `/packages`,
-use to filter packages by name,
+used to filter packages by name,
 to provide a guide for adding user inputs to this website.
 
 ## General advice

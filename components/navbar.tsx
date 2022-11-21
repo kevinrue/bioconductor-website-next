@@ -46,15 +46,21 @@ export default function Main() {
               <NavDropdown.Header>How-to&apos;s</NavDropdown.Header>
               <NavDropdown.Item
                 className={styles.link}
-                href="/posts/add-a-post"
+                href="/posts/how-to-add-a-post"
               >
                 Add a Post
               </NavDropdown.Item>
               <NavDropdown.Item
                 className={styles.link}
-                href="/posts/add-a-search-bar"
+                href="/posts/how-to-add-a-search-bar"
               >
                 Add a Search Bar
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                className={styles.link}
+                href="/posts/how-to-contribute"
+              >
+                Contribute
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
