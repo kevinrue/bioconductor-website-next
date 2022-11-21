@@ -18,8 +18,8 @@ const fetcher = (url: URL) => fetch(url).then((res) => res.json());
 
 // <https://react-data-table-component.netlify.app/?path=/docs/sorting-custom-column-sort--custom-column-sort>
 const linkSort = (rowA: any, rowB: any) => {
-  const a = rowA.name.props.children.toLowerCase();
-  const b = rowB.name.props.children.toLowerCase();
+  const a = rowA.Package.props.children.toLowerCase();
+  const b = rowB.Package.props.children.toLowerCase();
 
   if (a > b) {
     return 1;
@@ -32,22 +32,11 @@ const linkSort = (rowA: any, rowB: any) => {
   return 0;
 };
 
-//Handle the ready state and display the result contained in the data object mapped to the structure of the json file
-const table_columns = [
-  {
-    id: "package_name",
-    name: "Name",
-    selector: (row: any) => row.name,
-    sortable: true,
-    sortFunction: linkSort,
-  },
-];
-
 const paginationComponentOptions = {
   noRowsPerPage: true,
 };
 
-const filterPackageNamePattern = (name: string, pattern: string) => {
+const filterRowsByPackageColumn = (name: string, pattern: string) => {
   try {
     var matcher = new RegExp(pattern);
   } catch (err) {
@@ -72,17 +61,50 @@ export default function Packages() {
   //Handle the loading state
   if (!data) return <div>Loading...</div>;
 
+  const table_columns = [
+    {
+      id: "package",
+      name: "Package",
+      selector: (row: any) => row.Package,
+      sortable: true,
+      sortFunction: linkSort,
+    },
+    {
+      id: "version",
+      name: "Version",
+      selector: (row: any) => row.Version,
+      sortable: true,
+    },
+    {
+      id: "license",
+      name: "License",
+      selector: (row: any) => row.License,
+      sortable: true,
+    },
+    {
+      id: "git_last_commit_date",
+      name: "Last commit date",
+      selector: (row: any) => row.git_last_commit_date,
+      sortable: true,
+    },
+  ];
+
   const table_data = JSON.parse(data)
-    .name.filter((name: string) =>
-      filterPackageNamePattern(name, debouncedPackageSearchString)
+    .filter((object: any) =>
+      filterRowsByPackageColumn(object.Package, debouncedPackageSearchString)
     )
-    .map((name: string) => ({
-      name: (
-        <Link className={styles.link} href={`/package/${name}`}>
-          {name}
-        </Link>
-      ),
-    }));
+    .map((object: any) => {
+      return {
+        Package: (
+          <Link className={styles.link} href={`/package/${object.Package}`}>
+            {object.Package}
+          </Link>
+        ),
+        Version: object.Version,
+        License: object.License,
+        git_last_commit_date: object.git_last_commit_date
+      };
+    });
 
   const handleChangePackageSearchString = (
     event: React.ChangeEvent<HTMLInputElement>
