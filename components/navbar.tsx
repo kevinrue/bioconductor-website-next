@@ -34,7 +34,7 @@ export default function Main() {
               </NavDropdown.Item>
               <div className="dropdown-divider"></div>
               <NavDropdown.Header>Example</NavDropdown.Header>
-              <NavDropdown.Item className={styles.link} href="/package/Biobase">
+              <NavDropdown.Item className={styles.link} href="/packages/Biobase">
                 Biobase
               </NavDropdown.Item>
             </NavDropdown>
