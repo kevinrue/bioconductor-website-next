@@ -8,6 +8,13 @@
   align-items: left;
 }
 
+.post {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .author {
   font-style: italic;
   margin-bottom: 1em;
