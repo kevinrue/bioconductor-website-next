@@ -34,3 +34,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.Rproj.user
+
+# RStudio
+bioconductor-website-next.Rproj
+
+# renv
+.Rprofile
+/renv
+renv.lock
