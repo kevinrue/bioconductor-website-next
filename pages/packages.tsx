@@ -98,7 +98,7 @@ export default function Packages() {
     .map((object: any) => {
       return {
         Package: (
-          <Link className={styles.link} href={`/package/${object.Package}`}>
+          <Link className={styles.link} href={`/packages/${object.Package}`}>
             {object.Package}
           </Link>
         ),
