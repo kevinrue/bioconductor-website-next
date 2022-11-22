@@ -10,7 +10,7 @@ import { useState } from "react";
 import useSWR from "swr";
 import Layout from "../components/layout";
 import useDebounce from "../lib/useDebounce";
-import { Box } from "@mui/system";
+import Grid from '@mui/material/Grid';
 import TextField from "@mui/material/TextField";
 
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
@@ -20,15 +20,12 @@ const fetcher = (url: URL) => fetch(url).then((res) => res.json());
 const linkSort = (rowA: any, rowB: any) => {
   const a = rowA.Package.props.children.toLowerCase();
   const b = rowB.Package.props.children.toLowerCase();
-
   if (a > b) {
     return 1;
   }
-
   if (b > a) {
     return -1;
   }
-
   return 0;
 };
 
@@ -68,24 +65,29 @@ export default function Packages() {
       selector: (row: any) => row.Package,
       sortable: true,
       sortFunction: linkSort,
+      maxWidth: "150px",
     },
     {
       id: "version",
       name: "Version",
       selector: (row: any) => row.Version,
       sortable: true,
+      maxWidth: "100px",
     },
     {
-      id: "license",
-      name: "License",
-      selector: (row: any) => row.License,
+      id: "title",
+      name: "Title",
+      selector: (row: any) => row.Title,
       sortable: true,
+      minWidth: "500px",
+      wrap: true,
     },
     {
       id: "git_last_commit_date",
-      name: "Last commit date",
+      name: "Updated",
       selector: (row: any) => row.git_last_commit_date,
       sortable: true,
+      maxWidth: "150px",
     },
   ];
 
@@ -101,8 +103,8 @@ export default function Packages() {
           </Link>
         ),
         Version: object.Version,
-        License: object.License,
-        git_last_commit_date: object.git_last_commit_date
+        Title: object.Title,
+        git_last_commit_date: object.git_last_commit_date,
       };
     });
 
@@ -124,19 +126,20 @@ export default function Packages() {
       </Head>
       <main className={styles.main}>
         <h1>Packages</h1>
-        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
-          <Box>
-            <h4>Filters</h4>
-            <hr />
-            <TextField
-              id="package-search"
-              label="Name"
-              variant="outlined"
-              onChange={handleChangePackageSearchString}
-              value={packageSearchString}
-            />
-          </Box>
-          <Box sx={{ flexGrow: 1 }}>
+        <Grid container className={styles.form} rowSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid item xs={12} md={11}>
+            <fieldset>
+              <legend>Filters:</legend>
+              <TextField
+                id="package-search"
+                label="Name"
+                variant="outlined"
+                onChange={handleChangePackageSearchString}
+                value={packageSearchString}
+              />
+            </fieldset>
+          </Grid>
+          <Grid item xs={12} md={11}>
             <DataTable
               columns={table_columns}
               data={table_data}
@@ -145,8 +148,8 @@ export default function Packages() {
               // <https://stackoverflow.com/questions/66980280/how-to-sort-react-data-table-component-by-column-number>
               defaultSortFieldId="package_name"
             />
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
       </main>
     </Layout>
   );
