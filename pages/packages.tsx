@@ -51,12 +51,13 @@ export default function Packages() {
   //There are 3 possible states: (1) loading when data is null (2) ready when the data is returned (3) error when there was an error fetching the data
   const [packageSearchString, setPackageSearchString] = useState("");
   const debouncedPackageSearchString = useDebounce(packageSearchString, 500);
-  const { data, error } = useSWR("/api/packages", fetcher);
+  const { data: data_packages, error: error_packages } = useSWR("/api/packages", fetcher);
+  const { data: data_snapshot_date, error: error_snapshot_date } = useSWR("/api/snapshot_date", fetcher);
 
   //Handle the error state
-  if (error) return <div>Failed to load</div>;
+  if (error_packages || error_snapshot_date) return <div>Failed to load</div>;
   //Handle the loading state
-  if (!data) return <div>Loading...</div>;
+  if (!data_packages || !data_snapshot_date) return <div>Loading...</div>;
 
   const table_columns = [
     {
@@ -91,7 +92,7 @@ export default function Packages() {
     },
   ];
 
-  const table_data = JSON.parse(data)
+  const table_data = JSON.parse(data_packages)
     .filter((object: any) =>
       filterRowsByPackageColumn(object.Package, debouncedPackageSearchString)
     )
@@ -107,6 +108,8 @@ export default function Packages() {
         git_last_commit_date: object.git_last_commit_date,
       };
     });
+
+  const snapshot_date = JSON.parse(data_snapshot_date).snapshot_date;
 
   const handleChangePackageSearchString = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -125,8 +128,14 @@ export default function Packages() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <h1>Packages</h1>
-        <Grid container className={styles.form} rowSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid container className={styles.grid} rowSpacing={{ xs: 1, sm: 1, md: 2 }}>
+          <Grid item xs={12} md={11}>
+            <h1>Packages</h1>
+            <p className={styles.snapshot}>
+              {/* TODO: replace version and date by dynamic values */}
+              Bioconductor release 3.16 (Snapshot date: {snapshot_date})
+            </p>
+          </Grid>
           <Grid item xs={12} md={11}>
             <fieldset>
               <legend>Filters:</legend>

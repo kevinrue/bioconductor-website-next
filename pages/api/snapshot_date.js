@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   //Bioc release directory
   const biocReleaseDirectory = path.join(jsonDirectory, '3.16');
   //Read the json data file packages.json
-  const fileContents = await fs.readFile(biocReleaseDirectory + '/pkgs_basic_info.json', 'utf8');
+  const fileContents = await fs.readFile(biocReleaseDirectory + '/snapshot_date.json', 'utf8');
   //Return the content of the data file in json format
   res.status(200).json(fileContents);
 }
