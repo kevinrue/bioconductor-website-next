@@ -125,8 +125,14 @@ export default function Packages() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <h1>Packages</h1>
-        <Grid container className={styles.form} rowSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid container className={styles.grid} rowSpacing={{ xs: 1, sm: 1, md: 2 }}>
+          <Grid item xs={12} md={11}>
+            <h1>Packages</h1>
+            <p className={styles.snapshot}>
+              {/* TODO: replace version and date by dynamic values */}
+              Bioconductor release 3.16 (Snapshot date: 2022-11-22)
+            </p>
+          </Grid>
           <Grid item xs={12} md={11}>
             <fieldset>
               <legend>Filters:</legend>
