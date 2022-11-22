@@ -19,9 +19,9 @@ following agile principles.
 As a general workflow:
 
 - Add a static version of the component.
-- Handle user input in the component.
-- Update other components in the page given the updated state of the page.
-- Add logic to manage unexpected input values.
+- Capture user inputs in the component.
+- Update other components in the page.
+- Add logic to manage invalid input values.
 
 ## Import the component
 
@@ -35,7 +35,7 @@ import TextField from "@mui/material/TextField";
 
 ## Add a static component
 
-In the HTML value returned by the default function exported in the file `/pages/packages.tsx`,
+In the HTML tag list returned by the default function exported in the file `/pages/packages.tsx`,
 add the following lines to insert the component at the desired place in the web page.
 
 Replace the values in `id` and `label` with suitable values, and the value of `variant` by a valid choice (refer to the [documentation][variant-choices]).
@@ -65,7 +65,7 @@ const handleChangePackageSearchString = (
 };
 ```
 
-Finally, update the `<TextField>` as follows to call invoke the function above whenever the component changes, and to update the value of the component with the user input.
+Finally, update the `<TextField>` tag as follows, to invoke the function above whenever the component changes, and to update the value of the component with the current user input.
 
 ```jsx
 <TextField
@@ -79,9 +79,9 @@ Finally, update the `<TextField>` as follows to call invoke the function above w
 
 ## Update other components in the page
 
-Aside from the text input, the page `/packages` displays a table that contains the name of all the packages available in the Bioconductor repository.
+Aside from the text input, the page `/packages` displays a table that contains information for all the packages available in the current release of the Bioconductor repository.
 
-The purpose of the text input is to filter the table to display only the packages that match the user-defined pattern typed in that text input.
+The purpose of the text input is to filter the table to display only packages whose name matches the user-defined pattern typed in that text input.
 
 In the file `/pages/packages.tsx`, outside the default exported function,
 add the following lines to define a function that takes the name of a package and the user-defined pattern,
@@ -104,7 +104,7 @@ to filter the list of package names, retain only those that match the pattern, a
 ```jsx
 const table_data = JSON.parse(data)
   .name.filter((name: string) =>
-    filterPackageNamePattern(name, debouncedPackageSearchString)
+    filterPackageNamePattern(name, packageSearchString)
   )
   .map((name: string) => ({
     name: (
@@ -115,10 +115,10 @@ const table_data = JSON.parse(data)
   }));
 ```
 
-## Manage unexpected input values.
+## Manage invalid input values.
 
 While the text input theoretically supports regular expression,
-the extreme reactivity of the page causes it to crash when users type an invalid or incomplete regular expression (e.g., when the value is `^[` while attempting to type `^[Aa]`).
+the extreme reactivity of the page causes it to crash when the user input represents an invalid or incomplete regular expression (e.g., when the value is `^[` while attempting to type `^[Aa]`).
 
 Update the body of the `filterPackageNamePattern` function as follows,
 to display the full table while an invalid regular expression is detected.
