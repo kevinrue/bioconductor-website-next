@@ -2,7 +2,7 @@
 title: "How to - Add a Post"
 author: "Kevin Rue-Albrecht"
 created: "2022-11-18"
-edited: "2022-11-20"
+edited: "2022-11-22"
 ---
 
 ## Introduction
@@ -22,9 +22,11 @@ followed by the contents of the post in Markdown.
 Title, author, date of first creation, and date of last editing metadata in the YAML header are displayed in dedicated components of the page,
 while the body of the post is converted from Markdown to HTML and displayed _as-is_.
 
+Note that the field `edited` is bot automatically updated; it must be edited manually.
+
 ## How _You_ Can Add A Post
 
-As a result, adding a new post is achieved by adding a new Markdown file in the `/posts/[id].md`, following the requirements described above.
+As a result, adding a new post is achieved by adding a new Markdown file `/posts/[id].md`, following the requirements described above.
 
 The post will then be accessible at the URI `/posts/[id]`.
 
@@ -33,5 +35,5 @@ The post will then be accessible at the URI `/posts/[id]`.
 [bioconductor-org]: http://bioconductor.org/
 [node-js]: https://nodejs.org
 [next-js]: https://nextjs.org/
-[github-repo]: https://github.com/kevinrue/bioconductor-website-react
-[github-post-file]: https://github.com/kevinrue/bioconductor-website-next/blob/main/posts/example.md
+[github-repo]: https://github.com/kevinrue/bioconductor-website-next
+[github-post-file]: https://github.com/kevinrue/bioconductor-website-next/blob/main/posts/how-to-add-a-post.md
