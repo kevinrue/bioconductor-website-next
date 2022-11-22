@@ -15,6 +15,7 @@ dir.create(release_json_dir, showWarnings = FALSE, recursive = TRUE)
 
 # Export snapshot date ----
 
+snapshot_date <- RJSONIO::toJSON(c("snapshot_date" = as.character(snapshot_date)))
 write(as.character(snapshot_date), file = file.path(release_json_dir, "snapshot_date.json"))
 
 # Fetch package information ----
