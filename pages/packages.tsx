@@ -12,6 +12,9 @@ import Layout from "../components/layout";
 import useDebounce from "../lib/useDebounce";
 import Grid from '@mui/material/Grid';
 import TextField from "@mui/material/TextField";
+// <https://fontawesome.com/v5/docs/web/use-with/react>
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
 const fetcher = (url: URL) => fetch(url).then((res) => res.json());
@@ -137,8 +140,8 @@ export default function Packages() {
             </p>
           </Grid>
           <Grid item xs={12} md={11}>
-            <fieldset>
-              <legend>Filters:</legend>
+            <fieldset className={styles.fieldset}>
+              <legend className={styles.legend}><FontAwesomeIcon icon={faFilter} size="xs" /> Filters</legend>
               <TextField
                 id="package-search"
                 label="Name"
@@ -160,6 +163,6 @@ export default function Packages() {
           </Grid>
         </Grid>
       </main>
-    </Layout>
+    </Layout >
   );
 }
