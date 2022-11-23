@@ -13,3 +13,20 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.snapshot {
+  font-size: small;
+  margin-top: 1em;
+}
+
+.description {
+  text-align: justify;
+}
+
+.codeblock {
+  margin: 1rem;
+  background-color: #eee;
+  border: 1px solid #999;
+  display: block;
+  padding: 20px;
+}

@@ -178,7 +178,6 @@ export default function Packages() {
           <Grid item xs={grid_item_xs} md={grid_item_md}>
             <h1>Packages</h1>
             <p className={styles.snapshot}>
-              {/* TODO: replace version and date by dynamic values */}
               Bioconductor release 3.16 (Snapshot date: {snapshot_date})
             </p>
           </Grid>
