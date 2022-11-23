@@ -57,6 +57,14 @@ const filterRowsByPackageColumn = (name: string, pattern: string) => {
   }
 };
 
+const filterRowsByPackageType = (name: string, type: string) => {
+  if (type == 'All') {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 const table_columns = [
   {
     id: "package",
@@ -91,21 +99,15 @@ const table_columns = [
 ];
 
 const typeOptions = [
-  { value: 'all', label: 'All' },
-  { value: 'softare', label: 'Softare' },
-  { value: 'annotationdata', label: 'AnnotationData' },
-  { value: 'experimentdata', label: 'ExperimentData' },
-  { value: 'workflow', label: 'Workflow' },
+  { value: 'All', label: 'All' },
+  { value: 'Softare', label: 'Softare' },
+  { value: 'AnnotationData', label: 'AnnotationData' },
+  { value: 'ExperimentData', label: 'ExperimentData' },
+  { value: 'Workflow', label: 'Workflow' },
 ]
 
 // 'All' should always be the first option
 const typeDefaultValue = typeOptions[0];
-
-const flexRowForm = {
-  display: 'flex',
-  flexDirection: 'row',
-  'justify-content': 'space-between',
-};
 
 export default function Packages() {
   //Set up SWR to run the fetcher function when calling "/api/staticdata"
@@ -125,6 +127,7 @@ export default function Packages() {
     .filter((object: any) =>
       filterRowsByPackageColumn(object.Package, debouncedPackageSearchString)
     )
+    .filter((object: any) => filterRowsByPackageType(object.Package, packageType))
     .map((object: any) => {
       return {
         Package: (
