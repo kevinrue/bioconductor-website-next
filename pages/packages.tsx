@@ -57,11 +57,18 @@ const filterRowsByPackageColumn = (name: string, pattern: string) => {
   }
 };
 
-const filterRowsByPackageType = (name: string, type: string) => {
+const filterRowsByPackageType = (name: any, type: string, biocviews: string[]) => {
   if (type == 'All') {
     return true;
   } else {
-    return false;
+    const package_biocviews = biocviews[name];
+    if (package_biocviews === null) {
+      return false;
+    } else if (package_biocviews.includes(type)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
@@ -100,14 +107,14 @@ const table_columns = [
 
 const typeOptions = [
   { value: 'All', label: 'All' },
-  { value: 'Softare', label: 'Softare' },
+  { value: 'Software', label: 'Software' },
   { value: 'AnnotationData', label: 'AnnotationData' },
   { value: 'ExperimentData', label: 'ExperimentData' },
   { value: 'Workflow', label: 'Workflow' },
 ]
 
 // 'All' should always be the first option
-const typeDefaultValue = typeOptions[0];
+const typeDefaultValue = typeOptions[0].value;
 
 export default function Packages() {
   //Set up SWR to run the fetcher function when calling "/api/staticdata"
@@ -116,18 +123,23 @@ export default function Packages() {
   const [packageType, setPackageType] = React.useState(typeOptions[0].value);
   const debouncedPackageSearchString = useDebounce(packageSearchString, 500);
   const { data: data_packages, error: error_packages } = useSWR("/api/packages", fetcher);
+  const { data: data_biocviews, error: error_biocviews } = useSWR("/api/biocviews", fetcher);
   const { data: data_snapshot_date, error: error_snapshot_date } = useSWR("/api/snapshot_date", fetcher);
 
   //Handle the error state
-  if (error_packages || error_snapshot_date) return <div>Failed to load</div>;
+  if (error_packages || error_biocviews || error_snapshot_date) return <div>Failed to load</div>;
   //Handle the loading state
-  if (!data_packages || !data_snapshot_date) return <div>Loading...</div>;
+  if (!data_packages || !data_biocviews || !data_snapshot_date) return <div>Loading...</div>;
+
+  const snapshot_date = JSON.parse(data_snapshot_date).snapshot_date;
+
+  const biocviews_data = JSON.parse(data_biocviews);
 
   const table_data = JSON.parse(data_packages)
     .filter((object: any) =>
       filterRowsByPackageColumn(object.Package, debouncedPackageSearchString)
     )
-    .filter((object: any) => filterRowsByPackageType(object.Package, packageType))
+    .filter((object: any) => filterRowsByPackageType(object.Package, packageType, biocviews_data))
     .map((object: any) => {
       return {
         Package: (
@@ -140,8 +152,6 @@ export default function Packages() {
         git_last_commit_date: object.git_last_commit_date,
       };
     });
-
-  const snapshot_date = JSON.parse(data_snapshot_date).snapshot_date;
 
   const handleChangePackageSearchString = (
     event: React.ChangeEvent<HTMLInputElement>
