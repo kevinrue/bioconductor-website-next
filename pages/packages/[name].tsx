@@ -21,13 +21,15 @@ const Package = () => {
   const { data: data_packages, error: error_packages } = useSWR("/api/packages", fetcher);
   const { data: data_biocviews, error: error_biocviews } = useSWR("/api/biocviews", fetcher);
   const { data: data_snapshot_date, error: error_snapshot_date } = useSWR("/api/snapshot_date", fetcher);
+  const { data: data_r_version, error: error_r_version } = useSWR("/api/r_version", fetcher);
 
   //Handle the error state
-  if (error_packages || error_biocviews || error_snapshot_date) return <div>Failed to load</div>;
+  if (error_packages || error_biocviews || error_snapshot_date || error_r_version) return <div>Failed to load</div>;
   //Handle the loading state
-  if (!data_packages || !data_biocviews || !data_snapshot_date) return <div>Loading...</div>;
+  if (!data_packages || !data_biocviews || !data_snapshot_date || !data_r_version) return <div>Loading...</div>;
 
   const snapshot_date = JSON.parse(data_snapshot_date).snapshot_date;
+  const r_version = JSON.parse(data_r_version).r_version;
 
   const biocviews_data = JSON.parse(data_biocviews);
 
@@ -37,7 +39,7 @@ const Package = () => {
 
   const code_install = [
     'if (!require("BiocManager", quietly = TRUE))',
-    'install.packages("BiocManager")',
+    '    install.packages("BiocManager")',
     '',
     `BiocManager::install("${name}")`
   ].join("\n");
@@ -47,11 +49,11 @@ const Package = () => {
   const bug_report_details = (data: any) => {
     if (data.BugReports === null) {
       return (
-      <span>
-        <b>Bug reports:</b>
+        <span>
+          <b>Bug reports:</b>
           {' '}
-        Link not available.
-      </span>);
+          Link not available.
+        </span>);
     } else {
       return (
         <span>
@@ -83,11 +85,11 @@ const Package = () => {
             <h2>{package_data.Title}</h2>
             <hr />
             <p className={styles.snapshot}>
-              Bioconductor release 3.16 (Snapshot date: {snapshot_date})
+              Bioconductor release {r_version} (Snapshot date: {snapshot_date})
             </p>
             <p className={styles.description}>{package_data.Description}</p>
             <h3>Installation</h3>
-            To install this package, start R (version `TODO`) and enter:
+            To install this package, start R (version {r_version}) and enter:
             <SyntaxHighlighter className={styles.codeblock} language='r'>
               {code_install}
             </SyntaxHighlighter>
