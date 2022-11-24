@@ -34,7 +34,6 @@ const Package = () => {
   const package_data = JSON.parse(data_packages).filter((object: any) => {
     return (object.Package == name)
   })[0];
-  console.log(package_data);
 
   const code_install = [
     'if (!require("BiocManager", quietly = TRUE))',
@@ -44,6 +43,27 @@ const Package = () => {
   ].join("\n");
 
   const code_vignettes = `browseVignettes("${name}")`;
+
+  const bug_report_details = (data: any) => {
+    if (data.BugReports === null) {
+      return (
+      <span>
+        <b>Bug reports:</b>
+          {' '}
+        Link not available.
+      </span>);
+    } else {
+      return (
+        <span>
+          <b>Bug reports:</b>
+          {' '}
+          <Link className={styles.link} href={data.BugReports}>
+            {data.BugReports}
+          </Link>
+        </span>
+      )
+    }
+  }
 
   return (
     <Layout>
@@ -86,11 +106,7 @@ const Package = () => {
               {' '}
               {package_data.License}
               <br />
-              <b>Bug reports:</b>
-              {' '}
-              <Link className={styles.link} href={package_data.BugReports}>
-                {package_data.BugReports}
-              </Link>
+              {bug_report_details(package_data)}
             </p>
           </Grid>
         </Grid>
