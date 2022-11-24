@@ -23,7 +23,7 @@ const Package = () => {
   const { data: data_packages, error: error_packages } = useSWR("/api/packages", fetcher);
   const { data: data_biocviews, error: error_biocviews } = useSWR("/api/biocviews", fetcher);
   const { data: data_snapshot_date, error: error_snapshot_date } = useSWR("/api/snapshot_date", fetcher);
-  const { data: data_r_version, error: error_r_version } = useSWR("/api/r_version", fetcher);
+  const { data: data_r_version, error: error_r_version } = useSWR(bioc_release ? `/api/${bioc_release}/r_version` : null, fetcher);
 
   //Handle the error state
   if (error_packages || error_biocviews || error_snapshot_date || error_r_version) return <div>Failed to load</div>;
