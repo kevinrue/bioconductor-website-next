@@ -5,6 +5,8 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Image from "next/image";
 
+const bioc_releases = ['3.16', '3.15']
+
 export default function Main() {
   return (
     <Navbar className={styles.navbar} bg="light" expand="lg">
@@ -26,14 +28,12 @@ export default function Main() {
               title="Packages"
               id="basic-nav-dropdown"
             >
-              <NavDropdown.Item className={styles.link} href="/packages">
-                All packages
-              </NavDropdown.Item>
-              <div className="dropdown-divider"></div>
-              <NavDropdown.Header>Example</NavDropdown.Header>
-              <NavDropdown.Item className={styles.link} href="/packages/Biobase">
-                Biobase
-              </NavDropdown.Item>
+              <NavDropdown.Header>Releases</NavDropdown.Header>
+              {bioc_releases.map((release: string) => (
+                <NavDropdown.Item key={release} className={styles.link} href={`/packages/${release}`}>
+                  {release}
+                </NavDropdown.Item>
+              ))}
             </NavDropdown>
             <NavDropdown
               className={styles.link}
@@ -63,6 +63,6 @@ export default function Main() {
           </Nav>
         </Navbar.Collapse>
       </Container>
-    </Navbar>
+    </Navbar >
   );
 }
