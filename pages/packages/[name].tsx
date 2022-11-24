@@ -39,7 +39,9 @@ const Package = () => {
     'install.packages("BiocManager")',
     '',
     `BiocManager::install("${name}")`
-  ].join("\n")
+  ].join("\n");
+
+  const code_vignettes = `browseVignettes("${name}")`;
 
   return (
     <Layout>
@@ -53,7 +55,7 @@ const Package = () => {
       </Head>
       <main className={styles.main}>
         <Grid container className={styles.grid} rowSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid item xs={grid_item_xs} md={grid_item_md}>
+          <Grid item xs={grid_item_xs} md={grid_item_md}>
             <h1>{name}</h1>
             <p>Insert status badges here.</p>
             <h2>{package_data.Title}</h2>
@@ -66,6 +68,11 @@ const Package = () => {
             To install this package, start R (version `TODO`) and enter:
             <SyntaxHighlighter className={styles.codeblock} language='r'>
               {code_install}
+            </SyntaxHighlighter>
+            <h3>Documentation</h3>
+            <p>To view documentation for the version of this package installed in your system, start R and enter:</p>
+            <SyntaxHighlighter className={styles.codeblock} language='r'>
+            {code_vignettes}
             </SyntaxHighlighter>
           </Grid>
         </Grid>
