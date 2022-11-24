@@ -183,7 +183,10 @@ export default function Packages() {
           </Grid>
           <Grid item xs={grid_item_xs} md={grid_item_md}>
             <fieldset className={styles.fieldset}>
-              <legend className={styles.legend}><FontAwesomeIcon icon={faFilter} size="xs" /> Filters</legend>
+              <legend className={styles.legend}>
+                <FontAwesomeIcon icon={faFilter} size="xs" />
+                Filters
+              </legend>
               <FormControl variant="standard" sx={{ m: 1, width: '120' }}>
                 <TextField
                   id="package-search"

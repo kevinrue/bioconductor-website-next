@@ -1,7 +1,10 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 import Grid from '@mui/material/Grid';
+import Fab from '@mui/material/Fab';
 //useSWR allows the use of SWR inside function components
 import useSWR from "swr";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -112,6 +115,11 @@ const Package = () => {
             </p>
           </Grid>
         </Grid>
+        <Fab className={styles.fab} color="primary" aria-label="add">
+          {r_version}
+          {' '}
+          <FontAwesomeIcon icon={faAngleDown} size="xs" fixedWidth />
+        </Fab>
       </main>
     </Layout>
   );
