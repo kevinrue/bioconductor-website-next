@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Link from "next/link";
 import Grid from '@mui/material/Grid';
 //useSWR allows the use of SWR inside function components
 import useSWR from "swr";
@@ -33,6 +34,7 @@ const Package = () => {
   const package_data = JSON.parse(data_packages).filter((object: any) => {
     return (object.Package == name)
   })[0];
+  console.log(package_data);
 
   const code_install = [
     'if (!require("BiocManager", quietly = TRUE))',
@@ -72,8 +74,24 @@ const Package = () => {
             <h3>Documentation</h3>
             <p>To view documentation for the version of this package installed in your system, start R and enter:</p>
             <SyntaxHighlighter className={styles.codeblock} language='r'>
-            {code_vignettes}
+              {code_vignettes}
             </SyntaxHighlighter>
+            <h3>Details</h3>
+            <p className={styles.details}>
+              <b>Version:</b>
+              {' '}
+              {package_data.Version}
+              <br />
+              <b>License:</b>
+              {' '}
+              {package_data.License}
+              <br />
+              <b>Bug reports:</b>
+              {' '}
+              <Link className={styles.link} href={package_data.BugReports}>
+                {package_data.BugReports}
+              </Link>
+            </p>
           </Grid>
         </Grid>
       </main>
