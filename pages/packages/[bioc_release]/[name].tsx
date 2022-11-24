@@ -22,7 +22,7 @@ const Package = () => {
 
   const { data: data_packages, error: error_packages } = useSWR(bioc_release ? `/api/${bioc_release}/packages` : null, fetcher);
   const { data: data_biocviews, error: error_biocviews } = useSWR(bioc_release ? `/api/${bioc_release}/biocviews` : null, fetcher);
-  const { data: data_snapshot_date, error: error_snapshot_date } = useSWR("/api/snapshot_date", fetcher);
+  const { data: data_snapshot_date, error: error_snapshot_date } = useSWR(bioc_release ? `/api/${bioc_release}/snapshot_date` : null, fetcher);
   const { data: data_r_version, error: error_r_version } = useSWR(bioc_release ? `/api/${bioc_release}/r_version` : null, fetcher);
 
   //Handle the error state

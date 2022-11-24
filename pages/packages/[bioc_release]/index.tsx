@@ -128,12 +128,17 @@ export default function Packages() {
 
   const { data: data_packages, error: error_packages } = useSWR(bioc_release ? `/api/${bioc_release}/packages` : null, fetcher);
   const { data: data_biocviews, error: error_biocviews } = useSWR(bioc_release ? `/api/${bioc_release}/biocviews` : null, fetcher);
-  const { data: data_snapshot_date, error: error_snapshot_date } = useSWR("/api/snapshot_date", fetcher);
+  const { data: data_snapshot_date, error: error_snapshot_date } = useSWR(bioc_release ? `/api/${bioc_release}/snapshot_date` : null, fetcher);
 
   //Handle the error state
-  if (error_packages || error_biocviews || error_snapshot_date) return <div>Failed to load</div>;
+  if (error_packages) return <div>Failed to load package information.</div>;
+  if (error_biocviews) return <div>Failed to load BiocViews information.</div>;
+  if (error_snapshot_date) return <div>Failed to load snapshot date information.</div>;
+
   //Handle the loading state
-  if (!data_packages || !data_biocviews || !data_snapshot_date) return <div>Loading...</div>;
+  if (!data_packages) return <div>Loading package information...</div>;
+  if (!data_biocviews) return <div>Loading BiocViews information...</div>;
+  if (!data_snapshot_date) return <div>Loading snapshot date information...</div>;
 
   const snapshot_date = JSON.parse(data_snapshot_date).snapshot_date;
 
@@ -182,7 +187,7 @@ export default function Packages() {
           <Grid item xs={grid_item_xs} md={grid_item_md}>
             <h1>Packages</h1>
             <p className={styles.snapshot}>
-              Bioconductor release 3.16 (Snapshot date: {snapshot_date})
+              Bioconductor release {bioc_release} (Snapshot date: {snapshot_date})
             </p>
           </Grid>
           <Grid item xs={grid_item_xs} md={grid_item_md}>
