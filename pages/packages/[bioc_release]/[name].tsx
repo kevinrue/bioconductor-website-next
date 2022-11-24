@@ -20,15 +20,22 @@ const Package = () => {
   const package_name = router.query.name;
   const bioc_release = router.query.bioc_release;
 
-  const { data: data_packages, error: error_packages } = useSWR("/api/packages", fetcher);
-  const { data: data_biocviews, error: error_biocviews } = useSWR("/api/biocviews", fetcher);
+  const { data: data_packages, error: error_packages } = useSWR(bioc_release ? `/api/${bioc_release}/packages` : null, fetcher);
+  const { data: data_biocviews, error: error_biocviews } = useSWR(bioc_release ? `/api/${bioc_release}/biocviews` : null, fetcher);
   const { data: data_snapshot_date, error: error_snapshot_date } = useSWR("/api/snapshot_date", fetcher);
   const { data: data_r_version, error: error_r_version } = useSWR(bioc_release ? `/api/${bioc_release}/r_version` : null, fetcher);
 
   //Handle the error state
-  if (error_packages || error_biocviews || error_snapshot_date || error_r_version) return <div>Failed to load</div>;
+  if (error_packages) return <div>Failed to load package information.</div>;
+  if (error_biocviews) return <div>Failed to load BiocViews information.</div>;
+  if (error_snapshot_date) return <div>Failed to load snapshot date information.</div>;
+  if (error_r_version) return <div>Failed to load R version information.</div>;
+
   //Handle the loading state
-  if (!data_packages || !data_biocviews || !data_snapshot_date || !data_r_version) return <div>Loading...</div>;
+  if (!data_packages) return <div>Loading package information...</div>;
+  if (!data_biocviews) return <div>Loading BiocViews information...</div>;
+  if (!data_snapshot_date) return <div>Loading snapshot date information...</div>;
+  if (!data_r_version) return <div>Loading R version information...</div>;
 
   const snapshot_date = JSON.parse(data_snapshot_date).snapshot_date;
   const r_version = JSON.parse(data_r_version).r_version;
