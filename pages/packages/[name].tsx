@@ -1,10 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
+import React from 'react';
 import Grid from '@mui/material/Grid';
 import Fab from '@mui/material/Fab';
+import TextField from "@mui/material/TextField";
+import MenuItem from '@mui/material/MenuItem';
 //useSWR allows the use of SWR inside function components
 import useSWR from "swr";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -17,9 +18,13 @@ const grid_item_md = 9;
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
 const fetcher = (url: URL) => fetch(url).then((res) => res.json());
 
+const biocVersionOptions = ['3.15', '3.16'];
+
 const Package = () => {
   const router = useRouter();
   const { name } = router.query;
+
+  const [biocVersion, setBiocVersion] = React.useState(biocVersionOptions[biocVersionOptions.length - 1]);
 
   const { data: data_packages, error: error_packages } = useSWR("/api/packages", fetcher);
   const { data: data_biocviews, error: error_biocviews } = useSWR("/api/biocviews", fetcher);
@@ -70,6 +75,10 @@ const Package = () => {
     }
   }
 
+  const handleChangeBiocVersion = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBiocVersion(event.target.value);
+  };
+
   return (
     <Layout>
       <Head>
@@ -115,10 +124,21 @@ const Package = () => {
             </p>
           </Grid>
         </Grid>
-        <Fab className={styles.fab} color="primary" aria-label="add">
-          {r_version}
-          {' '}
-          <FontAwesomeIcon icon={faAngleDown} size="xs" fixedWidth />
+        <Fab className={styles.fab} color="primary" variant="extended">
+          <TextField
+            id="bioc-version"
+            select
+            // label="BioC version"
+            variant="standard"
+            onChange={handleChangeBiocVersion}
+            value={biocVersion}
+          >
+            {biocVersionOptions.map((option) => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </TextField>
         </Fab>
       </main>
     </Layout>

@@ -13,9 +13,8 @@ import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
 import TextField from "@mui/material/TextField";
 import MenuItem from '@mui/material/MenuItem';
-// import * as React from 'react';
-import React from 'react';
-import { useState } from "react";
+// React
+import React, { useState } from 'react';
 // <https://react-data-table-component.netlify.app/?path=/docs/getting-started-examples--page>
 import DataTable from "react-data-table-component";
 // Keep last to override other stylesheets
