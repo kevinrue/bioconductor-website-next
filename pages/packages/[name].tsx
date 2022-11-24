@@ -38,7 +38,7 @@ const Package = () => {
     'if (!require("BiocManager", quietly = TRUE))',
     'install.packages("BiocManager")',
     '',
-    'BiocManager::install("{name}")'
+    `BiocManager::install("${name}")`
   ].join("\n")
 
   return (
