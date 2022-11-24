@@ -3,8 +3,7 @@
 // <https://fontawesome.com/v5/docs/web/use-with/react>
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
-import Layout from "../components/layout";
-import useDebounce from "../lib/useDebounce";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 //useSWR allows the use of SWR inside function components
@@ -13,13 +12,14 @@ import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
 import TextField from "@mui/material/TextField";
 import MenuItem from '@mui/material/MenuItem';
-// import * as React from 'react';
-import React from 'react';
-import { useState } from "react";
+// React
+import React, { useState } from 'react';
 // <https://react-data-table-component.netlify.app/?path=/docs/getting-started-examples--page>
 import DataTable from "react-data-table-component";
 // Keep last to override other stylesheets
-import styles from "../styles/Packages.module.css";
+import Layout from "../../../components/layout";
+import useDebounce from "../../../lib/useDebounce";
+import styles from "../../../styles/Packages.module.css";
 
 const grid_item_xs = 12;
 const grid_item_md = 11;
@@ -117,19 +117,28 @@ const typeOptions = [
 const typeDefaultValue = typeOptions[0].value;
 
 export default function Packages() {
+  const router = useRouter();
+  const bioc_release = router.query.bioc_release;
+
   //Set up SWR to run the fetcher function when calling "/api/staticdata"
   //There are 3 possible states: (1) loading when data is null (2) ready when the data is returned (3) error when there was an error fetching the data
   const [packageSearchString, setPackageSearchString] = useState("");
   const [packageType, setPackageType] = React.useState(typeOptions[0].value);
   const debouncedPackageSearchString = useDebounce(packageSearchString, 500);
-  const { data: data_packages, error: error_packages } = useSWR("/api/packages", fetcher);
-  const { data: data_biocviews, error: error_biocviews } = useSWR("/api/biocviews", fetcher);
-  const { data: data_snapshot_date, error: error_snapshot_date } = useSWR("/api/snapshot_date", fetcher);
+
+  const { data: data_packages, error: error_packages } = useSWR(bioc_release ? `/api/${bioc_release}/packages` : null, fetcher);
+  const { data: data_biocviews, error: error_biocviews } = useSWR(bioc_release ? `/api/${bioc_release}/biocviews` : null, fetcher);
+  const { data: data_snapshot_date, error: error_snapshot_date } = useSWR(bioc_release ? `/api/${bioc_release}/snapshot_date` : null, fetcher);
 
   //Handle the error state
-  if (error_packages || error_biocviews || error_snapshot_date) return <div>Failed to load</div>;
+  if (error_packages) return <div>Failed to load package information.</div>;
+  if (error_biocviews) return <div>Failed to load BiocViews information.</div>;
+  if (error_snapshot_date) return <div>Failed to load snapshot date information.</div>;
+
   //Handle the loading state
-  if (!data_packages || !data_biocviews || !data_snapshot_date) return <div>Loading...</div>;
+  if (!data_packages) return <div>Loading package information...</div>;
+  if (!data_biocviews) return <div>Loading BiocViews information...</div>;
+  if (!data_snapshot_date) return <div>Loading snapshot date information...</div>;
 
   const snapshot_date = JSON.parse(data_snapshot_date).snapshot_date;
 
@@ -143,7 +152,7 @@ export default function Packages() {
     .map((object: any) => {
       return {
         Package: (
-          <Link className={styles.link} href={`/packages/${object.Package}`}>
+          <Link className={styles.link} href={`${router.asPath}/${object.Package}`}>
             {object.Package}
           </Link>
         ),
@@ -178,12 +187,15 @@ export default function Packages() {
           <Grid item xs={grid_item_xs} md={grid_item_md}>
             <h1>Packages</h1>
             <p className={styles.snapshot}>
-              Bioconductor release 3.16 (Snapshot date: {snapshot_date})
+              Bioconductor release {bioc_release} (Snapshot date: {snapshot_date})
             </p>
           </Grid>
           <Grid item xs={grid_item_xs} md={grid_item_md}>
             <fieldset className={styles.fieldset}>
-              <legend className={styles.legend}><FontAwesomeIcon icon={faFilter} size="xs" /> Filters</legend>
+              <legend className={styles.legend}>
+                <FontAwesomeIcon icon={faFilter} size="xs" />
+                Filters
+              </legend>
               <FormControl variant="standard" sx={{ m: 1, width: '120' }}>
                 <TextField
                   id="package-search"
