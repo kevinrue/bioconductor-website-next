@@ -59,6 +59,12 @@ export default function Main() {
               >
                 Contribute
               </NavDropdown.Item>
+              <NavDropdown.Item
+                className={styles.link}
+                href="/posts/how-to-promote-accessibility"
+              >
+                Promote Accessibility
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
