@@ -98,7 +98,7 @@ const Package = () => {
             </p>
             <p className={styles.description}>{package_data.Description}</p>
             <h3>Installation</h3>
-            To install this package, start R (version "{r_version}") and enter:
+            To install this package, start R (version &quot;{r_version}&quot;) and enter:
             <SyntaxHighlighter className={styles.codeblock} language='r'>
               {code_install}
             </SyntaxHighlighter>
