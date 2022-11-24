@@ -1,13 +1,16 @@
 // Sources:
 // <https://nextjs.org/learn/basics/dynamic-routes/render-markdown>
 // <https://github.com/remarkjs/react-markdown#use-custom-components-syntax-highlight
-import styles from "../../styles/Post.module.css";
-import Layout from "../../components/layout";
 import Head from "next/head";
 import { getAllPostIds, getPostData } from "../../lib/posts";
 import Grid from '@mui/material/Grid';
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import Layout from "../../components/layout";
+import styles from "../../styles/Post.module.css";
+
+const grid_item_xs = 12;
+const grid_item_md = 9;
 
 export default function Post({ postData }) {
   return (
@@ -21,8 +24,8 @@ export default function Post({ postData }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Grid container className={styles.post}>
-          <Grid item xs={12} md={9}>
+        <Grid container className={styles.grid}>
+          <Grid item xs={grid_item_xs} md={grid_item_md}>
             <h1>{postData.title}</h1>
             <p className={styles.author}>By {postData.author}</p>
             <ReactMarkdown
