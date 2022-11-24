@@ -66,6 +66,7 @@ export default function Main() {
                 Promote Accessibility
               </NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link className={styles.navlink} href="/code-of-conduct">Code of Conduct</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

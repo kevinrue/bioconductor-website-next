@@ -6,6 +6,10 @@
   pointer-events: none;
 }
 
+.navlink {
+  font-style: normal;
+}
+
 .link,
 .link>a {
   font-style: normal;
