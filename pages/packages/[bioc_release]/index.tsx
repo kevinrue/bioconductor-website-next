@@ -152,7 +152,7 @@ export default function Packages() {
     .map((object: any) => {
       return {
         Package: (
-          <Link className={styles.link} href={`/packages/${object.Package}`}>
+          <Link className={styles.link} href={`${router.asPath}/${object.Package}`}>
             {object.Package}
           </Link>
         ),
