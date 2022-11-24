@@ -3,14 +3,11 @@ import Head from "next/head";
 import Link from "next/link";
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import Fab from '@mui/material/Fab';
-import TextField from "@mui/material/TextField";
-import MenuItem from '@mui/material/MenuItem';
 //useSWR allows the use of SWR inside function components
 import useSWR from "swr";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import Layout from "../../components/layout";
-import styles from "../../styles/Package.module.css";
+import Layout from "../../../components/layout";
+import styles from "../../../styles/Package.module.css";
 
 const grid_item_xs = 12;
 const grid_item_md = 9;
@@ -18,13 +15,10 @@ const grid_item_md = 9;
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
 const fetcher = (url: URL) => fetch(url).then((res) => res.json());
 
-const biocVersionOptions = ['3.15', '3.16'];
-
 const Package = () => {
   const router = useRouter();
-  const { name } = router.query;
-
-  const [biocVersion, setBiocVersion] = React.useState(biocVersionOptions[biocVersionOptions.length - 1]);
+  const package_name = router.query.name;
+  const bioc_release = router.query.bioc_release;
 
   const { data: data_packages, error: error_packages } = useSWR("/api/packages", fetcher);
   const { data: data_biocviews, error: error_biocviews } = useSWR("/api/biocviews", fetcher);
@@ -42,17 +36,17 @@ const Package = () => {
   const biocviews_data = JSON.parse(data_biocviews);
 
   const package_data = JSON.parse(data_packages).filter((object: any) => {
-    return (object.Package == name)
+    return (object.Package == package_name)
   })[0];
 
   const code_install = [
     'if (!require("BiocManager", quietly = TRUE))',
     '    install.packages("BiocManager")',
     '',
-    `BiocManager::install("${name}")`
+    `BiocManager::install("${package_name}", version = ${bioc_release})`
   ].join("\n");
 
-  const code_vignettes = `browseVignettes("${name}")`;
+  const code_vignettes = `browseVignettes("${package_name}")`;
 
   const bug_report_details = (data: any) => {
     if (data.BugReports === null) {
@@ -75,14 +69,10 @@ const Package = () => {
     }
   }
 
-  const handleChangeBiocVersion = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setBiocVersion(event.target.value);
-  };
-
   return (
     <Layout>
       <Head>
-        <title>{name} - Package landing page</title>
+        <title>{package_name} - Package landing page</title>
         <meta
           name="description"
           content="Work in progress by Kevin Rue-Albrecht"
@@ -92,7 +82,7 @@ const Package = () => {
       <main className={styles.main}>
         <Grid container className={styles.grid} rowSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={grid_item_xs} md={grid_item_md}>
-            <h1>{name}</h1>
+            <h1>{package_name}</h1>
             <p>Insert status badges here.</p>
             <h2>{package_data.Title}</h2>
             <hr />
@@ -101,7 +91,7 @@ const Package = () => {
             </p>
             <p className={styles.description}>{package_data.Description}</p>
             <h3>Installation</h3>
-            To install this package, start R (version {r_version}) and enter:
+            To install this package, start R (version "{r_version}") and enter:
             <SyntaxHighlighter className={styles.codeblock} language='r'>
               {code_install}
             </SyntaxHighlighter>
@@ -124,22 +114,6 @@ const Package = () => {
             </p>
           </Grid>
         </Grid>
-        <Fab className={styles.fab} color="primary" variant="extended">
-          <TextField
-            id="bioc-version"
-            select
-            // label="BioC version"
-            variant="standard"
-            onChange={handleChangeBiocVersion}
-            value={biocVersion}
-          >
-            {biocVersionOptions.map((option) => (
-              <MenuItem key={option} value={option}>
-                {option}
-              </MenuItem>
-            ))}
-          </TextField>
-        </Fab>
       </main>
     </Layout>
   );
