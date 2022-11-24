@@ -3,8 +3,7 @@
 // <https://fontawesome.com/v5/docs/web/use-with/react>
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
-import Layout from "../components/layout";
-import useDebounce from "../lib/useDebounce";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 //useSWR allows the use of SWR inside function components
@@ -18,7 +17,9 @@ import React, { useState } from 'react';
 // <https://react-data-table-component.netlify.app/?path=/docs/getting-started-examples--page>
 import DataTable from "react-data-table-component";
 // Keep last to override other stylesheets
-import styles from "../styles/Packages.module.css";
+import Layout from "../../../components/layout";
+import useDebounce from "../../../lib/useDebounce";
+import styles from "../../../styles/Packages.module.css";
 
 const grid_item_xs = 12;
 const grid_item_md = 11;
@@ -116,13 +117,17 @@ const typeOptions = [
 const typeDefaultValue = typeOptions[0].value;
 
 export default function Packages() {
+  const router = useRouter();
+  const bioc_release = router.query.bioc_release;
+
   //Set up SWR to run the fetcher function when calling "/api/staticdata"
   //There are 3 possible states: (1) loading when data is null (2) ready when the data is returned (3) error when there was an error fetching the data
   const [packageSearchString, setPackageSearchString] = useState("");
   const [packageType, setPackageType] = React.useState(typeOptions[0].value);
   const debouncedPackageSearchString = useDebounce(packageSearchString, 500);
-  const { data: data_packages, error: error_packages } = useSWR("/api/packages", fetcher);
-  const { data: data_biocviews, error: error_biocviews } = useSWR("/api/biocviews", fetcher);
+
+  const { data: data_packages, error: error_packages } = useSWR(bioc_release ? `/api/${bioc_release}/packages` : null, fetcher);
+  const { data: data_biocviews, error: error_biocviews } = useSWR(bioc_release ? `/api/${bioc_release}/biocviews` : null, fetcher);
   const { data: data_snapshot_date, error: error_snapshot_date } = useSWR("/api/snapshot_date", fetcher);
 
   //Handle the error state
