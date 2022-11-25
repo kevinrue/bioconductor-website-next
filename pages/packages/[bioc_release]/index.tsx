@@ -304,29 +304,25 @@ export default function Packages() {
               defaultSortFieldId="package_name"
             />
           </Grid>
-          {bioc_release ? (
-            <ThemeProvider theme={FabTheme}>
-              <Fab color="primary" variant="extended" sx={{ color: "white" }}>
-                Release:{" "}
-                <TextField
-                  id="select-release"
-                  variant="standard"
-                  select
-                  defaultValue={bioc_release}
-                  onChange={handleChangeBiocRelease}
-                  // helperText="Please select your currency"
-                >
-                  {releaseOptions.map((option) => (
-                    <MenuItem key={option} value={option}>
-                      {option}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </Fab>
-            </ThemeProvider>
-          ) : (
-            ""
-          )}
+          <ThemeProvider theme={FabTheme}>
+            <Fab color="primary" variant="extended" sx={{ color: "white" }}>
+              Release:{" "}
+              <TextField
+                id="select-release"
+                variant="standard"
+                select
+                defaultValue={bioc_release}
+                onChange={handleChangeBiocRelease}
+                // helperText="Please select your currency"
+              >
+                {releaseOptions.map((option) => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Fab>
+          </ThemeProvider>
         </Grid>
       </main>
     </Layout>
