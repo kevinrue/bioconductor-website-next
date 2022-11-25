@@ -12,6 +12,8 @@ import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
 import TextField from "@mui/material/TextField";
 import MenuItem from '@mui/material/MenuItem';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Fab from '@mui/material/Fab';
 // React
 import React, { useState } from 'react';
 // <https://react-data-table-component.netlify.app/?path=/docs/getting-started-examples--page>
@@ -113,8 +115,22 @@ const typeOptions = [
   { value: 'Workflow', label: 'Workflow' },
 ]
 
-// 'All' should always be the first option
-const typeDefaultValue = typeOptions[0].value;
+const FabTheme = createTheme({
+  components: {
+    // Name of the component
+    MuiFab: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          position: 'fixed',
+          bottom: '25px',
+          right: '25px',
+        },
+      },
+    },
+  },
+});
 
 export default function Packages() {
   const router = useRouter();
@@ -233,6 +249,11 @@ export default function Packages() {
               defaultSortFieldId="package_name"
             />
           </Grid>
+          <ThemeProvider theme={FabTheme}>
+            <Fab className={styles.fab} color="primary" variant="extended">
+            Release: {bioc_release}
+            </Fab>
+          </ThemeProvider>
         </Grid>
       </main>
     </Layout >
