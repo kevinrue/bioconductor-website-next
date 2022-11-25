@@ -9,6 +9,8 @@ body {
 
 h1 {
   color: #87b13f;
+  /* https://coolors.co/87b13f-1a81c2-13293d-fbfffe-6b0504 + 'View shades' */
+  text-shadow: 0 0 2px #d1e6b3;
 }
 
 a {
