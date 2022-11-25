@@ -4,7 +4,7 @@ title: "Project-wide Code of Conduct statement for Bioconductor (English, United
 
 (Adapted from the [BioC 2020 Code of Conduct][1])
 
-## Version 1.1.0 (July 16, 2022)
+**Version 1.1.0 (July 16, 2022)**
 
 _Initial project-wide Code of Conduct, expanded from previous conference-specific documents_
 

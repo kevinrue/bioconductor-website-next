@@ -13,6 +13,10 @@ h1 {
   text-shadow: 0 0 2px #d1e6b3;
 }
 
+h2 {
+  color: #1a81c2;
+}
+
 a {
   color: #1a81c2;
   text-decoration: none;

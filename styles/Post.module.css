@@ -29,4 +29,8 @@
   border-radius: 25px;
   background-color: white;
   padding: 20px 2em;
+  border-style: solid;
+  /* https://coolors.co/87b13f-1a81c2-13293d-fbfffe-6b0504 */
+  border-color: #13293d;
+  border-width: thin;
 }
