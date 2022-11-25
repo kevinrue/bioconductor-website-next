@@ -1,6 +1,7 @@
 // Sources:
 // <https://vercel.com/guides/loading-static-file-nextjs-api-route>
 // <https://fontawesome.com/v5/docs/web/use-with/react>
+import path from "path";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
@@ -142,7 +143,6 @@ export default function Packages() {
   const router = useRouter();
   const bioc_release = router.query.bioc_release;
 
-  const [biocRelease, setBiocRelease] = useState(bioc_release);
   const [packageSearchString, setPackageSearchString] = useState("");
   const [packageType, setPackageType] = useState(typeOptions[0].value);
   const debouncedPackageSearchString = useDebounce(packageSearchString, 500);
@@ -216,7 +216,8 @@ export default function Packages() {
   const handleChangeBiocRelease = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setBiocRelease(event.target.value);
+    const href = `${path.dirname(router.asPath)}/${event.target.value}`;
+    router.push(href);
   };
 
   return (
