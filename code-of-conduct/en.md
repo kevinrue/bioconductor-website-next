@@ -90,18 +90,18 @@ This procedure is briefly summarized [here](https://bioconductor.github.io/CodeO
 
 ### Code of Conduct Committee 
 
-* (Chair) Saskia Freytag sas.freytag@gmail.com (until 2023) she/her [EN, DE]
-* Yagoub Adam yagoub@alumni.usp.br (until 2022) he/him [EN] (CAB)
-* Leonardo Collado-Torres lcolladotor@gmail.com (until 2022) he/him [EN, ES]
-* Laurent Gatto laurent.gatto@gmail.com (until 2023) he/him [FR, EN] (TAB, European Bioconductor Society)
-* Michael Love michaelisaiahlove@gmail.com (until 2024) he/him [EN] (TAB)
-* Federico Marini fede.maro@gmail.com (until 2024) he/him [EN, IT, DE]
-* Sowmya Parthiban sowmyaparthiban@gmail.com (until 2024) she/her [EN, Tamil]
-* Anna Quaglieri anna.quaglieri16@gmail.com (until 2024) she/her [EN, IT]
-* Johannes Rainer johannes.rainer@eurac.edu (until 2023) he/him [EN, DE, IT] (CAB, European Bioconductor Society)
-* Lluís Revilla lluis.revilla@gmail.com (until 2024) he/him [CAT, ES, EN]
-* Kevin Rue-Albrecht kevinrue67@gmail.com  (until 2024) he/him [FR, EN] (CAB)
-* Charlotte Soneson charlottesoneson@gmail.com (until 2023) she/her [EN, SE] (TAB, European Bioconductor Society)
-* (Ombusdperson) Beatriz Serrano-Solano beatrizserrano.galaxy@gmail.com (Galaxy project) she/her [ES,EN]
+* (Chair) Saskia Freytag <sas.freytag@gmail.com> (until 2023) she/her [EN, DE]
+* Yagoub Adam <yagoub@alumni.usp.br> (until 2022) he/him [EN] (CAB)
+* Leonardo Collado-Torres <lcolladotor@gmail.com> (until 2022) he/him [EN, ES]
+* Laurent Gatto <laurent.gatto@gmail.com> (until 2023) he/him [FR, EN] (TAB, European Bioconductor Society)
+* Michael Love <michaelisaiahlove@gmail.com> (until 2024) he/him [EN] (TAB)
+* Federico Marini <fede.maro@gmail.com> (until 2024) he/him [EN, IT, DE]
+* Sowmya Parthiban <sowmyaparthiban@gmail.com> (until 2024) she/her [EN, Tamil]
+* Anna Quaglieri <anna.quaglieri16@gmail.com> (until 2024) she/her [EN, IT]
+* Johannes Rainer <johannes.rainer@eurac.edu> (until 2023) he/him [EN, DE, IT] (CAB, European Bioconductor Society)
+* Lluís Revilla <lluis.revilla@gmail.com> (until 2024) he/him [CAT, ES, EN]
+* Kevin Rue-Albrecht <kevinrue67@gmail.com>  (until 2024) he/him [FR, EN] (CAB)
+* Charlotte Soneson <charlottesoneson@gmail.com> (until 2023) she/her [EN, SE] (TAB, European Bioconductor Society)
+* (Ombusdperson) Beatriz Serrano-Solano <beatrizserrano.galaxy@gmail.com> (Galaxy project) she/her [ES,EN]
 
 [1]: https://bioc2020.bioconductor.org/code_of_conduct
