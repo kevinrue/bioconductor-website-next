@@ -136,6 +136,24 @@ const FabTheme = createTheme({
         },
       },
     },
+    MuiTextField: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          margin: "0 0 0 5px",
+        },
+      },
+    },
+    MuiInputBase: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          color: "white",
+        },
+      },
+    },
   },
 });
 
@@ -288,10 +306,11 @@ export default function Packages() {
           </Grid>
           {bioc_release ? (
             <ThemeProvider theme={FabTheme}>
-              <Fab className={styles.fab} color="primary" variant="extended">
+              <Fab color="primary" variant="extended" sx={{ color: "white" }}>
                 Release:{" "}
                 <TextField
                   id="select-release"
+                  variant="standard"
                   select
                   defaultValue={bioc_release}
                   onChange={handleChangeBiocRelease}
