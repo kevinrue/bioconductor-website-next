@@ -5,12 +5,12 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Image from "next/image";
 
-const bioc_releases = ['3.16', '3.15']
-const coc_locales = ['en', 'fr']
+const bioc_releases = ["3.16", "3.15"];
+const coc_locales = ["en", "fr"];
 
 export default function Main() {
   return (
-    <Navbar className={styles.navbar} bg="light" expand="lg">
+    <Navbar className={styles.navbar} bg="light" expand="md">
       <Container>
         <Navbar.Brand href="/">
           <Image
@@ -23,7 +23,7 @@ export default function Main() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          <Nav className="ms-auto">
             <NavDropdown
               className={styles.link}
               title="Packages"
@@ -31,7 +31,11 @@ export default function Main() {
             >
               <NavDropdown.Header>Releases</NavDropdown.Header>
               {bioc_releases.map((release: string) => (
-                <NavDropdown.Item key={release} className={styles.link} href={`/packages/${release}`}>
+                <NavDropdown.Item
+                  key={release}
+                  className={styles.link}
+                  href={`/packages/${release}`}
+                >
                   {release}
                 </NavDropdown.Item>
               ))}
@@ -74,7 +78,11 @@ export default function Main() {
             >
               <NavDropdown.Header>Locales</NavDropdown.Header>
               {coc_locales.map((release: string) => (
-                <NavDropdown.Item key={release} className={styles.link} href={`/code-of-conduct/${release}`}>
+                <NavDropdown.Item
+                  key={release}
+                  className={styles.link}
+                  href={`/code-of-conduct/${release}`}
+                >
                   {release}
                 </NavDropdown.Item>
               ))}
@@ -82,6 +90,6 @@ export default function Main() {
           </Nav>
         </Navbar.Collapse>
       </Container>
-    </Navbar >
+    </Navbar>
   );
 }

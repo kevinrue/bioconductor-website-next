@@ -6,13 +6,17 @@
   pointer-events: none;
 }
 
-.navlink {
-  font-style: normal;
+.navbar-nav {
+  flex: 1;
+  flex-direction: row;
+  /* justify-content: right; */
+  /* align-items: flex-end; */
 }
 
 .link,
 .link>a {
   font-style: normal;
+  margin: 0 3px;
 }
 
 .link:hover,
@@ -20,6 +24,7 @@
   color: #87b13f;
 }
 
+/* TODO: Set color #87b13f to the link of the NavDropdown title that is currently open */
 /* .navbar-nav .show > .nav-link, .navbar-nav .nav-link.active {
   color:#87b13f !important;
 } */
