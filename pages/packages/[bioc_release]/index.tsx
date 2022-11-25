@@ -25,7 +25,7 @@ import useDebounce from "../../../lib/useDebounce";
 import styles from "../../../styles/Packages.module.css";
 
 const grid_item_xs = 12;
-const grid_item_md = 11;
+const grid_item_md = 10;
 
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
 const fetcher = (url: URL) => fetch(url).then((res) => res.json());
