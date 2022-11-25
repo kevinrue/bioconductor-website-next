@@ -127,9 +127,9 @@ const FabTheme = createTheme({
     // Name of the component
     MuiFab: {
       styleOverrides: {
-        // Name of the slot
+        // Name of the slot (see <https://mui.com/material-ui/api/fab/#css>)
         root: {
-          // Some CSS
+          // Keep floating action button in the bottom right corner while scrolling
           position: "fixed",
           bottom: "25px",
           right: "25px",
@@ -138,18 +138,18 @@ const FabTheme = createTheme({
     },
     MuiTextField: {
       styleOverrides: {
-        // Name of the slot
+        // Name of the slot (see <https://mui.com/material-ui/api/text-field/#css>)
         root: {
-          // Some CSS
+          // Add margin on the left of the selectable TextField
           margin: "0 0 0 5px",
         },
       },
     },
     MuiInputBase: {
       styleOverrides: {
-        // Name of the slot
+        // Name of the slot (see <https://mui.com/material-ui/api/input-base/#css>)
         root: {
-          // Some CSS
+          // Color of the text of the selected option
           color: "white",
         },
       },
