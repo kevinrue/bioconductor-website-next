@@ -8,7 +8,7 @@ import styles from "../../styles/CodeOfConduct.module.css";
 const grid_item_xs = 12;
 const grid_item_md = 9;
 
-export default function CodeOfConduct({ cocData }) {
+export default function CodeOfConduct({ cocData }: any) {
   return (
     <Layout>
       <Head>
