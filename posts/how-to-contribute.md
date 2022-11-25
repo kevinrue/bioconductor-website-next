@@ -46,12 +46,13 @@ So far, the project has been developed using Visual Studio Code (VS Code),
 and a number of VS Code Extensions to facilitate development and linting, e.g.:
 
 - [ESLint][eslint-website]
+- [Prettier][prettier-website]
 
 For instance:
 
 - JavaScript files are regularly linted using a keyboard shortcut.
-  - (macOS) `Option` + `Shift` + `F` 
-  - (Windows) `Ctrl` + `Shift` + `F` 
+  - (macOS) `Option` + `Shift` + `F`
+  - (Windows) `Ctrl` + `Shift` + `F`
 
 ## Install dependencies
 
@@ -112,5 +113,6 @@ This is a project for the Bioconductor community, as such:
 [nextjs-website]: https://nextjs.org
 [github-repository]: https://github.com/kevinrue/bioconductor-website-next
 [eslint-website]: https://eslint.org
+[prettier-website]: https://prettier.io/
 [nodejs-website]: https://nodejs.org/
 [bioc-coc]: https://bioconductor.github.io/bioc_coc_multilingual/

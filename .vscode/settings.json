@@ -1,13 +1,15 @@
 {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-    "[markdown]": {
-        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
-    },
-    "editor.formatOnPaste": false,
-    "eslint.format.enable": true,
-    "[css]": {
-        "editor.defaultFormatter": "vscode.css-language-features"
-    },
-    "editor.detectIndentation": false,
-    "editor.tabSize": 2
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnPaste": false,
+  "eslint.format.enable": true,
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true
 }
