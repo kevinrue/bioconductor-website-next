@@ -15,19 +15,10 @@
   align-items: center;
 }
 
-.author {
-  font-style: italic;
-  margin-bottom: 1em;
-}
-
-.date {
-  font-size: small;
-  margin-top: 1em;
-}
-
 .content {
   border-radius: 25px;
   background-color: white;
+  margin: 1rem 0;
   padding: 20px 2em;
   border-style: solid;
   /* https://coolors.co/87b13f-1a81c2-13293d-fbfffe-6b0504 */

@@ -6,6 +6,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Image from "next/image";
 
 const bioc_releases = ['3.16', '3.15']
+const coc_locales = ['en', 'fr']
 
 export default function Main() {
   return (
@@ -65,6 +66,18 @@ export default function Main() {
               >
                 Promote Accessibility
               </NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown
+              className={styles.link}
+              title="Code of Conduct"
+              id="basic-nav-dropdown"
+            >
+              <NavDropdown.Header>Locales</NavDropdown.Header>
+              {coc_locales.map((release: string) => (
+                <NavDropdown.Item key={release} className={styles.link} href={`/code-of-conduct/${release}`}>
+                  {release}
+                </NavDropdown.Item>
+              ))}
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
