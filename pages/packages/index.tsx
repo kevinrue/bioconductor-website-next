@@ -9,9 +9,15 @@ import styles from "../../styles/Releases.module.css";
 const grid_item_xs = 12;
 const grid_item_md = 9;
 
-export default function Releases({ releasesData }) {
+// To understand "Typing Destructured Object Parameters in TypeScript", see section
+// "Typing Immediately Destructured Parameters"
+// at <https://mariusschulz.com/blog/typing-destructured-object-parameters-in-typescript>
+export default function Releases({
+  releasesData,
+}: {
+  releasesData: { content: string };
+}) {
   const router = useRouter();
-  console.log(releasesData.content);
 
   return (
     <Layout>
