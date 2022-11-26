@@ -5,10 +5,12 @@ import Navbar from "./navbar";
 import Footer from "./footer";
 import styles from "../styles/Layout.module.css";
 
-export default function Layout({ children }: any) {
+// TODO: check if syntax { children, ...pageProps } is good practice
+export default function Layout({ children, ...pageProps }: any) {
   return (
     <>
-      <Navbar />
+      {/* TODO: check if latest_bioc_release can be passed more elegantly */}
+      <Navbar latest_bioc_release={pageProps.latest_bioc_release} />
       <div className={styles.container}>{children}</div>
       <Footer />
     </>

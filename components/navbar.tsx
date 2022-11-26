@@ -11,7 +11,14 @@ const coc_locales = [
   { locale: "fr", label: "French" },
 ];
 
-export default function NavigationBar() {
+export default function NavigationBar({
+  latest_bioc_release,
+}: {
+  latest_bioc_release: {
+    version: string;
+    status: string;
+  };
+}) {
   return (
     <Navbar className={styles.navbar} bg="light" expand="md">
       <Container>
@@ -37,8 +44,11 @@ export default function NavigationBar() {
               </NavDropdown.Item>
               <NavDropdown.Header>Latest</NavDropdown.Header>
               {/* TODO: dynamically identify the most recent release */}
-              <NavDropdown.Item className={styles.link} href={`/packages/3.16`}>
-                3.16
+              <NavDropdown.Item
+                className={styles.link}
+                href={`/packages/${latest_bioc_release.version}`}
+              >
+                {latest_bioc_release.version}
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown

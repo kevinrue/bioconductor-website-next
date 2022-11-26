@@ -18,9 +18,11 @@ export default function Releases({
   releasesData: { content: string };
 }) {
   const router = useRouter();
+  // TODO: sort().reverse() before taking first one
+  const latest_bioc_release = JSON.parse(releasesData.content)[0];
 
   return (
-    <Layout>
+    <Layout latest_bioc_release={latest_bioc_release}>
       <Head>
         <title>Bioconductor - Releases</title>
         <meta
