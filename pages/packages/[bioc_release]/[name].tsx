@@ -114,7 +114,8 @@ export default function Package() {
             <h2>{package_data.Title}</h2>
             <hr />
             <p className={styles.snapshot}>
-              Bioconductor release {r_version} (Snapshot date: {snapshot_date})
+              Bioconductor release {bioc_release} | R version {r_version}{" "}
+              (Snapshot date: {snapshot_date})
             </p>
             <p className={styles.description}>{package_data.Description}</p>
             <h3>Installation</h3>
