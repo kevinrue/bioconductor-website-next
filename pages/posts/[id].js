@@ -2,10 +2,10 @@
 // <https://nextjs.org/learn/basics/dynamic-routes/render-markdown>
 // <https://github.com/remarkjs/react-markdown#use-custom-components-syntax-highlight
 import Head from "next/head";
-import { getAllPostIds, getPostData } from "../../lib/posts";
 import Grid from "@mui/material/Grid";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { getAllPostIds, getPostData } from "../../lib/posts";
 import Layout from "../../components/layout";
 import styles from "../../styles/Post.module.css";
 

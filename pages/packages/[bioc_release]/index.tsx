@@ -128,6 +128,7 @@ export default function Packages() {
 
   const [packageSearchString, setPackageSearchString] = useState("");
   const [packageType, setPackageType] = useState(typeOptions[0].value);
+  // Debounce the string input on package names by 500ms
   const debouncedPackageSearchString = useDebounce(packageSearchString, 500);
 
   //Set up SWR to run the fetcher function when calling "/api/staticdata"
