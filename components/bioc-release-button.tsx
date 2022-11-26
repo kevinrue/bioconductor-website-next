@@ -42,7 +42,13 @@ const FabTheme = createTheme({
   },
 });
 
-export default function BiocReleaseButton({ defaultValue, options }) {
+export default function BiocReleaseButton({
+  defaultValue,
+  options,
+}: {
+  defaultValue: string;
+  options: string[];
+}) {
   const router = useRouter();
 
   const handleChangeBiocRelease = (
