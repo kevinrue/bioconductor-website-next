@@ -1,7 +1,6 @@
 // Sources:
 // <https://vercel.com/guides/loading-static-file-nextjs-api-route>
 // <https://fontawesome.com/v5/docs/web/use-with/react>
-import path from "path";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
@@ -13,14 +12,13 @@ import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import Fab from "@mui/material/Fab";
 // React
 import React, { useState } from "react";
 // <https://react-data-table-component.netlify.app/?path=/docs/getting-started-examples--page>
 import DataTable from "react-data-table-component";
 // Keep last to override other stylesheets
 import Layout from "../../../components/layout";
+import BiocReleaseFab from "../../../components/bioc-release-button";
 import useDebounce from "../../../lib/useDebounce";
 import styles from "../../../styles/Packages.module.css";
 
@@ -120,42 +118,8 @@ const typeOptions = [
   { value: "Workflow", label: "Workflow" },
 ];
 
-const releaseOptions = ["3.15", "3.16"];
-
-const FabTheme = createTheme({
-  components: {
-    // Name of the component
-    MuiFab: {
-      styleOverrides: {
-        // Name of the slot (see <https://mui.com/material-ui/api/fab/#css>)
-        root: {
-          // Keep floating action button in the bottom right corner while scrolling
-          position: "fixed",
-          bottom: "25px",
-          right: "25px",
-        },
-      },
-    },
-    MuiTextField: {
-      styleOverrides: {
-        // Name of the slot (see <https://mui.com/material-ui/api/text-field/#css>)
-        root: {
-          // Add margin on the left of the selectable TextField
-          margin: "0 0 0 5px",
-        },
-      },
-    },
-    MuiInputBase: {
-      styleOverrides: {
-        // Name of the slot (see <https://mui.com/material-ui/api/input-base/#css>)
-        root: {
-          // Color of the text of the selected option
-          color: "white",
-        },
-      },
-    },
-  },
-});
+// TODO: move global options elsewhere
+const biocReleaseOptions = ["3.15", "3.16"];
 
 export default function Packages() {
   const router = useRouter();
@@ -231,13 +195,6 @@ export default function Packages() {
     setPackageType(event.target.value);
   };
 
-  const handleChangeBiocRelease = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const href = `${path.dirname(router.asPath)}/${event.target.value}`;
-    router.push(href);
-  };
-
   return (
     <Layout>
       <Head>
@@ -304,25 +261,10 @@ export default function Packages() {
               defaultSortFieldId="package_name"
             />
           </Grid>
-          <ThemeProvider theme={FabTheme}>
-            <Fab color="primary" variant="extended" sx={{ color: "white" }}>
-              Release:{" "}
-              <TextField
-                id="select-release"
-                variant="standard"
-                select
-                defaultValue={bioc_release}
-                onChange={handleChangeBiocRelease}
-                // helperText="Please select your currency"
-              >
-                {releaseOptions.map((option) => (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Fab>
-          </ThemeProvider>
+          <BiocReleaseFab
+            defaultValue={bioc_release}
+            options={biocReleaseOptions}
+          />
         </Grid>
       </main>
     </Layout>
