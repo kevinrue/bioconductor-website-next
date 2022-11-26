@@ -1,6 +1,7 @@
 // Sources:
 // <https://vercel.com/guides/loading-static-file-nextjs-api-route>
 // <https://fontawesome.com/v5/docs/web/use-with/react>
+import path from "path";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
@@ -18,7 +19,7 @@ import React, { useState } from "react";
 import DataTable from "react-data-table-component";
 // Keep last to override other stylesheets
 import Layout from "../../../components/layout";
-import BiocReleaseFab from "../../../components/bioc-release-button";
+import BiocReleaseButton from "../../../components/bioc-release-button";
 import useDebounce from "../../../lib/useDebounce";
 import styles from "../../../styles/Packages.module.css";
 
@@ -123,7 +124,7 @@ const biocReleaseOptions = ["3.15", "3.16"];
 
 export default function Packages() {
   const router = useRouter();
-  const bioc_release = String(router.query.bioc_release);
+  const bioc_release = router.query.bioc_release;
 
   const [packageSearchString, setPackageSearchString] = useState("");
   const [packageType, setPackageType] = useState(typeOptions[0].value);
@@ -261,9 +262,10 @@ export default function Packages() {
               defaultSortFieldId="package_name"
             />
           </Grid>
-          <BiocReleaseFab
-            defaultValue={bioc_release}
+          <BiocReleaseButton
+            defaultValue={String(bioc_release)}
             options={biocReleaseOptions}
+            templateUrl="/packages/${release}"
           />
         </Grid>
       </main>
