@@ -32,7 +32,7 @@ export default function Releases({
       <main className={styles.main}>
         <Grid container className={styles.grid}>
           <Grid item xs={grid_item_xs} md={grid_item_md}>
-            <h2>Releases</h2>
+            <h1>Releases</h1>
             <p>Use the links below to navigate to individual releases.</p>
             <ul>
               {JSON.parse(releasesData.content).map(
