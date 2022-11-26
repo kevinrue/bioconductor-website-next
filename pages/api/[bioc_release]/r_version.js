@@ -8,7 +8,11 @@ export default async function handler(req, res) {
   //Find the absolute path of the json directory
   const jsonDirectory = path.join(process.cwd(), "json");
   //Bioc release directory
-  const biocReleaseDirectory = path.join(jsonDirectory, bioc_release);
+  const biocReleaseDirectory = path.join(
+    jsonDirectory,
+    "releases",
+    bioc_release
+  );
   //Read the json data file packages.json
   const fileContents = await fs.readFile(
     biocReleaseDirectory + "/r_version.json",

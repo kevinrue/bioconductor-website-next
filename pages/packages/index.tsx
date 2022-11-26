@@ -9,12 +9,10 @@ import styles from "../../styles/Releases.module.css";
 const grid_item_xs = 12;
 const grid_item_md = 9;
 
-export default function Releases({
-  releasesData,
-}: {
-  releasesData: { directories: string[] };
-}) {
+export default function Releases({ releasesData }) {
   const router = useRouter();
+  console.log(releasesData.content);
+
   return (
     <Layout>
       <Head>
@@ -31,20 +29,19 @@ export default function Releases({
             <h2>Releases</h2>
             <p>Use the links below to navigate to individual releases.</p>
             <ul>
-              {releasesData.directories
-                .sort()
-                .reverse()
-                .map((release: string) => (
-                  <li key={release}>
+              {JSON.parse(releasesData.content).map(
+                (object: { version: string; status: string }) => (
+                  <li key={object.version}>
                     {" "}
                     <Link
                       className={styles.link}
-                      href={`${router.asPath}/${release}`}
+                      href={`${router.asPath}/${object.version}`}
                     >
-                      {release}
+                      {object.version} ({object.status})
                     </Link>
                   </li>
-                ))}
+                )
+              )}
             </ul>
           </Grid>
         </Grid>
@@ -56,7 +53,6 @@ export default function Releases({
 export async function getStaticProps() {
   // Add the "await" keyword like this:
   const releasesData = await getReleasesData();
-  // const releasesData = ["3.15", "3.16"];
 
   return {
     props: {
