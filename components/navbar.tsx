@@ -7,7 +7,10 @@ import Image from "next/image";
 
 // TODO: move website-wide constants to global settings (find out suitable method for this)
 const bioc_releases = ["3.16", "3.15"];
-const coc_locales = ["en", "fr"];
+const coc_locales = [
+  { locale: "en", label: "English" },
+  { locale: "fr", label: "French" },
+];
 
 export default function NavigationBar() {
   return (
@@ -77,16 +80,18 @@ export default function NavigationBar() {
               title="Code of Conduct"
               id="basic-nav-dropdown"
             >
-              <NavDropdown.Header>Locales</NavDropdown.Header>
-              {coc_locales.map((release: string) => (
-                <NavDropdown.Item
-                  key={release}
-                  className={styles.link}
-                  href={`/code-of-conduct/${release}`}
-                >
-                  {release}
-                </NavDropdown.Item>
-              ))}
+              <NavDropdown.Header>Languages</NavDropdown.Header>
+              {coc_locales.map(
+                ({ locale, label }: { locale: string; label: string }) => (
+                  <NavDropdown.Item
+                    key={locale}
+                    className={styles.link}
+                    href={`/code-of-conduct/${locale}`}
+                  >
+                    {label}
+                  </NavDropdown.Item>
+                )
+              )}
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
