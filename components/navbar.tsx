@@ -6,7 +6,6 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Image from "next/image";
 
 // TODO: move website-wide constants to global settings (find out suitable method for this)
-const bioc_releases = ["3.16", "3.15"];
 const coc_locales = [
   { locale: "en", label: "English" },
   { locale: "fr", label: "French" },
@@ -33,16 +32,14 @@ export default function NavigationBar() {
               title="Packages"
               id="basic-nav-dropdown"
             >
-              <NavDropdown.Header>Releases</NavDropdown.Header>
-              {bioc_releases.map((release: string) => (
-                <NavDropdown.Item
-                  key={release}
-                  className={styles.link}
-                  href={`/packages/${release}`}
-                >
-                  {release}
-                </NavDropdown.Item>
-              ))}
+              <NavDropdown.Item className={styles.link} href={`/packages/`}>
+                All Releases
+              </NavDropdown.Item>
+              <NavDropdown.Header>Latest</NavDropdown.Header>
+              {/* TODO: dynamically identify the most recent release */}
+              <NavDropdown.Item className={styles.link} href={`/packages/3.16`}>
+                3.16
+              </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown
               className={styles.link}

@@ -31,17 +31,20 @@ export default function Releases({
             <h2>Releases</h2>
             <p>Use the links below to navigate to individual releases.</p>
             <ul>
-              {releasesData.directories.map((release: string) => (
-                <li key={release}>
-                  {" "}
-                  <Link
-                    className={styles.link}
-                    href={`${router.asPath}/${release}`}
-                  >
-                    {release}
-                  </Link>
-                </li>
-              ))}
+              {releasesData.directories
+                .sort()
+                .reverse()
+                .map((release: string) => (
+                  <li key={release}>
+                    {" "}
+                    <Link
+                      className={styles.link}
+                      href={`${router.asPath}/${release}`}
+                    >
+                      {release}
+                    </Link>
+                  </li>
+                ))}
             </ul>
           </Grid>
         </Grid>
