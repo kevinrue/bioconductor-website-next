@@ -1,14 +1,15 @@
-import styles from "../styles/Navbar.module.css";
+import styles from "../styles/NavigationBar.module.css";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Image from "next/image";
 
+// TODO: move website-wide constants to global settings (find out suitable method for this)
 const bioc_releases = ["3.16", "3.15"];
 const coc_locales = ["en", "fr"];
 
-export default function Main() {
+export default function NavigationBar() {
   return (
     <Navbar className={styles.navbar} bg="light" expand="md">
       <Container>
