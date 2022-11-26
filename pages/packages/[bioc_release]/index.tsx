@@ -123,7 +123,7 @@ const biocReleaseOptions = ["3.15", "3.16"];
 
 export default function Packages() {
   const router = useRouter();
-  const bioc_release = router.query.bioc_release;
+  const bioc_release = String(router.query.bioc_release);
 
   const [packageSearchString, setPackageSearchString] = useState("");
   const [packageType, setPackageType] = useState(typeOptions[0].value);
