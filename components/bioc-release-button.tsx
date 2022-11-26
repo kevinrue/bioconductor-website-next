@@ -1,11 +1,8 @@
-import path from "path";
 import { useRouter } from "next/router";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Fab from "@mui/material/Fab";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-
-const bioc_releases = ["3.15", "3.16"];
 
 const FabTheme = createTheme({
   components: {
@@ -42,19 +39,25 @@ const FabTheme = createTheme({
   },
 });
 
+const fillUrlTemplate = function (templateUrl: string, release: string) {
+  return templateUrl.replaceAll("${release}", release);
+};
+
 export default function BiocReleaseButton({
   defaultValue,
   options,
+  templateUrl,
 }: {
   defaultValue: string;
   options: string[];
+  templateUrl: string;
 }) {
   const router = useRouter();
 
   const handleChangeBiocRelease = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const href = `${path.dirname(router.asPath)}/${event.target.value}`;
+    const href = fillUrlTemplate(templateUrl, event.target.value);
     router.push(href);
   };
 
