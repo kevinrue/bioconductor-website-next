@@ -82,31 +82,8 @@ export default function NavigationBar() {
               >
                 Community blog
               </NavDropdown.Item>
-
-              <NavDropdown.Header>How-to&apos;s</NavDropdown.Header>
-              <NavDropdown.Item
-                className={styles.link}
-                href="/posts/how-to-add-a-post"
-              >
-                Add a Post
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                className={styles.link}
-                href="/posts/how-to-add-a-search-bar"
-              >
-                Add a Search Bar
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                className={styles.link}
-                href="/posts/how-to-contribute"
-              >
-                Contribute
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                className={styles.link}
-                href="/posts/how-to-promote-accessibility"
-              >
-                Promote Accessibility
+              <NavDropdown.Item className={styles.link} href="/posts">
+                Developer's notes
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown
