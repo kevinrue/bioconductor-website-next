@@ -14,6 +14,17 @@
   /* align-items: flex-end; */
 }
 
+.navlink,
+.navlink>a {
+  font-style: normal;
+  margin: 0 3px;
+}
+
+.navlink:hover,
+.navlink>a:hover {
+  color: white;
+}
+
 .link,
 .link>a {
   font-style: normal;

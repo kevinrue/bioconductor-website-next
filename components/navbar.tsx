@@ -50,7 +50,7 @@ export default function NavigationBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <NavDropdown
-              className={styles.link}
+              className={styles.navlink}
               title="Packages"
               id="basic-nav-dropdown"
             >
@@ -71,7 +71,7 @@ export default function NavigationBar() {
               )}
             </NavDropdown>
             <NavDropdown
-              className={styles.link}
+              className={styles.navlink}
               title="Blog"
               id="basic-nav-dropdown"
             >
@@ -83,11 +83,11 @@ export default function NavigationBar() {
                 Community blog
               </NavDropdown.Item>
               <NavDropdown.Item className={styles.link} href="/posts">
-                Developer's notes
+                Developer&apos;s notes
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown
-              className={styles.link}
+              className={styles.navlink}
               title="Code of Conduct"
               id="basic-nav-dropdown"
             >
