@@ -75,6 +75,14 @@ export default function NavigationBar() {
               title="Blog"
               id="basic-nav-dropdown"
             >
+              <NavDropdown.Item
+                className={styles.link}
+                href="https://bioconductor.github.io/biocblog/"
+                target="_blank"
+              >
+                Community blog
+              </NavDropdown.Item>
+
               <NavDropdown.Header>How-to&apos;s</NavDropdown.Header>
               <NavDropdown.Item
                 className={styles.link}
