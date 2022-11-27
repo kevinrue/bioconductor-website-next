@@ -15,6 +15,7 @@ const coc_locales = [
 export default function NavigationBar() {
   const [latestBiocReleaseData, setLatestBiocReleaseData] = useState({
     version: undefined,
+    status: undefined,
   });
 
   // Source: <https://stackoverflow.com/questions/72894206/how-to-create-dynamic-nav-items-using-next-js>
@@ -28,7 +29,6 @@ export default function NavigationBar() {
           a.version > b.version ? 1 : -1
         )
         .reverse()[0];
-      // const latestBiocRelease = { version: "3.16", status: "release" };
       setLatestBiocReleaseData(latestBiocReleaseData);
     }
     fetchData();
@@ -64,7 +64,8 @@ export default function NavigationBar() {
                   className={styles.link}
                   href={`/packages/${latestBiocReleaseData.version}`}
                 >
-                  {latestBiocReleaseData.version}
+                  {latestBiocReleaseData.version} (
+                  {latestBiocReleaseData.status})
                 </NavDropdown.Item>
               ) : (
                 ""
