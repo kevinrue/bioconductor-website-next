@@ -49,6 +49,11 @@ export default function NavigationBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
+            <Nav.Item>
+              <Nav.Link className={styles.navlink} href="/learn">
+                Learn
+              </Nav.Link>
+            </Nav.Item>
             <NavDropdown
               className={styles.navlink}
               title="Packages"
@@ -58,7 +63,6 @@ export default function NavigationBar() {
                 All Releases
               </NavDropdown.Item>
               <NavDropdown.Header>Latest</NavDropdown.Header>
-              {/* TODO: dynamically identify the most recent release */}
               {latestBiocReleaseData ? (
                 <NavDropdown.Item
                   className={styles.link}
