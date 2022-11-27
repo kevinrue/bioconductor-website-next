@@ -19,6 +19,8 @@ export default function Releases({
 }) {
   const router = useRouter();
 
+  const releases_data = JSON.parse(releasesData.content);
+
   return (
     <Layout>
       <Head>
@@ -33,9 +35,31 @@ export default function Releases({
         <Grid container className={styles.grid}>
           <Grid item xs={grid_item_xs} md={grid_item_md}>
             <h1>Releases</h1>
+            <h2>The Bioconductor release cycle</h2>
+            <p>
+              The Bioconductor projects features a 6-month release cycle
+              (typically around April and October), which sees a snapshot of the
+              current version of all packages in the Bioconductor repository
+              earmarked for a specific version of R.
+            </p>
+            <h2>Release types</h2>
+            <p>
+              The current stable release is marked as <i>release</i>. Only
+              critical bug fixes are allowed in that area of the repository.
+            </p>
+            <p>
+              The next stable release is marked as <i>devel</i>. Active
+              development takes place in that area of the repository. New
+              packages versions may be released daily.
+            </p>
+            <p>
+              Earlier releases are marked as <i>archived</i>. No more changes
+              are allowed in that area of the repository.
+            </p>
+            <h2>Links</h2>
             <p>Use the links below to navigate to individual releases.</p>
             <ul>
-              {JSON.parse(releasesData.content).map(
+              {releases_data.map(
                 (object: { version: string; status: string }) => (
                   <li key={object.version}>
                     {" "}
