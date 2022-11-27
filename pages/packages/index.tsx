@@ -44,17 +44,17 @@ export default function Releases({
             </p>
             <h2>Release types</h2>
             <p>
-              The current stable release is marked as 'release'. Only critical
-              bug fixes are allowed in that area of the repository.
+              The current stable release is marked as <i>release</i>. Only
+              critical bug fixes are allowed in that area of the repository.
             </p>
             <p>
-              The next stable release is marked as 'devel'. Active development
-              takes place in that area of the repository. New packages versions
-              may be released daily.
+              The next stable release is marked as <i>devel</i>. Active
+              development takes place in that area of the repository. New
+              packages versions may be released daily.
             </p>
             <p>
-              Earlier releases are marked as 'archived'. No more changes are
-              allowed in that area of the repository.
+              Earlier releases are marked as <i>archived</i>. No more changes
+              are allowed in that area of the repository.
             </p>
             <h2>Links</h2>
             <p>Use the links below to navigate to individual releases.</p>
