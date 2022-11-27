@@ -1,9 +1,10 @@
-import styles from "../styles/NavigationBar.module.css";
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Image from "next/image";
+import styles from "../styles/NavigationBar.module.css";
 
 // TODO: move website-wide constants to global settings (find out suitable method for this)
 const coc_locales = [
@@ -11,14 +12,28 @@ const coc_locales = [
   { locale: "fr", label: "French" },
 ];
 
-export default function NavigationBar({
-  latest_bioc_release,
-}: {
-  latest_bioc_release: {
-    version: string;
-    status: string;
-  };
-}) {
+export default function NavigationBar() {
+  const [latestBiocReleaseData, setLatestBiocReleaseData] = useState({
+    version: undefined,
+  });
+
+  // Source: <https://stackoverflow.com/questions/72894206/how-to-create-dynamic-nav-items-using-next-js>
+  // Trick to dynamically identify the latest BioC release and extract its version
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch("/api/bioc_releases");
+      const releasesData = await res.json();
+      const latestBiocReleaseData = JSON.parse(releasesData)
+        .sort((a: { version: string }, b: { version: string }) =>
+          a.version > b.version ? 1 : -1
+        )
+        .reverse()[0];
+      // const latestBiocRelease = { version: "3.16", status: "release" };
+      setLatestBiocReleaseData(latestBiocReleaseData);
+    }
+    fetchData();
+  }, []);
+
   return (
     <Navbar className={styles.navbar} bg="light" expand="md">
       <Container>
@@ -44,12 +59,16 @@ export default function NavigationBar({
               </NavDropdown.Item>
               <NavDropdown.Header>Latest</NavDropdown.Header>
               {/* TODO: dynamically identify the most recent release */}
-              <NavDropdown.Item
-                className={styles.link}
-                href={`/packages/${latest_bioc_release.version}`}
-              >
-                {latest_bioc_release.version}
-              </NavDropdown.Item>
+              {latestBiocReleaseData ? (
+                <NavDropdown.Item
+                  className={styles.link}
+                  href={`/packages/${latestBiocReleaseData.version}`}
+                >
+                  {latestBiocReleaseData.version}
+                </NavDropdown.Item>
+              ) : (
+                ""
+              )}
             </NavDropdown>
             <NavDropdown
               className={styles.link}
