@@ -35,7 +35,7 @@ export default function NavigationBar() {
   }, []);
 
   return (
-    <Navbar className={styles.navbar} bg="light" expand="md">
+    <Navbar className={styles.navbar} expand="md">
       <Container>
         <Navbar.Brand href="/">
           <Image
