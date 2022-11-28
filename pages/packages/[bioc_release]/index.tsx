@@ -1,7 +1,6 @@
 // Sources:
 // <https://vercel.com/guides/loading-static-file-nextjs-api-route>
 // <https://fontawesome.com/v5/docs/web/use-with/react>
-import path from "path";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
@@ -242,7 +241,7 @@ export default function Packages() {
                   label="Type"
                   value={packageType}
                   onChange={handleChangePackageType}
-                  // helperText="Please select your currency"
+                // helperText="Please select your currency"
                 >
                   {typeOptions.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
