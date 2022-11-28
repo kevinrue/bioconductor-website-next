@@ -46,7 +46,7 @@ So far, the project has been developed using Visual Studio Code (VS Code),
 and a number of VS Code Extensions to facilitate development and linting, e.g.:
 
 - [ESLint][eslint-website]
-- [Prettier][prettier-website]
+- [Prettier - Code formatter][prettier-website]
 
 For instance:
 
