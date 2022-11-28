@@ -42,15 +42,17 @@ Note: Be sure to replace `<username>` by your own GitHub username.
 
 ## Recommended: Use Visual Studio Code
 
-So far, the project has been developed using Visual Studio Code (VS Code),
-and a number of VS Code Extensions to facilitate development and linting, e.g.:
+So far, the project has been developed using Visual Studio Code,
+and a number of Visual Studio Code Extensions to facilitate development and linting, e.g.:
 
 - [ESLint][eslint-website]
 - [Prettier - Code formatter][prettier-website]
 
-For instance:
+If using Visual Studio Code, the configuration file `.vscode/settings.json` is set to automatically format files on save.
 
-- JavaScript files are regularly linted using a keyboard shortcut.
+Furthermore:
+
+- Formatting can be triggered manually using a keyboard shortcut that depends on the operating system.
   - (macOS) `Option` + `Shift` + `F`
   - (Windows) `Ctrl` + `Shift` + `F`
 
