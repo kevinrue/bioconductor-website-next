@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Image from "next/image";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExternalLink } from "@fortawesome/free-solid-svg-icons";
 import styles from "../styles/NavigationBar.module.css";
 
@@ -51,11 +51,18 @@ export default function NavigationBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Item>
-              <Nav.Link className={styles.navlink} href="/learn">
-                Learn
-              </Nav.Link>
-            </Nav.Item>
+            <NavDropdown
+              className={styles.navlink}
+              title="Learn"
+              id="basic-nav-dropdown"
+            >
+              <NavDropdown.Item
+                className={styles.navlink}
+                href={`/get-started/`}
+              >
+                Get started
+              </NavDropdown.Item>
+            </NavDropdown>
             <NavDropdown
               className={styles.navlink}
               title="Packages"
@@ -87,9 +94,7 @@ export default function NavigationBar() {
                 href="https://bioconductor.github.io/biocblog/"
                 target="_blank"
               >
-                Community blog
-                {" "}
-                <FontAwesomeIcon icon={faExternalLink} />
+                Community blog <FontAwesomeIcon icon={faExternalLink} />
               </NavDropdown.Item>
               <NavDropdown.Item className={styles.link} href="/posts">
                 Developer&apos;s notes

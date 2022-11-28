@@ -13,7 +13,7 @@ export default function Releases() {
   return (
     <Layout>
       <Head>
-        <title>Learn Bioconductor</title>
+        <title>Get started - Bioconductor</title>
         <meta
           name="description"
           content="Work in progress by Kevin Rue-Albrecht"
@@ -23,7 +23,7 @@ export default function Releases() {
       <main className={styles.main}>
         <Grid container className={styles.grid}>
           <Grid item xs={grid_item_xs} md={grid_item_md}>
-            <h1>Learn Bioconductor</h1>
+            <h1>Get started</h1>
             <p>Insert text and links here.</p>
           </Grid>
         </Grid>
