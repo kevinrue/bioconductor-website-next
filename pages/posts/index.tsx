@@ -33,15 +33,15 @@ export default function Releases() {
             </p>
             <ul>
               <li>
+                <Link href="/posts/how-to-contribute">How to: Contribute</Link>
+              </li>
+              <li>
                 <Link href="/posts/how-to-add-a-post">How to: Add a Post</Link>
               </li>
               <li>
                 <Link href="/posts/how-to-add-user-inputs">
                   How to: Add User Inputs
                 </Link>
-              </li>
-              <li>
-                <Link href="/posts/how-to-contribute">How to: Contribute</Link>
               </li>
               <li>
                 <Link href="/posts/how-to-promote-accessibility">
