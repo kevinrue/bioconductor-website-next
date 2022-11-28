@@ -36,8 +36,8 @@ export default function Releases() {
                 <Link href="/posts/how-to-add-a-post">How to: Add a Post</Link>
               </li>
               <li>
-                <Link href="/posts/how-to-add-a-search-bar">
-                  How to: Add a Search Bar
+                <Link href="/posts/how-to-add-user-inputs">
+                  How to: Add User Inputs
                 </Link>
               </li>
               <li>
