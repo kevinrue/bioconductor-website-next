@@ -52,7 +52,8 @@ export default function Releases() {
         <Grid container className={styles.grid}>
           <Grid item xs={grid_item_xs} md={grid_item_md}>
             <h1>Get started</h1>
-            <p>Welcome!</p>
+            <h2>Welcome</h2>
+            <p>Welcome to the Bioconductor community!</p>
             <h2>Pre-requisites</h2>
             <h3>Install {fa_r_project}</h3>
             <p>
