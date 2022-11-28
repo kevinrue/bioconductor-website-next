@@ -11,7 +11,9 @@ import styles from "../../styles/GetStarted.module.css";
 const grid_item_xs = 12;
 const grid_item_md = 9;
 
-const fa_r_project = <FontAwesomeIcon icon={faRProject}></FontAwesomeIcon>;
+const fa_r_project = (
+  <FontAwesomeIcon icon={faRProject} size="1x"></FontAwesomeIcon>
+);
 
 // To understand "Typing Destructured Object Parameters in TypeScript", see section
 // "Typing Immediately Destructured Parameters"
