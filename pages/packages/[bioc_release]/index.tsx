@@ -144,20 +144,27 @@ export default function Packages() {
     bioc_release ? `/api/${bioc_release}/snapshot_date` : null,
     fetcher
   );
+  const { data: data_r_version, error: error_r_version } = useSWR(
+    bioc_release ? `/api/${bioc_release}/r_version` : null,
+    fetcher
+  );
 
   //Handle the error state
   if (error_packages) return <div>Failed to load package information.</div>;
   if (error_biocviews) return <div>Failed to load BiocViews information.</div>;
   if (error_snapshot_date)
     return <div>Failed to load snapshot date information.</div>;
+  if (error_r_version) return <div>Failed to load R version information.</div>;
 
   //Handle the loading state
   if (!data_packages) return <div>Loading package information...</div>;
   if (!data_biocviews) return <div>Loading BiocViews information...</div>;
   if (!data_snapshot_date)
     return <div>Loading snapshot date information...</div>;
+  if (!data_r_version) return <div>Loading R version information...</div>;
 
   const snapshot_date = JSON.parse(data_snapshot_date).snapshot_date;
+  const r_version = JSON.parse(data_r_version).r_version;
 
   const biocviews_data = JSON.parse(data_biocviews);
 
@@ -215,8 +222,8 @@ export default function Packages() {
           <Grid item xs={grid_item_xs} md={grid_item_md}>
             <h1>Packages</h1>
             <p className={styles.snapshot}>
-              Bioconductor release {bioc_release} (Snapshot date:{" "}
-              {snapshot_date})
+              Bioconductor release {bioc_release} | R version {r_version}{" "}
+              (Snapshot date: {snapshot_date})
             </p>
           </Grid>
           <Grid item xs={grid_item_xs} md={grid_item_md}>
@@ -241,7 +248,7 @@ export default function Packages() {
                   label="Type"
                   value={packageType}
                   onChange={handleChangePackageType}
-                // helperText="Please select your currency"
+                  // helperText="Please select your currency"
                 >
                   {typeOptions.map((option) => (
                     <MenuItem key={option.value} value={option.value}>

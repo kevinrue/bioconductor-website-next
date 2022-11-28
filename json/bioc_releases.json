@@ -1,4 +1,4 @@
 [
-  { "version": "3.16", "status": "release" },
-  { "version": "3.15", "status": "archived" }
+  { "version": "3.16", "r_version": "4.2", "status": "release" },
+  { "version": "3.15", "r_version": "4.2", "status": "archived" }
 ]
