@@ -65,17 +65,14 @@ export default function Releases() {
               added to Bioconductor since the last release.
             </p>
             <p>
-              Download the latest release of R from{" "}
-              <Link href="https://cran.r-project.org/">
-                https://cran.r-project.org/
-              </Link>
-            </p>
-            <p>
               Follow instructions on{" "}
               <Link href="https://carpentries-incubator.github.io/bioc-intro/setup.html">
                 this page
               </Link>{" "}
               to install {fa_r_project} on your own specific operating system.
+              The page also contains information to check which version of{" "}
+              {fa_r_project} you are using; if you already have the correct
+              version, you may not need to do anything!
             </p>
           </Grid>
         </Grid>
