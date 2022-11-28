@@ -4,6 +4,8 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Image from "next/image";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faExternalLink } from "@fortawesome/free-solid-svg-icons";
 import styles from "../styles/NavigationBar.module.css";
 
 // TODO: move website-wide constants to global settings (find out suitable method for this)
@@ -86,6 +88,8 @@ export default function NavigationBar() {
                 target="_blank"
               >
                 Community blog
+                {" "}
+                <FontAwesomeIcon icon={faExternalLink} />
               </NavDropdown.Item>
               <NavDropdown.Item className={styles.link} href="/posts">
                 Developer&apos;s notes
