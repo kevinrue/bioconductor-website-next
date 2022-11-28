@@ -2,6 +2,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 // Import custom global stylesheet to override aspects of bootstrap
 import "../styles/globals.css";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import type { AppProps } from "next/app";
 import { SSRProvider } from "react-aria";
 
