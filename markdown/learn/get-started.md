@@ -67,7 +67,7 @@ BiocManager::version()
 
     ## [1] '3.16'
 
-The answer should be “3.16”.
+The answer should be ‘3.16’.
 
 Congratulations! You are ready to install the latest version of more
 Bioconductor packages!

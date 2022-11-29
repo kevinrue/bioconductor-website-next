@@ -70,7 +70,7 @@ To check your installation, restart your <i class="fab fa-r-project"></i> sessio
 BiocManager::version()
 ```
 
-The answer should be "`r bioc_major_minor`".
+The answer should be '`r bioc_major_minor`'.
 
 Congratulations!
 You are ready to install the latest version of more Bioconductor packages!
