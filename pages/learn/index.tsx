@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Layout from "../../components/layout";
 import styles from "../../styles/Learn.module.css";
+import { flexbox } from "@mui/system";
 
 const grid_item_body_xs = 12;
 const grid_item_body_md = 8;
@@ -29,18 +30,9 @@ export default function Learn() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Grid
-          container
-          className={styles.grid}
-          display={{ xs: "none", md: "block" }}
-        >
-          <Grid xs={0} md={1}></Grid>
-          <Grid
-            component={Box}
-            item
-            xs={grid_item_navleft_xs}
-            md={grid_item_navleft_md}
-            container
+        <Box sx={{ display: "inline-flex", justifyContent: "center" }}>
+          <Box
+            component={Grid}
             className={styles.navleft}
             display={{ xs: "none", md: "block" }}
             sx={{
@@ -61,8 +53,13 @@ export default function Learn() {
                 </Link>
               </li>
             </ul>
-          </Grid>
-          <Grid item xs={grid_item_body_xs} md={grid_item_body_md}>
+          </Box>
+          <Box
+            sx={{
+              maxWidth: "850px",
+              margin: "0 30px",
+            }}
+          >
             <h1>Learn Bioconductor</h1>
             <hr />
             <p>
@@ -87,8 +84,8 @@ export default function Learn() {
                 </Link>
               </li>
             </ul>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </main>
     </Layout>
   );
