@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import rehypeRaw from "rehype-raw";
-import { getAllPageIds, getPageData } from "../../lib/get-started";
+import { getAllPageIds, getPageData } from "../../lib/learn";
 import Layout from "../../components/layout";
 import styles from "../../styles/LearnPage.module.css";
 
