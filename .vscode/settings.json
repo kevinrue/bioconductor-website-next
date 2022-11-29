@@ -12,5 +12,8 @@
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
-  "prettier.proseWrap": "always"
+  "prettier.proseWrap": "always",
+  "[rmd]": {
+    "editor.defaultFormatter": "REditorSupport.r"
+  }
 }
