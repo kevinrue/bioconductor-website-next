@@ -58,7 +58,7 @@ export default function NavigationBar() {
             >
               <NavDropdown.Item
                 className={styles.navlink}
-                href={`/get-started/`}
+                href={`/learn/get-started`}
               >
                 Get started
               </NavDropdown.Item>

@@ -1,0 +1,81 @@
+---
+title: "Get started"
+edited: "2022-11-29"
+compiled: "Sys.Date()"
+output:
+  md_document:
+    preserve_yaml: true
+    variant: markdown_github
+---
+
+```{r, include=FALSE}
+## Bioconductor version (format: <major>.<minor>)
+bioc_major_minor <- BiocManager::version()
+```
+
+```{r, include=FALSE}
+## R version (format: <major>.<minor>)
+r_major_minor_patch <- paste0(R.Version()$major, ".", R.Version()$minor)
+r_major_minor <- gsub(
+  pattern = "([[:digit:]]+)\\.([[:digit:]]+)\\.([[:digit:]]+)",
+  replacement = "\\1.\\2",
+  x = r_major_minor_patch
+)
+```
+
+## Welcome
+
+Welcome to the Bioconductor community!
+
+This guide details how to install the latest release of Bioconductor on your
+computer.
+
+## Pre-requisites
+
+### Install <i class="fab fa-r-project"></i>
+
+The current release of Bioconductor is version `r bioc_major_minor`; it works with <i class="fab fa-r-project"></i> version `r r_major_minor`.
+Users of older <i class="fab fa-r-project"></i> versions must update their installation to take advantage of new features and to access packages that have been added to Bioconductor since the last release.
+
+Follow the instructions for your operating system in [this episode][bioc-intro-setup] of the Carpentries lesson "Introduction to data analysis with R and Bioconductor".
+The page also contains information to check which version of <i class="fab fa-r-project"></i> you are using; if you already have the correct version, you may not need to do anything!
+
+## Install the BiocManager package
+
+The `r BiocStyle::CRANpkg("BiocManager")` package is a convenient tool distributed on the [CRAN][cran-website] repository to install and update Bioconductor packages.
+
+To install the package, type the following in an <i class="fab fa-r-project"></i> console:
+
+```{r, eval=FALSE}
+install.packages("BiocManager")
+```
+
+## Install the current Bioconductor release
+
+To install the latest version of Bioconductor core packages, type the following in an <i class="fab fa-r-project"></i> console:
+
+```{r, echo=FALSE, results='asis'}
+cat(paste0(
+    "```r", "\n",
+    sprintf('BiocManager::install(version = "%s")', bioc_major_minor), "\n",
+    "```", "\n"
+))
+```
+
+## Check your installation
+
+To check your installation, restart your <i class="fab fa-r-project"></i> session, and type the following in the <i class="fab fa-r-project"></i> console:
+
+```{r}
+BiocManager::version()
+```
+
+The answer should be '`r bioc_major_minor`'.
+
+Congratulations!
+You are ready to install the latest version of more Bioconductor packages!
+
+<!-- Links -->
+
+[bioc-intro-setup]: https://carpentries-incubator.github.io/bioc-intro/setup.html
+[cran-website]: https://cran.r-project.org/

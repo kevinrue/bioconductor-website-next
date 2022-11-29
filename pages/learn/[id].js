@@ -2,36 +2,43 @@
 // <https://nextjs.org/learn/basics/dynamic-routes/render-markdown>
 // <https://github.com/remarkjs/react-markdown#use-custom-components-syntax-highlight
 import Head from "next/head";
+import Script from "next/script";
 import Grid from "@mui/material/Grid";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import rehypeRaw from "rehype-raw";
-import { getAllPostIds, getPostData } from "../../lib/posts";
+import { getAllPageIds, getPageData } from "../../lib/learn";
 import Layout from "../../components/layout";
-import styles from "../../styles/Post.module.css";
+import styles from "../../styles/LearnPage.module.css";
 
 const grid_item_xs = 12;
 const grid_item_md = 9;
 
-export default function Post({ postData }) {
+export default function LearnPage({ pageData }) {
   return (
     <Layout>
       <Head>
-        <title>{postData.title} - Post</title>
+        <title>{pageData.title} - Learn Bioconductor</title>
         <meta
           name="description"
           content="Work in progress by Kevin Rue-Albrecht"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {/* TODO: src= below points to a FontAwesome Kit on Kevin's account.
+      Change when to more stable solution when possible */}
+      <Script
+        src="https://kit.fontawesome.com/ffb34e6829.js"
+        crossorigin="anonymous"
+      ></Script>
       <main className={styles.main}>
         <Grid container className={styles.grid}>
           <Grid item xs={grid_item_xs} md={grid_item_md}>
-            <h1>{postData.title}</h1>
-            <p className={styles.author}>By {postData.author}</p>
+            <h1>{pageData.title}</h1>
+            {/* <div dangerouslySetInnerHTML={{ __html: pageData.content }}></div> */}
             <ReactMarkdown
               className={styles.content}
-              skipHtml={true}
+              skipHtml={false}
               rehypePlugins={[rehypeRaw]}
               components={{
                 code: ({ node, inline, className, children, ...props }) => {
@@ -48,10 +55,11 @@ export default function Post({ postData }) {
                 },
               }}
             >
-              {postData.content}
+              {pageData.content}
             </ReactMarkdown>
             <p className={styles.date}>
-              Created on {postData.created} (Last updated: {postData.edited})
+              Last updated: {pageData.edited} (Last compiled:{" "}
+              {pageData.compiled})
             </p>
           </Grid>
         </Grid>
@@ -61,7 +69,7 @@ export default function Post({ postData }) {
 }
 
 export async function getStaticPaths() {
-  const paths = getAllPostIds();
+  const paths = getAllPageIds();
   return {
     paths,
     fallback: false,
@@ -70,11 +78,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   // Add the "await" keyword like this:
-  const postData = await getPostData(params.id);
+  const pageData = await getPageData(params.id);
 
   return {
     props: {
-      postData,
+      pageData,
     },
   };
 }
