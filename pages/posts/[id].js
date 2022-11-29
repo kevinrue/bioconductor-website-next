@@ -28,6 +28,7 @@ export default function Post({ postData }) {
         <Grid container className={styles.grid}>
           <Grid item xs={grid_item_xs} md={grid_item_md}>
             <h1>{postData.title}</h1>
+            <hr />
             <p className={styles.author}>By {postData.author}</p>
             <ReactMarkdown
               className={styles.content}

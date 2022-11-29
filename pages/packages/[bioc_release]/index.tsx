@@ -221,6 +221,7 @@ export default function Packages() {
         >
           <Grid item xs={grid_item_xs} md={grid_item_md}>
             <h1>Packages</h1>
+            <hr />
             <p className={styles.snapshot}>
               Bioconductor release {bioc_release} | R version {r_version}{" "}
               (Snapshot date: {snapshot_date})

@@ -1,7 +1,7 @@
 ---
 title: "Get started"
 edited: "2022-11-29"
-compiled: "Sys.Date()"
+compiled: "`r Sys.Date()`"
 output:
   md_document:
     preserve_yaml: true
@@ -70,7 +70,7 @@ To check your installation, restart your <i class="fab fa-r-project"></i> sessio
 BiocManager::version()
 ```
 
-The answer should be '`r bioc_major_minor`'.
+## Final words
 
 Congratulations!
 You are ready to install the latest version of more Bioconductor packages!

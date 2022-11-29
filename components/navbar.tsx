@@ -51,18 +51,9 @@ export default function NavigationBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <NavDropdown
-              className={styles.navlink}
-              title="Learn"
-              id="basic-nav-dropdown"
-            >
-              <NavDropdown.Item
-                className={styles.navlink}
-                href={`/learn/get-started`}
-              >
-                Get started
-              </NavDropdown.Item>
-            </NavDropdown>
+            <Nav.Item className={styles.link}>
+              <Nav.Link href="/learn">Learn</Nav.Link>
+            </Nav.Item>
             <NavDropdown
               className={styles.navlink}
               title="Packages"

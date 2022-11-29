@@ -1,7 +1,7 @@
 ---
 title: "Get started"
 edited: "2022-11-29"
-compiled: "Sys.Date()"
+compiled: "2022-11-29"
 output:
   md_document:
     preserve_yaml: true
@@ -67,7 +67,7 @@ BiocManager::version()
 
     ## [1] '3.16'
 
-The answer should be ‘3.16’.
+## Final words
 
 Congratulations! You are ready to install the latest version of more
 Bioconductor packages!

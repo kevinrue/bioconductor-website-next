@@ -110,6 +110,7 @@ export default function Package() {
         >
           <Grid item xs={grid_item_xs} md={grid_item_md}>
             <h1>{package_name}</h1>
+            <hr />
             <p>Insert status badges here.</p>
             <h2>{package_data.Title}</h2>
             <hr />

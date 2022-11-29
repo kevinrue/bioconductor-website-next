@@ -35,6 +35,7 @@ export default function Releases({
         <Grid container className={styles.grid}>
           <Grid item xs={grid_item_xs} md={grid_item_md}>
             <h1>Releases</h1>
+            <hr />
             <h2>The Bioconductor release cycle</h2>
             <p>
               The Bioconductor projects features a 6-month release cycle
