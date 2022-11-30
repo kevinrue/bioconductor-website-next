@@ -27,7 +27,7 @@ export default function Learn() {
           <Box
             component={Grid}
             className={styles.navleft}
-            display={{ xs: "none", md: "block" }}
+            display={{ xs: "none", lg: "block" }}
             sx={{
               position: "sticky",
               alignSelf: "flex-start",
@@ -59,7 +59,7 @@ export default function Learn() {
           </Box>
           <Box
             sx={{
-              maxWidth: "800px",
+              maxWidth: "850px",
               margin: "0 30px",
             }}
           >
