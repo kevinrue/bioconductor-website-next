@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import TableOfContent from "../../components/toc";
 import Layout from "../../components/layout";
 import styles from "../../styles/Learn.module.css";
 
@@ -38,24 +39,7 @@ export default function Learn() {
               maxWidth: "200px",
             }}
           >
-            <h5 className={styles.navtitle}>On this page</h5>
-            <ul>
-              <li>
-                <Link className={styles.navlink} href="#beginners">
-                  Beginners
-                </Link>
-              </li>
-              <li>
-                <Link className={styles.navlink} href="#advanced">
-                  Advanced
-                </Link>
-              </li>
-              <li>
-                <Link className={styles.navlink} href="#bioconductor-talks">
-                  Bioconductor Talks
-                </Link>
-              </li>
-            </ul>
+            <TableOfContent />
           </Box>
           <Box
             sx={{
