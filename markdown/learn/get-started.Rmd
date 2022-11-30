@@ -8,6 +8,13 @@ output:
     variant: markdown_github
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse=TRUE, prompt=TRUE, comment = ''
+)
+```
+
+
 ```{r, include=FALSE}
 ## Bioconductor version (format: <major>.<minor>)
 bioc_major_minor <- BiocManager::version()
@@ -57,7 +64,7 @@ To install the latest version of Bioconductor core packages, type the following 
 ```{r, echo=FALSE, results='asis'}
 cat(paste0(
     "```r", "\n",
-    sprintf('BiocManager::install(version = "%s")', bioc_major_minor), "\n",
+    sprintf('> BiocManager::install(version = "%s")', bioc_major_minor), "\n",
     "```", "\n"
 ))
 ```

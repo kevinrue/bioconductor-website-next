@@ -1,7 +1,7 @@
 ---
 title: "Get started"
 edited: "2022-11-29"
-compiled: "2022-11-29"
+compiled: "2022-11-30"
 output:
   md_document:
     preserve_yaml: true
@@ -43,7 +43,7 @@ To install the package, type the following in an
 <i class="fab fa-r-project"></i> console:
 
 ``` r
-install.packages("BiocManager")
+> install.packages("BiocManager")
 ```
 
 ## Install the current Bioconductor release
@@ -52,7 +52,7 @@ To install the latest version of Bioconductor core packages, type the
 following in an <i class="fab fa-r-project"></i> console:
 
 ``` r
-BiocManager::install(version = "3.16")
+> BiocManager::install(version = "3.16")
 ```
 
 ## Check your installation
@@ -62,10 +62,9 @@ To check your installation, restart your
 <i class="fab fa-r-project"></i> console:
 
 ``` r
-BiocManager::version()
+> BiocManager::version()
+[1] '3.16'
 ```
-
-    ## [1] '3.16'
 
 ## Final words
 
