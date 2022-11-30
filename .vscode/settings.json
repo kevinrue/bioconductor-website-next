@@ -15,5 +15,6 @@
   "prettier.proseWrap": "always",
   "[rmd]": {
     "editor.defaultFormatter": "REditorSupport.r"
-  }
+  },
+  "prettier.printWidth": 80
 }

@@ -114,7 +114,9 @@ export default function Learn() {
             <section id="advanced"></section>
             <h2>Advanced</h2>
             <p>
-              Try these advanced resources for a better understanding of Bioconductor concepts like S4, package development, specific technologies, and more.
+              Try these advanced resources for a better understanding of
+              Bioconductor concepts like S4, package development, specific
+              technologies, and more.
             </p>
             <h3>Tutorials</h3>
             <ul>
