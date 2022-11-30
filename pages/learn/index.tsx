@@ -5,13 +5,6 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Layout from "../../components/layout";
 import styles from "../../styles/Learn.module.css";
-import { flexbox } from "@mui/system";
-
-const grid_item_body_xs = 12;
-const grid_item_body_md = 8;
-
-const grid_item_navleft_xs = 0;
-const grid_item_navleft_md = 2;
 
 // To understand "Typing Destructured Object Parameters in TypeScript", see section
 // "Typing Immediately Destructured Parameters"
@@ -42,7 +35,7 @@ export default function Learn() {
               top: "6rem",
               width: "100%",
               margin: "65px 15px",
-              maxWidth: "150px",
+              maxWidth: "200px",
             }}
           >
             <h5 className={styles.navtitle}>On this page</h5>
@@ -52,11 +45,21 @@ export default function Learn() {
                   Beginners
                 </Link>
               </li>
+              <li>
+                <Link className={styles.navlink} href="#advanced">
+                  Advanced
+                </Link>
+              </li>
+              <li>
+                <Link className={styles.navlink} href="#bioconductor-talks">
+                  Bioconductor Talks
+                </Link>
+              </li>
             </ul>
           </Box>
           <Box
             sx={{
-              maxWidth: "850px",
+              maxWidth: "800px",
               margin: "0 30px",
             }}
           >
@@ -81,6 +84,85 @@ export default function Learn() {
                   href={`${router.asPath}/get-started`}
                 >
                   Get started
+                </Link>
+              </li>
+            </ul>
+            <h3>Videos</h3>
+            <ul>
+              <li>
+                <Link
+                  className={styles.link}
+                  href="https://youtu.be/dg6NvmMVQ3I"
+                  target="_blank"
+                >
+                  Introduction To Bioconductor
+                </Link>{" "}
+                by Martin Morgan (2015).
+              </li>
+              <li>
+                <Link
+                  className={styles.link}
+                  href="https://youtu.be/NMv27jgHRb4"
+                  target="_blank"
+                >
+                  What is Bioconductor?
+                </Link>{" "}
+                by Lori Ann Shepherd (2021).
+              </li>
+            </ul>
+            <hr />
+            <section id="advanced"></section>
+            <h2>Advanced</h2>
+            <p>
+              Try these advanced resources for a better understanding of Bioconductor concepts like S4, package development, specific technologies, and more.
+            </p>
+            <h3>Tutorials</h3>
+            <ul>
+              <li>
+                <i>Coming soon.</i>
+              </li>
+            </ul>
+            <h3>Books</h3>
+            <ul>
+              <li>
+                <Link
+                  className={styles.link}
+                  href="http://bioconductor.org/books/release/csawBook"
+                  target="_blank"
+                >
+                  csaw User&apos;s Guide
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={styles.link}
+                  href="http://bioconductor.org/books/release/OSCA"
+                  target="_blank"
+                >
+                  Orchestrating Single-Cell Analysis with Bioconductor
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={styles.link}
+                  href="http://bioconductor.org/books/release/SingleRBook"
+                  target="_blank"
+                >
+                  Assigning cell types with SingleR
+                </Link>
+              </li>
+            </ul>
+            <hr />
+            <section id="bioconductor-talks"></section>
+            <h2>Bioconductor Talks</h2>
+            <ul>
+              <li>
+                <Link
+                  className={styles.link}
+                  href="https://www.youtube.com/@bioconductor"
+                  target="_blank"
+                >
+                  Bioconductor YouTube channel
                 </Link>
               </li>
             </ul>
