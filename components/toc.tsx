@@ -2,14 +2,14 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/TableOfContent.module.css";
 
-const getClassName = (level: Number) => {
+const getClassName = (level: number) => {
   switch (level) {
     case 2:
       return styles.head2
     case 3:
       return styles.head3
     default:
-      return null
+      return styles.headDefault
   }
 }
 
@@ -17,7 +17,8 @@ export default function TableOfContent() {
   const [headings, setHeadings] = useState([{ id: "", text: "", level: 0 }]);
 
   useEffect(() => {
-    const elements = Array.from(document.querySelectorAll("h2, h3")).map(
+    const html_elements = Array.from(document.querySelectorAll("h2, h3")) as HTMLElement[];
+    const elements = html_elements.map(
       (elem) => ({
         id: elem.id,
         text: elem.innerText,

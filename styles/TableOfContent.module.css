@@ -28,3 +28,8 @@
   margin-left: 20px;
   list-style-type: square;
 }
+
+.headDefault {
+  margin-left: 20px;
+  list-style-type: disc;
+}
