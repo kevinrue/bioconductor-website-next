@@ -6,22 +6,17 @@ import Grid from "@mui/material/Grid";
 //useSWR allows the use of SWR inside function components
 import useSWR from "swr";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import Layout from "../../../components/layout";
-import BiocReleaseButton from "../../../components/bioc-release-button";
-import styles from "../../../styles/Package.module.css";
-
-const grid_item_xs = 12;
-const grid_item_md = 9;
+import Layout from "../../components/layout";
+import BiocReleaseButton from "../../components/bioc-release-button";
+import styles from "../../styles/Package.module.css";
 
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
 const fetcher = (url: URL) => fetch(url).then((res) => res.json());
 
-// TODO: move global options elsewhere
-const biocReleaseOptions = ["3.15", "3.16"];
-
 export default function Package() {
   const router = useRouter();
   const package_name = router.query.name;
+  // TODO: version passed through GET || latest bioc release
   const bioc_release = String(router.query.bioc_release);
 
   const { data: data_packages, error: error_packages } = useSWR(

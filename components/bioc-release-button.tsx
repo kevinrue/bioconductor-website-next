@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Fab from "@mui/material/Fab";
 import TextField from "@mui/material/TextField";
@@ -46,19 +45,16 @@ const fillUrlTemplate = function (templateUrl: string, release: string) {
 export default function BiocReleaseButton({
   defaultValue,
   options,
-  templateUrl,
+  onChange,
 }: {
   defaultValue: string;
   options: string[];
-  templateUrl: string;
+  onChange: Function;
 }) {
-  const router = useRouter();
-
   const handleChangeBiocRelease = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const href = fillUrlTemplate(templateUrl, event.target.value);
-    router.push(href);
+    const href = onChange(event.target.value);
   };
 
   return (
