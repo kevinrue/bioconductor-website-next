@@ -4,15 +4,16 @@
 import Head from "next/head";
 import Script from "next/script";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import rehypeRaw from "rehype-raw";
+import { rehype } from "rehype";
+import rehypeSlug from "rehype-slug";
 import { getAllPageIds, getPageData } from "../../lib/learn";
+import TableOfContent from "../../components/toc";
 import Layout from "../../components/layout";
 import styles from "../../styles/LearnPage.module.css";
-
-const grid_item_xs = 12;
-const grid_item_md = 9;
 
 export default function LearnPage({ pageData }) {
   return (
@@ -32,14 +33,19 @@ export default function LearnPage({ pageData }) {
         crossorigin="anonymous"
       ></Script>
       <main className={styles.main}>
-        <Grid container className={styles.grid}>
-          <Grid item xs={grid_item_xs} md={grid_item_md}>
+        <Box sx={{ display: "inline-flex", justifyContent: "center" }}>
+          <Box
+            sx={{
+              maxWidth: "850px",
+              margin: "0 30px",
+            }}
+          >
             <h1>{pageData.title}</h1>
             {/* <div dangerouslySetInnerHTML={{ __html: pageData.content }}></div> */}
             <ReactMarkdown
               className={styles.content}
               skipHtml={false}
-              rehypePlugins={[rehypeRaw]}
+              rehypePlugins={[rehypeRaw, rehypeSlug]}
               components={{
                 code: ({ node, inline, className, children, ...props }) => {
                   const match = /language-(\w+)/.exec(className || "");
@@ -61,8 +67,25 @@ export default function LearnPage({ pageData }) {
               Last updated: {pageData.edited} (Last compiled:{" "}
               {pageData.compiled})
             </p>
-          </Grid>
-        </Grid>
+          </Box>
+
+          <Box
+            component={Grid}
+            className={styles.navleft}
+            display={{ xs: "none", lg: "block" }}
+            sx={{
+              position: "sticky",
+              alignSelf: "flex-start",
+              textAlign: "left",
+              top: "6rem",
+              width: "100%",
+              margin: "65px 15px",
+              maxWidth: "16%",
+            }}
+          >
+            <TableOfContent />
+          </Box>
+        </Box>
       </main>
     </Layout>
   );

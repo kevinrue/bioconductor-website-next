@@ -17,7 +17,7 @@ export function useHeadsObserver() {
       // Original values: https://blog.logrocket.com/create-table-contents-highlighting-react/
       // rootMargin: "-20% 0% -35% 0px",
       // Values updated for a small page
-      rootMargin: "-20px 0% -300px 0px",
+      rootMargin: "-10px 0% -50% 0px",
     });
 
     const elements = document.querySelectorAll("h2");
