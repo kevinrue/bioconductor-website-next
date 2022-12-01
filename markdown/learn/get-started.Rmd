@@ -6,13 +6,11 @@ output:
   md_document:
     preserve_yaml: true
     variant: markdown_github
-  html_document:
-    theme: null
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-  collapse=TRUE, prompt=TRUE, comment = ''
+  collapse = TRUE, prompt = TRUE, comment = ""
 )
 ```
 
@@ -41,7 +39,7 @@ computer.
 
 ## Pre-requisites
 
-### Install <i class="fab fa-r-project"></i>
+### Install *R*
 
 The current release of Bioconductor is version `r bioc_major_minor`; it works with <i class="fab fa-r-project"></i> version `r r_major_minor`.
 Users of older <i class="fab fa-r-project"></i> versions must update their installation to take advantage of new features and to access packages that have been added to Bioconductor since the last release.
