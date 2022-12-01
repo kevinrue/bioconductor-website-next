@@ -18,3 +18,13 @@
 .nav ul li {
   margin-bottom: 15px;
 }
+
+.head3 {
+  margin-left: 10px;
+  list-style-type: circle;
+}
+
+.head4 {
+  margin-left: 20px;
+  list-style-type: square;
+}

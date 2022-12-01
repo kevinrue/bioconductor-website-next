@@ -54,13 +54,12 @@ export default function Learn() {
               self-learning and teaching others, developed by Bioconductor
               contributors and vetted by the community.
             </p>
-            <section id="beginners"></section>
-            <h2>Beginners</h2>
+            <h2 id="beginners">Beginners</h2>
             <p>
               If you are just starting, we strongly recommend the following
               resouces:
             </p>
-            <h3>Tutorials</h3>
+            <h3 id="beginners-tutorials">Tutorials</h3>
             <ul>
               <li>
                 <Link
@@ -71,7 +70,7 @@ export default function Learn() {
                 </Link>
               </li>
             </ul>
-            <h3>Videos</h3>
+            <h3 id="beginners-videos">Videos</h3>
             <ul>
               <li>
                 <Link
@@ -95,20 +94,19 @@ export default function Learn() {
               </li>
             </ul>
             <hr />
-            <section id="advanced"></section>
-            <h2>Advanced</h2>
+            <h2 id="advanced">Advanced</h2>
             <p>
               Try these advanced resources for a better understanding of
               Bioconductor concepts like S4, package development, specific
               technologies, and more.
             </p>
-            <h3>Tutorials</h3>
+            <h3 id="advanced-tutorial">Tutorials</h3>
             <ul>
               <li>
                 <i>Coming soon.</i>
               </li>
             </ul>
-            <h3>Books</h3>
+            <h3 id="advanced-books">Books</h3>
             <ul>
               <li>
                 <Link
@@ -139,8 +137,7 @@ export default function Learn() {
               </li>
             </ul>
             <hr />
-            <section id="bioconductor-talks"></section>
-            <h2>Bioconductor Talks</h2>
+            <h2 id="bioconductor-talks">Bioconductor Talks</h2>
             <ul>
               <li>
                 <Link
