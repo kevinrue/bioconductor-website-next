@@ -1,5 +1,6 @@
 // Source: <https://blog.logrocket.com/create-table-contents-highlighting-react/>
 import { useEffect, useState } from "react";
+import { useHeadsObserver } from './hooks';
 import styles from "../styles/TableOfContent.module.css";
 
 const getClassName = (level: number) => {
@@ -15,6 +16,7 @@ const getClassName = (level: number) => {
 
 export default function TableOfContent() {
   const [headings, setHeadings] = useState([{ id: "", text: "", level: 0 }]);
+  const { activeId } = useHeadsObserver();
 
   useEffect(() => {
     const html_elements = Array.from(document.querySelectorAll("h2, h3")) as HTMLElement[];
@@ -34,14 +36,20 @@ export default function TableOfContent() {
       <ul>
         {headings.map((heading) => (
           <li key={heading.id} className={getClassName(heading.level)}>
-            <a href={`#${heading.id}`} onClick={(e) => {
-              e.preventDefault()
-              // <https://bobbyhadz.com/blog/typescript-document-getelementbyid-object-possibly-null>
-              const target = document.querySelector(`#${heading.id}`);
-              if (target !== null) {
-                target.scrollIntoView({ behavior: "smooth" })
-              }
-            }}>{heading.text}</a>
+            <a
+              href={`#${heading.id}`}
+              onClick={(e) => {
+                e.preventDefault()
+                // <https://bobbyhadz.com/blog/typescript-document-getelementbyid-object-possibly-null>
+                const target = document.querySelector(`#${heading.id}`);
+                if (target !== null) {
+                  target.scrollIntoView({ behavior: "smooth" })
+                }
+              }}
+              style={{
+                fontWeight: activeId === heading.id ? "bold" : "normal"
+              }}
+            >{heading.text}</a>
           </li>
         ))}
       </ul>
