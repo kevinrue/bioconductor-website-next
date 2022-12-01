@@ -8,7 +8,6 @@ import Box from "@mui/material/Box";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import rehypeRaw from "rehype-raw";
-import { rehype } from "rehype";
 import rehypeSlug from "rehype-slug";
 import { getAllPageIds, getPageData } from "../../lib/learn";
 import TableOfContent from "../../components/toc";
