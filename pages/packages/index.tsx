@@ -112,6 +112,32 @@ const typeOptions = [
   { value: "Workflow", label: "Workflow" },
 ];
 
+const releaseSort = (releaseA: any, releaseB: any) => {
+  const a = releaseA.version;
+  const b = releaseB.version;
+  if (a > b) {
+    return 1;
+  }
+  if (b > a) {
+    return -1;
+  }
+  return 0;
+};
+
+const mapStringToBiocRelease = (
+  query: string,
+  releases: string[],
+  latest: string
+) => {
+  if (query == "latest") {
+    return latest;
+  } else if (releases.includes(query)) {
+    return query;
+  } else {
+    return null;
+  }
+};
+
 // To understand "Typing Destructured Object Parameters in TypeScript", see section
 // "Typing Immediately Destructured Parameters"
 // at <https://mariusschulz.com/blog/typing-destructured-object-parameters-in-typescript>
@@ -121,16 +147,31 @@ export default function Releases({
   releasesData: { content: string };
 }) {
   const router = useRouter();
+  const query = router.query;
 
-  const biocReleaseOptions = JSON.parse(releasesData.content).map(
+  const bioc_release_options = JSON.parse(releasesData.content).map(
     (object: { version: string; r_version: string; status: string }) =>
       object.version
   );
-  // TODO: version passed through GET || latest bioc release
-  const bioc_release = biocReleaseOptions[0];
+  const bioc_release_latest_version = JSON.parse(releasesData.content)
+    .filter(
+      (object: { version: string; r_version: string; status: string }) =>
+        object.status == "release"
+    )
+    .sort(releaseSort)[0].version;
+
+  const bioc_release =
+    query.release === undefined
+      ? bioc_release_latest_version
+      : mapStringToBiocRelease(
+          String(query.release),
+          bioc_release_options,
+          bioc_release_latest_version
+        );
+  console.log(bioc_release);
 
   const [packageSearchString, setPackageSearchString] = useState("");
-  const [biocRelease, setBiocRelease] = useState(bioc_release);
+
   // Debounce the string input on package names by 500ms
   const [packageType, setPackageType] = useState(typeOptions[0].value);
   const debouncedPackageSearchString = useDebounce(packageSearchString, 500);
@@ -138,19 +179,19 @@ export default function Releases({
   //Set up SWR to run the fetcher function when calling "/api/staticdata"
   //There are 3 possible states: (1) loading when data is null (2) ready when the data is returned (3) error when there was an error fetching the data
   const { data: data_packages, error: error_packages } = useSWR(
-    bioc_release ? `/api/${biocRelease}/packages` : null,
+    bioc_release ? `/api/${bioc_release}/packages` : null,
     fetcher
   );
   const { data: data_biocviews, error: error_biocviews } = useSWR(
-    biocRelease ? `/api/${biocRelease}/biocviews` : null,
+    bioc_release ? `/api/${bioc_release}/biocviews` : null,
     fetcher
   );
   const { data: data_snapshot_date, error: error_snapshot_date } = useSWR(
-    biocRelease ? `/api/${biocRelease}/snapshot_date` : null,
+    bioc_release ? `/api/${bioc_release}/snapshot_date` : null,
     fetcher
   );
   const { data: data_r_version, error: error_r_version } = useSWR(
-    biocRelease ? `/api/${biocRelease}/r_version` : null,
+    bioc_release ? `/api/${bioc_release}/r_version` : null,
     fetcher
   );
 
@@ -230,7 +271,7 @@ export default function Releases({
             <h1>Packages</h1>
             <hr />
             <p className={styles.snapshot}>
-              Bioconductor release {biocRelease} | R version {r_version}{" "}
+              Bioconductor release {bioc_release} | R version {r_version}{" "}
               (Snapshot date: {snapshot_date})
             </p>
           </Box>
@@ -256,7 +297,6 @@ export default function Releases({
                   label="Type"
                   value={packageType}
                   onChange={handleChangePackageType}
-                  // helperText="Please select your currency"
                 >
                   {typeOptions.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
@@ -278,9 +318,9 @@ export default function Releases({
             />
           </Box>
           <BiocReleaseButton
-            defaultValue={String(biocRelease)}
-            options={biocReleaseOptions}
-            onChange={setBiocRelease}
+            defaultValue={bioc_release}
+            options={bioc_release_options}
+            templateUrl="/packages?release=${release}"
           />
         </Box>
       </main>

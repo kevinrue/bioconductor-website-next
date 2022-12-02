@@ -1,7 +1,9 @@
+import { useRouter } from "next/router";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Fab from "@mui/material/Fab";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
+import Router from "next/router";
 
 const FabTheme = createTheme({
   components: {
@@ -45,16 +47,18 @@ const fillUrlTemplate = function (templateUrl: string, release: string) {
 export default function BiocReleaseButton({
   defaultValue,
   options,
-  onChange,
+  templateUrl,
 }: {
   defaultValue: string;
   options: string[];
-  onChange: Function;
+  templateUrl: string;
 }) {
+  const router = useRouter();
   const handleChangeBiocRelease = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const href = onChange(event.target.value);
+    const href = fillUrlTemplate(templateUrl, event.target.value);
+    router.push(href);
   };
 
   return (
@@ -67,7 +71,6 @@ export default function BiocReleaseButton({
           select
           defaultValue={defaultValue}
           onChange={handleChangeBiocRelease}
-          // helperText="Please select your currency"
         >
           {options.map((option) => (
             <MenuItem key={option} value={option}>
