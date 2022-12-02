@@ -24,17 +24,11 @@ export const mapStringToBiocRelease = (
   }
 };
 
-export const mapBiocReleaseToString = (
-  query: string,
-  releases: string[],
-  latest: string
-) => {
+export const mapBiocReleaseToString = (query: string, latest: string) => {
   if (query == latest) {
     return "latest";
-  } else if (releases.includes(query)) {
-    return query;
   } else {
-    return null;
+    return query;
   }
 };
 

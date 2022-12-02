@@ -65,8 +65,8 @@ export default function BiocReleaseButton({
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     // TODO: convert the latest release release version to 'latest'
-    // const release = mapBiocReleaseToString(event.target.value, options, latest);
-    const href = fillUrlTemplate(templateUrl, event.target.value);
+    const release = mapBiocReleaseToString(event.target.value, latest);
+    const href = fillUrlTemplate(templateUrl, release);
     router.push(href);
   };
 
