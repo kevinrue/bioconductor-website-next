@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { ParsedUrlQuery } from "querystring";
 import Head from "next/head";
 import Link from "next/link";
 import Box from "@mui/material/Box";
@@ -120,7 +121,7 @@ const typeOptions = [
 const buildPackageUrl = (
   router: { pathname: string },
   name: string,
-  query: { release: string }
+  query: ParsedUrlQuery
 ) => {
   const new_query =
     query.release === undefined ? "" : `?release=${query.release}`;
