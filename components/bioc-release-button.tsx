@@ -3,7 +3,11 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Fab from "@mui/material/Fab";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import Router from "next/router";
+import {
+  mapBiocReleaseToString,
+  getBiocReleaseLatestVersion,
+} from "./bioc-releases";
+import { StringLiteral } from "typescript";
 
 const FabTheme = createTheme({
   components: {
@@ -47,16 +51,19 @@ const fillUrlTemplate = function (templateUrl: string, release: string) {
 export default function BiocReleaseButton({
   defaultValue,
   options,
+  latest,
   templateUrl,
 }: {
   defaultValue: string;
   options: string[];
+  latest: string;
   templateUrl: string;
 }) {
   const router = useRouter();
   const handleChangeBiocRelease = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    const release = mapBiocReleaseToString(event.target.value, options, latest);
     const href = fillUrlTemplate(templateUrl, event.target.value);
     router.push(href);
   };

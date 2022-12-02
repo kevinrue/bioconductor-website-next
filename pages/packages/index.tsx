@@ -14,6 +14,11 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 // <https://react-data-table-component.netlify.app/?path=/docs/getting-started-examples--page>
 import DataTable from "react-data-table-component";
 import { getReleasesData } from "../../lib/bioc_releases";
+import {
+  mapStringToBiocRelease,
+  getBiocReleaseLatestVersion,
+  getBiocReleaseVersion,
+} from "../../components/bioc-releases";
 import useDebounce from "../../lib/useDebounce";
 import BiocReleaseButton from "../../components/bioc-release-button";
 import Layout from "../../components/layout";
@@ -112,32 +117,6 @@ const typeOptions = [
   { value: "Workflow", label: "Workflow" },
 ];
 
-const releaseSort = (releaseA: any, releaseB: any) => {
-  const a = releaseA.version;
-  const b = releaseB.version;
-  if (a > b) {
-    return 1;
-  }
-  if (b > a) {
-    return -1;
-  }
-  return 0;
-};
-
-const mapStringToBiocRelease = (
-  query: string,
-  releases: string[],
-  latest: string
-) => {
-  if (query == "latest") {
-    return latest;
-  } else if (releases.includes(query)) {
-    return query;
-  } else {
-    return null;
-  }
-};
-
 // To understand "Typing Destructured Object Parameters in TypeScript", see section
 // "Typing Immediately Destructured Parameters"
 // at <https://mariusschulz.com/blog/typing-destructured-object-parameters-in-typescript>
@@ -149,24 +128,19 @@ export default function Releases({
   const router = useRouter();
   const query = router.query;
 
-  const bioc_release_options = JSON.parse(releasesData.content).map(
-    (object: { version: string; r_version: string; status: string }) =>
-      object.version
-  );
-  const bioc_release_latest_version = JSON.parse(releasesData.content)
-    .filter(
-      (object: { version: string; r_version: string; status: string }) =>
-        object.status == "release"
-    )
-    .sort(releaseSort)[0].version;
+  const releases_data = JSON.parse(releasesData.content);
+
+  const bioc_release_version_options = getBiocReleaseVersion(releases_data);
+  const bioc_release_version_latest =
+    getBiocReleaseLatestVersion(releases_data);
 
   const bioc_release =
     query.release === undefined
-      ? bioc_release_latest_version
+      ? bioc_release_version_latest
       : mapStringToBiocRelease(
           String(query.release),
-          bioc_release_options,
-          bioc_release_latest_version
+          bioc_release_version_options,
+          bioc_release_version_latest
         );
   console.log(bioc_release);
 
@@ -318,8 +292,9 @@ export default function Releases({
             />
           </Box>
           <BiocReleaseButton
-            defaultValue={bioc_release}
-            options={bioc_release_options}
+            defaultValue={String(bioc_release)}
+            options={bioc_release_version_options}
+            latest={bioc_release_version_latest}
             templateUrl="/packages?release=${release}"
           />
         </Box>
