@@ -142,7 +142,6 @@ export default function Releases({
           bioc_release_version_options,
           bioc_release_version_latest
         );
-  console.log(bioc_release);
 
   const [packageSearchString, setPackageSearchString] = useState("");
 

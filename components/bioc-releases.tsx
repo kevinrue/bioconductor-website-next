@@ -52,7 +52,6 @@ export const getBiocReleaseLatestVersion = (
 export const getBiocReleaseVersion = (
   releases_data: { version: string; r_version: string; status: string }[]
 ) => {
-  console.log(releases_data);
   return releases_data.map(
     (object: { version: string; r_version: string; status: string }) =>
       object.version
