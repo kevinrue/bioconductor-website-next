@@ -19,6 +19,7 @@ import {
   mapStringToBiocRelease,
   getBiocReleaseLatestVersion,
   getBiocReleaseVersion,
+  releaseSort,
 } from "../../components/bioc-releases";
 import useDebounce from "../../lib/useDebounce";
 import BiocReleaseButton from "../../components/bioc-release-button";
@@ -142,7 +143,9 @@ export default function Releases({
 
   const releases_data = JSON.parse(releasesData.content);
 
-  const bioc_release_version_options = getBiocReleaseVersion(releases_data);
+  const bioc_release_version_options = getBiocReleaseVersion(
+    releases_data.sort(releaseSort)
+  );
   const bioc_release_version_latest =
     getBiocReleaseLatestVersion(releases_data);
 

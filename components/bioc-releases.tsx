@@ -1,4 +1,4 @@
-const releaseSort = (
+export const releaseSort = (
   releaseA: { version: string },
   releaseB: { version: string }
 ) => {
