@@ -3,6 +3,11 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Fab from "@mui/material/Fab";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
+import {
+  mapBiocReleaseToString,
+  getBiocReleaseLatestVersion,
+} from "./bioc-releases";
+import { StringLiteral } from "typescript";
 
 const FabTheme = createTheme({
   components: {
@@ -46,10 +51,12 @@ const fillUrlTemplate = function (templateUrl: string, release: string) {
 export default function BiocReleaseButton({
   defaultValue,
   options,
+  latest,
   templateUrl,
 }: {
   defaultValue: string;
   options: string[];
+  latest: string;
   templateUrl: string;
 }) {
   const router = useRouter();
@@ -57,7 +64,8 @@ export default function BiocReleaseButton({
   const handleChangeBiocRelease = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const href = fillUrlTemplate(templateUrl, event.target.value);
+    const release = mapBiocReleaseToString(event.target.value, latest);
+    const href = fillUrlTemplate(templateUrl, release);
     router.push(href);
   };
 
@@ -71,7 +79,6 @@ export default function BiocReleaseButton({
           select
           defaultValue={defaultValue}
           onChange={handleChangeBiocRelease}
-          // helperText="Please select your currency"
         >
           {options.map((option) => (
             <MenuItem key={option} value={option}>

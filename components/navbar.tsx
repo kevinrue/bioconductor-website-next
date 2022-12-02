@@ -54,27 +54,9 @@ export default function NavigationBar() {
             <Nav.Item className={styles.link}>
               <Nav.Link href="/learn">Learn</Nav.Link>
             </Nav.Item>
-            <NavDropdown
-              className={styles.navlink}
-              title="Packages"
-              id="basic-nav-dropdown"
-            >
-              <NavDropdown.Item className={styles.link} href={`/packages/`}>
-                All Releases
-              </NavDropdown.Item>
-              <NavDropdown.Header>Latest</NavDropdown.Header>
-              {latestBiocReleaseData ? (
-                <NavDropdown.Item
-                  className={styles.link}
-                  href={`/packages/${latestBiocReleaseData.version}`}
-                >
-                  {latestBiocReleaseData.version} (
-                  {latestBiocReleaseData.status})
-                </NavDropdown.Item>
-              ) : (
-                ""
-              )}
-            </NavDropdown>
+            <Nav.Item className={styles.link}>
+              <Nav.Link href="/packages">Packages</Nav.Link>
+            </Nav.Item>
             <NavDropdown
               className={styles.navlink}
               title="Blog"

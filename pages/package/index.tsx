@@ -1,28 +1,52 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
+import Box from "@mui/material/Box";
 import React from "react";
 import Grid from "@mui/material/Grid";
 //useSWR allows the use of SWR inside function components
 import useSWR from "swr";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import Layout from "../../../components/layout";
-import BiocReleaseButton from "../../../components/bioc-release-button";
-import styles from "../../../styles/Package.module.css";
-
-const grid_item_xs = 12;
-const grid_item_md = 9;
+import { getReleasesData } from "../../lib/bioc_releases";
+import {
+  mapStringToBiocRelease,
+  getBiocReleaseLatestVersion,
+  getBiocReleaseVersion,
+  releaseSort,
+} from "../../components/bioc-releases";
+import Layout from "../../components/layout";
+import BiocReleaseButton from "../../components/bioc-release-button";
+import styles from "../../styles/Package.module.css";
 
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
 const fetcher = (url: URL) => fetch(url).then((res) => res.json());
 
-// TODO: move global options elsewhere
-const biocReleaseOptions = ["3.15", "3.16"];
-
-export default function Package() {
+export default function Package({
+  releasesData,
+}: {
+  releasesData: { content: string };
+}) {
   const router = useRouter();
+
+  const query = router.query;
   const package_name = router.query.name;
-  const bioc_release = String(router.query.bioc_release);
+
+  const releases_data = JSON.parse(releasesData.content);
+
+  const bioc_release_version_options = getBiocReleaseVersion(
+    releases_data.sort(releaseSort)
+  );
+  const bioc_release_version_latest =
+    getBiocReleaseLatestVersion(releases_data);
+
+  const bioc_release =
+    query.release === undefined
+      ? bioc_release_version_latest
+      : mapStringToBiocRelease(
+          String(query.release),
+          bioc_release_version_options,
+          bioc_release_version_latest
+        );
 
   const { data: data_packages, error: error_packages } = useSWR(
     bioc_release ? `/api/${bioc_release}/packages` : null,
@@ -103,12 +127,14 @@ export default function Package() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Grid
-          container
-          className={styles.grid}
-          rowSpacing={{ xs: 1, sm: 2, md: 3 }}
+        <Box
+          sx={{
+            display: "block",
+            alignSelf: "center",
+            width: "80%",
+          }}
         >
-          <Grid item xs={grid_item_xs} md={grid_item_md}>
+          <Box component={Grid} display="block">
             <h1>{package_name}</h1>
             <hr />
             <p>Insert status badges here.</p>
@@ -118,6 +144,16 @@ export default function Package() {
               Bioconductor release {bioc_release} | R version {r_version}{" "}
               (Snapshot date: {snapshot_date})
             </p>
+            {bioc_release == bioc_release_version_latest ? (
+              <p className={styles.highlight}>
+                This is the latest stable release of Bioconductor.
+              </p>
+            ) : (
+              <p className={styles.highlight}>
+                This is <i>not</i> the latest stable release of Bioconductor. We
+                recommend keeping your installation of Bioconductor up-to-date.
+              </p>
+            )}
             <p className={styles.description}>{package_data.Description}</p>
             <h3>Installation</h3>
             To install this package, start R (version &quot;{r_version}&quot;)
@@ -141,14 +177,26 @@ export default function Package() {
               <br />
               {bug_report_details(package_data)}
             </p>
-          </Grid>
+          </Box>
           <BiocReleaseButton
-            defaultValue={bioc_release}
-            options={biocReleaseOptions}
-            templateUrl={`/packages/\${release}/${package_name}`}
+            defaultValue={String(bioc_release)}
+            options={bioc_release_version_options}
+            latest={bioc_release_version_latest}
+            templateUrl={`/package?name=${package_name}&release=\${release}`}
           />
-        </Grid>
+        </Box>
       </main>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  // Add the "await" keyword like this:
+  const releasesData = await getReleasesData();
+
+  return {
+    props: {
+      releasesData,
+    },
+  };
 }

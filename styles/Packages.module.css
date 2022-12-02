@@ -40,3 +40,10 @@
   padding-block-end: 0.625em;
   /* min-inline-size: min-content; */
 }
+
+.highlight {
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: red;
+  padding: 1rem;
+}
