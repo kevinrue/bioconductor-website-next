@@ -247,6 +247,16 @@ export default function Releases({
               Bioconductor release {bioc_release} | R version {r_version}{" "}
               (Snapshot date: {snapshot_date})
             </p>
+            {bioc_release == bioc_release_version_latest ? (
+              <p className={styles.highlight}>
+                This is the latest stable release of Bioconductor.
+              </p>
+            ) : (
+              <p className={styles.highlight}>
+                This is <i>not</i> the latest stable release of Bioconductor. We
+                recommend keeping your installation of Bioconductor up-to-date.
+              </p>
+            )}
           </Box>
           <Box>
             <fieldset className={styles.fieldset}>
