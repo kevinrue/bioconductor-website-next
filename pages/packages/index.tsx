@@ -118,14 +118,13 @@ const typeOptions = [
   { value: "Workflow", label: "Workflow" },
 ];
 
-const buildPackageUrl = (
-  router: { pathname: string },
-  name: string,
-  query: ParsedUrlQuery
-) => {
-  const new_query =
-    query.release === undefined ? "" : `?release=${query.release}`;
-  const href = [router.pathname, name + new_query].join("/");
+const buildPackageUrl = (name: string, query: ParsedUrlQuery) => {
+  let new_query = `?name=${name}`;
+  new_query =
+    query.release === undefined
+      ? new_query
+      : `${new_query}&release=${query.release}`;
+  const href = ["/package", new_query].join("/");
   return href;
 };
 
@@ -212,8 +211,7 @@ export default function Releases({
         Package: (
           <Link
             className={styles.link}
-            // href={`${router.pathname}/${object.Package}`}
-            href={buildPackageUrl(router, object.Package, query)}
+            href={buildPackageUrl(object.Package, query)}
           >
             {object.Package}
           </Link>
