@@ -117,6 +117,17 @@ const typeOptions = [
   { value: "Workflow", label: "Workflow" },
 ];
 
+const buildPackageUrl = (
+  router: { pathname: string },
+  name: string,
+  query: { release: string }
+) => {
+  const new_query =
+    query.release === undefined ? "" : `?release=${query.release}`;
+  const href = [router.pathname, name + new_query].join("/");
+  return href;
+};
+
 // To understand "Typing Destructured Object Parameters in TypeScript", see section
 // "Typing Immediately Destructured Parameters"
 // at <https://mariusschulz.com/blog/typing-destructured-object-parameters-in-typescript>
@@ -126,6 +137,7 @@ export default function Releases({
   releasesData: { content: string };
 }) {
   const router = useRouter();
+
   const query = router.query;
 
   const releases_data = JSON.parse(releasesData.content);
@@ -199,7 +211,8 @@ export default function Releases({
         Package: (
           <Link
             className={styles.link}
-            href={`${router.asPath}/${object.Package}`}
+            // href={`${router.pathname}/${object.Package}`}
+            href={buildPackageUrl(router, object.Package, query)}
           >
             {object.Package}
           </Link>
