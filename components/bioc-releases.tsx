@@ -1,4 +1,7 @@
-const releaseSort = (releaseA: any, releaseB: any) => {
+const releaseSort = (
+  releaseA: { version: string },
+  releaseB: { version: string }
+) => {
   const a = releaseA.version;
   const b = releaseB.version;
   if (a > b) {
