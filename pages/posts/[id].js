@@ -8,7 +8,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import rehypeRaw from "rehype-raw";
 import { getAllPostIds, getPostData } from "../../lib/posts";
 import Layout from "../../components/layout";
-import styles from "./post.module.css";
+import styles from "./posts.module.css";
 
 export default function Post({ postData }) {
   return (

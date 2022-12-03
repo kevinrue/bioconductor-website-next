@@ -12,7 +12,7 @@ import rehypeSlug from "rehype-slug";
 import { getAllPageIds, getPageData } from "../../lib/learn";
 import TableOfContent from "../../components/toc";
 import Layout from "../../components/layout";
-import styles from "./id.module.css";
+import styles from "./learn.module.css";
 
 export default function LearnPage({ pageData }) {
   return (
