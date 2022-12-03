@@ -43,6 +43,7 @@ export default function Learn() {
           </Box>
           <Box
             sx={{
+              width: "100%",
               maxWidth: "850px",
               margin: "0 15px",
             }}

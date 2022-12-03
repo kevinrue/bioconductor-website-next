@@ -35,10 +35,9 @@ export default function LearnPage({ pageData }) {
         <Box sx={{ display: "inline-flex", justifyContent: "center" }}>
           <Box
             sx={{
+              width: "100%",
               maxWidth: "850px",
               margin: "0 15px",
-              width: "100%",
-              padding: "0 15px",
             }}
           >
             <h1>{pageData.title}</h1>
