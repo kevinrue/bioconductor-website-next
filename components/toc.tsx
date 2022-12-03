@@ -1,7 +1,7 @@
 // Source: <https://blog.logrocket.com/create-table-contents-highlighting-react/>
 import { useEffect, useState } from "react";
 import { useHeadsObserver } from "./hooks";
-import styles from "../styles/TableOfContent.module.css";
+import styles from "./toc.module.css";
 
 const getClassName = (level: number) => {
   switch (level) {

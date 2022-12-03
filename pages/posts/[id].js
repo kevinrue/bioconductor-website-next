@@ -2,16 +2,13 @@
 // <https://nextjs.org/learn/basics/dynamic-routes/render-markdown>
 // <https://github.com/remarkjs/react-markdown#use-custom-components-syntax-highlight
 import Head from "next/head";
-import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import rehypeRaw from "rehype-raw";
 import { getAllPostIds, getPostData } from "../../lib/posts";
 import Layout from "../../components/layout";
-import styles from "../../styles/Post.module.css";
-
-const grid_item_xs = 12;
-const grid_item_md = 9;
+import styles from "./post.module.css";
 
 export default function Post({ postData }) {
   return (
@@ -24,9 +21,15 @@ export default function Post({ postData }) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <Grid container className={styles.grid}>
-          <Grid item xs={grid_item_xs} md={grid_item_md}>
+      <main className="main">
+        <Box sx={{ display: "inline-flex", justifyContent: "center" }}>
+          <Box
+            sx={{
+              width: "100%",
+              maxWidth: "850px",
+              margin: "0 15px",
+            }}
+          >
             <h1>{postData.title}</h1>
             <hr />
             <p className={styles.author}>By {postData.author}</p>
@@ -54,8 +57,8 @@ export default function Post({ postData }) {
             <p className={styles.date}>
               Created on {postData.created} (Last updated: {postData.edited})
             </p>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </main>
     </Layout>
   );

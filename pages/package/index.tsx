@@ -3,7 +3,6 @@ import Head from "next/head";
 import Link from "next/link";
 import Box from "@mui/material/Box";
 import React from "react";
-import Grid from "@mui/material/Grid";
 //useSWR allows the use of SWR inside function components
 import useSWR from "swr";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -16,7 +15,7 @@ import {
 } from "../../components/bioc-releases";
 import Layout from "../../components/layout";
 import BiocReleaseButton from "../../components/bioc-release-button";
-import styles from "../../styles/Package.module.css";
+import styles from "./package.module.css";
 
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
 const fetcher = (url: URL) => fetch(url).then((res) => res.json());
@@ -126,15 +125,15 @@ export default function Package({
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <Box
-          sx={{
-            display: "block",
-            alignSelf: "center",
-            width: "80%",
-          }}
-        >
-          <Box component={Grid} display="block">
+      <main className="main">
+        <Box sx={{ display: "inline-flex", justifyContent: "center" }}>
+          <Box
+            sx={{
+              width: "100%",
+              maxWidth: "850px",
+              margin: "0 15px",
+            }}
+          >
             <h1>{package_name}</h1>
             <hr />
             <p>Insert status badges here.</p>

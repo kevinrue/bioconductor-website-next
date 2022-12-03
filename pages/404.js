@@ -1,10 +1,10 @@
 // Source:
 // <https://www.netlify.com/blog/2020/12/08/making-a-custom-404-page-in-next.js/>
 
-import styles from "../styles/FourOhFour.module.css";
 import Head from "next/head";
 import Link from "next/link";
 import Layout from "../components/layout";
+import styles from "./404.module.css";
 
 export default function Home() {
   return (

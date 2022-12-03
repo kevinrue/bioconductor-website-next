@@ -1,0 +1,18 @@
+.author {
+  font-style: italic;
+  margin-bottom: 1em;
+}
+
+.date {
+  font-size: small;
+  margin-top: 1em;
+}
+
+.content {
+  border-radius: 25px;
+  background-color: white;
+  padding: 20px 2em;
+  border-style: solid;
+  border-color: #13293d;
+  border-width: thin;
+}
