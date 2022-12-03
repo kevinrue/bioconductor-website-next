@@ -1,12 +1,12 @@
 import Head from "next/head";
-import Grid from '@mui/material/Grid';
+import Box from "@mui/material/Box";
 import ReactMarkdown from "react-markdown";
-import { getAllCodeOfConductIds, getCodeOfConductData } from "../../lib/code-of-conduct";
+import {
+  getAllCodeOfConductIds,
+  getCodeOfConductData,
+} from "../../lib/code-of-conduct";
 import Layout from "../../components/layout";
-import styles from "../../styles/CodeOfConduct.module.css";
-
-const grid_item_xs = 12;
-const grid_item_md = 9;
+import styles from "./code-of-conduct.module.css";
 
 export default function CodeOfConduct({ cocData }: any) {
   return (
@@ -19,19 +19,23 @@ export default function CodeOfConduct({ cocData }: any) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <Grid container className={styles.grid}>
-          <Grid item xs={grid_item_xs} md={grid_item_md}>
+      <main className="main">
+        <Box sx={{ display: "inline-flex", justifyContent: "center" }}>
+          <Box
+            sx={{
+              width: "100%",
+              maxWidth: "850px",
+              margin: "0 15px",
+            }}
+          >
             <h1>Code of Conduct</h1>
+            <hr />
             <h2>{cocData.title}</h2>
-            <ReactMarkdown
-              className={styles.content}
-              skipHtml={true}
-            >
+            <ReactMarkdown className={styles.content} skipHtml={true}>
               {cocData.content}
             </ReactMarkdown>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </main>
     </Layout>
   );

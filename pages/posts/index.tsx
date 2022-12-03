@@ -1,11 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
-import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import Layout from "../../components/layout";
-import styles from "../../styles/Posts.module.css";
-
-const grid_item_xs = 12;
-const grid_item_md = 9;
 
 // To understand "Typing Destructured Object Parameters in TypeScript", see section
 // "Typing Immediately Destructured Parameters"
@@ -21,9 +17,15 @@ export default function Posts() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <Grid container className={styles.grid}>
-          <Grid item xs={grid_item_xs} md={grid_item_md}>
+      <main className="main">
+        <Box sx={{ display: "inline-flex", justifyContent: "center" }}>
+          <Box
+            sx={{
+              width: "100%",
+              maxWidth: "850px",
+              margin: "0 15px",
+            }}
+          >
             <h1>Developer&apos;s notes</h1>
             <hr />
             <p>
@@ -50,8 +52,8 @@ export default function Posts() {
                 </Link>
               </li>
             </ul>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </main>
     </Layout>
   );

@@ -6,7 +6,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExternalLink } from "@fortawesome/free-solid-svg-icons";
-import styles from "../styles/NavigationBar.module.css";
+import styles from "./navbar.module.css";
 
 // TODO: move website-wide constants to global settings (find out suitable method for this)
 const coc_locales = [

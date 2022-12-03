@@ -12,7 +12,7 @@ import rehypeSlug from "rehype-slug";
 import { getAllPageIds, getPageData } from "../../lib/learn";
 import TableOfContent from "../../components/toc";
 import Layout from "../../components/layout";
-import styles from "../../styles/LearnPage.module.css";
+import styles from "./learn.module.css";
 
 export default function LearnPage({ pageData }) {
   return (
@@ -31,19 +31,18 @@ export default function LearnPage({ pageData }) {
         src="https://kit.fontawesome.com/ffb34e6829.js"
         crossorigin="anonymous"
       ></Script>
-      <main className={styles.main}>
+      <main className="main">
         <Box sx={{ display: "inline-flex", justifyContent: "center" }}>
           <Box
             sx={{
+              width: "100%",
               maxWidth: "850px",
-              margin: "0 30px",
+              margin: "0 15px",
             }}
           >
             <h1>{pageData.title}</h1>
-            {/* <div dangerouslySetInnerHTML={{ __html: pageData.content }}></div> */}
+            <hr />
             <ReactMarkdown
-              className={styles.content}
-              skipHtml={false}
               rehypePlugins={[rehypeRaw, rehypeSlug]}
               components={{
                 code: ({ node, inline, className, children, ...props }) => {

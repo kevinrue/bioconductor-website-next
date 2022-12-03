@@ -5,7 +5,6 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import TableOfContent from "../../components/toc";
 import Layout from "../../components/layout";
-import styles from "../../styles/Learn.module.css";
 
 // To understand "Typing Destructured Object Parameters in TypeScript", see section
 // "Typing Immediately Destructured Parameters"
@@ -23,11 +22,10 @@ export default function Learn() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main className="main">
         <Box sx={{ display: "inline-flex", justifyContent: "center" }}>
           <Box
             component={Grid}
-            className={styles.navleft}
             display={{ xs: "none", lg: "block" }}
             sx={{
               position: "sticky",
@@ -43,8 +41,9 @@ export default function Learn() {
           </Box>
           <Box
             sx={{
+              width: "100%",
               maxWidth: "850px",
-              margin: "0 30px",
+              margin: "0 15px",
             }}
           >
             <h1>Learn Bioconductor</h1>
@@ -62,32 +61,19 @@ export default function Learn() {
             <h3 id="beginners-tutorials">Tutorials</h3>
             <ul>
               <li>
-                <Link
-                  className={styles.link}
-                  href={`${router.asPath}/get-started`}
-                >
-                  Get started
-                </Link>
+                <Link href={`${router.asPath}/get-started`}>Get started</Link>
               </li>
             </ul>
             <h3 id="beginners-videos">Videos</h3>
             <ul>
               <li>
-                <Link
-                  className={styles.link}
-                  href="https://youtu.be/dg6NvmMVQ3I"
-                  target="_blank"
-                >
+                <Link href="https://youtu.be/dg6NvmMVQ3I" target="_blank">
                   Introduction To Bioconductor
                 </Link>{" "}
                 by Martin Morgan (2015).
               </li>
               <li>
-                <Link
-                  className={styles.link}
-                  href="https://youtu.be/NMv27jgHRb4"
-                  target="_blank"
-                >
+                <Link href="https://youtu.be/NMv27jgHRb4" target="_blank">
                   What is Bioconductor?
                 </Link>{" "}
                 by Lori Ann Shepherd (2021).
@@ -110,7 +96,6 @@ export default function Learn() {
             <ul>
               <li>
                 <Link
-                  className={styles.link}
                   href="http://bioconductor.org/books/release/csawBook"
                   target="_blank"
                 >
@@ -119,7 +104,6 @@ export default function Learn() {
               </li>
               <li>
                 <Link
-                  className={styles.link}
                   href="http://bioconductor.org/books/release/OSCA"
                   target="_blank"
                 >
@@ -128,7 +112,6 @@ export default function Learn() {
               </li>
               <li>
                 <Link
-                  className={styles.link}
                   href="http://bioconductor.org/books/release/SingleRBook"
                   target="_blank"
                 >
@@ -141,7 +124,6 @@ export default function Learn() {
             <ul>
               <li>
                 <Link
-                  className={styles.link}
                   href="https://www.youtube.com/@bioconductor"
                   target="_blank"
                 >

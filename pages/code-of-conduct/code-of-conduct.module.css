@@ -1,0 +1,9 @@
+.content {
+  border-radius: 25px;
+  background-color: white;
+  margin: 1rem 0;
+  padding: 20px 2em;
+  border-style: solid;
+  border-color: #13293d;
+  border-width: thin;
+}

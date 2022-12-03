@@ -24,7 +24,7 @@ import {
 import useDebounce from "../../lib/useDebounce";
 import BiocReleaseButton from "../../components/bioc-release-button";
 import Layout from "../../components/layout";
-import styles from "../../styles/Packages.module.css";
+import styles from "./packages.module.css";
 
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
 const fetcher = (url: URL) => fetch(url).then((res) => res.json());
@@ -247,12 +247,15 @@ export default function Releases({
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main className="main">
         <Box
           sx={{
-            display: "block",
+            width: "100%",
+            maxWidth: "850px",
+            margin: "0 15px",
+            display: "flex",
+            flexDirection: "column",
             alignSelf: "center",
-            width: "80%",
           }}
         >
           <Box component={Grid} display="block">
