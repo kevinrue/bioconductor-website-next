@@ -23,7 +23,7 @@ export default function Learn() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main className="main">
         <Box sx={{ display: "inline-flex", justifyContent: "center" }}>
           <Box
             component={Grid}
@@ -44,7 +44,7 @@ export default function Learn() {
           <Box
             sx={{
               maxWidth: "850px",
-              margin: "0 30px",
+              margin: "0 15px",
             }}
           >
             <h1>Learn Bioconductor</h1>

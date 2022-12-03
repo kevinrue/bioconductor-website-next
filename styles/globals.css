@@ -30,8 +30,17 @@ a {
   html {
     color-scheme: dark;
   }
+
   body {
     color: white;
     background: black;
   }
+}
+
+.main {
+  min-height: 80vh;
+  padding: 1rem 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
 }
