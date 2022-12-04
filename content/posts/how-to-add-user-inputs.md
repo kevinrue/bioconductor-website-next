@@ -1,5 +1,9 @@
 ---
 title: "How to: Add User Inputs"
+description: |
+  This post uses the example of the text input component on the page
+  `/packages/[bioc_release]/`, used to filter packages by name, to provide a guide
+  for adding user inputs to this website.
 author: "Kevin Rue-Albrecht"
 created: "2022-11-20"
 edited: "2022-11-28"
