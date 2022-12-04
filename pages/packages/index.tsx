@@ -243,7 +243,7 @@ export default function Releases({
         <title>Bioconductor - Packages</title>
         <meta
           name="description"
-          content="Work in progress by Kevin Rue-Albrecht"
+          content="Use this interactive table to browse the complete set of packages in the Bioconductor repository."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>

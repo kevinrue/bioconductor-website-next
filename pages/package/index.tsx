@@ -119,10 +119,7 @@ export default function Package({
     <Layout>
       <Head>
         <title>{package_name} - Package landing page</title>
-        <meta
-          name="description"
-          content="Work in progress by Kevin Rue-Albrecht"
-        />
+        <meta name="description" content={package_data.Description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="main">

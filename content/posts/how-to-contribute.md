@@ -1,5 +1,8 @@
 ---
 title: "How to - Contribute"
+description: |
+  This article describes the process for contributing to the development of this
+  website.
 author: "Kevin Rue-Albrecht"
 created: "2022-11-21"
 edited: "2022-11-21"

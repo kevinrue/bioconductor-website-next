@@ -1,5 +1,7 @@
 ---
 title: "How to - Add a Post"
+description: |
+  This article describes the process for adding a new post of developer's notes.
 author: "Kevin Rue-Albrecht"
 created: "2022-11-18"
 edited: "2022-11-22"
@@ -7,26 +9,34 @@ edited: "2022-11-22"
 
 ## Introduction
 
-This website is a proof of concept demonstrating the transition of the existing [bioconductor.org][bioconductor-org] website to a [Node.js][node-js] application using the [Next.js][next-js] full-stack framework.
+This website is a proof of concept demonstrating the transition of the existing
+[bioconductor.org][bioconductor-org] website to a [Node.js][node-js] application
+using the [Next.js][next-js] full-stack framework.
 
-The source code for this application is hosted on this [GitHub repository][github-repo].
+The source code for this application is hosted on this [GitHub
+repository][github-repo].
 
-The contents of the post itself are written in Markdown in this [file][github-post-file].
+The contents of the post itself are written in Markdown in this
+[file][github-post-file].
 
 ## How Posts Work In This Application
 
-When accessing the URI `/posts/[id]`, the application attempts to parse the file `/posts/[id].md`.
-The application expects the Markdown file to contain a YAML header with the fields `title`, `author`, `added` and `edited`,
-followed by the contents of the post in Markdown.
+When accessing the URI `/posts/[id]`, the application attempts to parse the file
+`/posts/[id].md`. The application expects the Markdown file to contain a YAML
+header with the fields `title`, `author`, `added` and `edited`, followed by the
+contents of the post in Markdown.
 
-Title, author, date of first creation, and date of last editing metadata in the YAML header are displayed in dedicated components of the page,
-while the body of the post is converted from Markdown to HTML and displayed _as-is_.
+Title, author, date of first creation, and date of last editing metadata in the
+YAML header are displayed in dedicated components of the page, while the body of
+the post is converted from Markdown to HTML and displayed _as-is_.
 
-Note that the field `edited` is bot automatically updated; it must be edited manually.
+Note that the field `edited` is bot automatically updated; it must be edited
+manually.
 
 ## How _You_ Can Add A Post
 
-As a result, adding a new post is achieved by adding a new Markdown file `/posts/[id].md`, following the requirements described above.
+As a result, adding a new post is achieved by adding a new Markdown file
+`/posts/[id].md`, following the requirements described above.
 
 The post will then be accessible at the URI `/posts/[id]`.
 
@@ -36,4 +46,5 @@ The post will then be accessible at the URI `/posts/[id]`.
 [node-js]: https://nodejs.org
 [next-js]: https://nextjs.org/
 [github-repo]: https://github.com/kevinrue/bioconductor-website-next
-[github-post-file]: https://github.com/kevinrue/bioconductor-website-next/blob/main/posts/how-to-add-a-post.md
+[github-post-file]:
+  https://github.com/kevinrue/bioconductor-website-next/blob/main/posts/how-to-add-a-post.md

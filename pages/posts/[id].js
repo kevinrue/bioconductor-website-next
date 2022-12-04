@@ -15,10 +15,7 @@ export default function Post({ postData }) {
     <Layout>
       <Head>
         <title>{postData.title} - Post</title>
-        <meta
-          name="description"
-          content="Work in progress by Kevin Rue-Albrecht"
-        />
+        <meta name="description" content={postData.description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="main">
