@@ -1,7 +1,12 @@
 ---
 title: "Get started"
+description: |
+  Welcome to the Bioconductor community!
+
+  This guide details how to install the latest release of Bioconductor on your
+  computer.
 edited: "2022-11-29"
-compiled: "2022-12-01"
+compiled: "2022-12-04"
 output:
   md_document:
     preserve_yaml: true
