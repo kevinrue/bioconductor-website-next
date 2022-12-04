@@ -18,7 +18,7 @@ export default function Learn() {
         <title>Learn - Bioconductor</title>
         <meta
           name="description"
-          content="Work in progress by Kevin Rue-Albrecht"
+          content="On this page is a curated collection of educational resources, both for self-learning and teaching others, developed by Bioconductor contributors and vetted by the community."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
