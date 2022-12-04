@@ -13,10 +13,7 @@ export default function CodeOfConduct({ cocData }: any) {
     <Layout>
       <Head>
         <title>Bioconductor - Code of Conduct</title>
-        <meta
-          name="description"
-          content="Work in progress by Kevin Rue-Albrecht"
-        />
+        <meta name="description" content={cocData.title} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="main">
