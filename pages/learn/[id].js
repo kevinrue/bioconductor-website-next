@@ -19,10 +19,7 @@ export default function LearnPage({ pageData }) {
     <Layout>
       <Head>
         <title>{pageData.title} - Learn Bioconductor</title>
-        <meta
-          name="description"
-          content="Work in progress by Kevin Rue-Albrecht"
-        />
+        <meta name="description" content={pageData.description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* TODO: src= below points to a FontAwesome Kit on Kevin's account.
