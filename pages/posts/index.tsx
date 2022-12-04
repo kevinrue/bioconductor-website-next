@@ -13,7 +13,7 @@ export default function Posts() {
         <title>Developer&apos;s notes</title>
         <meta
           name="description"
-          content="Work in progress by Kevin Rue-Albrecht"
+          content="The posts listed on this page were written during the development of this website. They describe some of the efforts made so far, while keeping notes and links to resources that might facilitate future contributions."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
