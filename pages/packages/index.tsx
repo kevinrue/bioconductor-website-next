@@ -243,7 +243,7 @@ export default function Releases({
         <title>Bioconductor - Packages</title>
         <meta
           name="description"
-          content="On this interactive page, browse the complete list of packages in the Bioconductor repository."
+          content="Use this interactive table to browse the complete set of packages in the Bioconductor repository."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
