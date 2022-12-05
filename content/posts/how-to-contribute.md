@@ -10,6 +10,8 @@ edited: "2022-11-21"
 
 ## Introduction
 
+This article describes the recommended process for contributing to this website.
+
 This website is mainly written in [JavaScript][javascript-website], using a
 number of packages from [npm][npm-website], the Node Package Manager.
 
@@ -22,12 +24,6 @@ and an intimidatig paradox of choice.
 
 This website uses the [Next.js][nextjs-website] open-source web development
 framework based on [React][react-website].
-
-The initial template of the project was initialised using the following command:
-
-```bash
-npx create-next-app@latest next-app
-```
 
 ## Fork the repository
 
@@ -121,6 +117,19 @@ This is a project for the Bioconductor community, as such:
   reports, feature requests, and constructive discussions.
 - The project adopts the [Bioconductor Code of Conduct][bioc-coc].
 
+## Additional resources
+
+The initial template of the project was initialised using the following command:
+
+```bash
+npx create-next-app@latest next-app
+```
+
+Contributors may wish to initialise a separate copy of the original template
+(i.e., in a separate directory) to use as a sandbox while prototyping new
+content. I strongly recommend following the tutorial [Create Next
+App][create-next-app].
+
 <!-- Links -->
 
 [javascript-website]: https://www.javascript.com
@@ -132,3 +141,4 @@ This is a project for the Bioconductor community, as such:
 [nodejs-website]: https://nodejs.org/
 [bioc-coc]: https://bioconductor.github.io/bioc_coc_multilingual/
 [react-website]: https://reactjs.org/
+[create-next-app]: https://nextjs.org/docs/api-reference/create-next-app
