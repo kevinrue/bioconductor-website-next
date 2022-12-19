@@ -169,7 +169,6 @@ export default function Package({
 
 export async function getServerSideProps(context: { query: { release: string, name: string }, }) {
   const query = context.query;
-  console.log(query);
 
   const releasesData = await getReleasesData();
 
