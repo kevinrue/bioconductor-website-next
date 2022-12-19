@@ -120,12 +120,11 @@ const typeOptions = [
 ];
 
 const buildPackageUrl = (name: string, query: ParsedUrlQuery) => {
-  let new_query = `?name=${name}`;
-  new_query =
+  let query_string =
     query.release === undefined
-      ? new_query
-      : `${new_query}&release=${query.release}`;
-  const href = ["/package", new_query].join("/");
+      ? ""
+      : `?release=${query.release}`;
+  const href = [`/packages/${name}`, query_string].join("/");
   return href;
 };
 
@@ -153,10 +152,10 @@ export default function Releases({
     query.release === undefined
       ? bioc_release_version_latest
       : mapStringToBiocRelease(
-          String(query.release),
-          bioc_release_version_options,
-          bioc_release_version_latest
-        );
+        String(query.release),
+        bioc_release_version_options,
+        bioc_release_version_latest
+      );
 
   const [packageSearchString, setPackageSearchString] = useState("");
 

@@ -1,9 +1,6 @@
-import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 import Box from "@mui/material/Box";
-import React from "react";
-//useSWR allows the use of SWR inside function components
 import useSWR from "swr";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { getReleasesData } from "../../lib/bioc_releases";
@@ -21,32 +18,16 @@ import styles from "./package.module.css";
 const fetcher = (url: URL) => fetch(url).then((res) => res.json());
 
 export default function Package({
-  releasesData,
+  package_name,
+  bioc_release,
+  bioc_release_version_latest,
+  bioc_release_version_options,
 }: {
-  releasesData: { content: string };
+  package_name: string,
+  bioc_release: string,
+  bioc_release_version_latest: string,
+  bioc_release_version_options: string[]
 }) {
-  const router = useRouter();
-
-  const query = router.query;
-  const package_name = router.query.name;
-
-  const releases_data = JSON.parse(releasesData.content);
-
-  const bioc_release_version_options = getBiocReleaseVersion(
-    releases_data.sort(releaseSort)
-  );
-  const bioc_release_version_latest =
-    getBiocReleaseLatestVersion(releases_data);
-
-  const bioc_release =
-    query.release === undefined
-      ? bioc_release_version_latest
-      : mapStringToBiocRelease(
-          String(query.release),
-          bioc_release_version_options,
-          bioc_release_version_latest
-        );
-
   const { data: data_packages, error: error_packages } = useSWR(
     bioc_release ? `/api/${bioc_release}/packages` : null,
     fetcher
@@ -178,7 +159,7 @@ export default function Package({
             defaultValue={String(bioc_release)}
             options={bioc_release_version_options}
             latest={bioc_release_version_latest}
-            templateUrl={`/package?name=${package_name}&release=\${release}`}
+            templateUrl={`/packages/${package_name}?release=\${release}`}
           />
         </Box>
       </main>
@@ -186,13 +167,36 @@ export default function Package({
   );
 }
 
-export async function getStaticProps() {
-  // Add the "await" keyword like this:
+export async function getServerSideProps(context: { query: { release: string, name: string }, }) {
+  const query = context.query;
+  console.log(query);
+
   const releasesData = await getReleasesData();
+
+  const releases_data = JSON.parse(releasesData.content);
+
+  const bioc_release_version_options = getBiocReleaseVersion(
+    releases_data.sort(releaseSort)
+  );
+  const bioc_release_version_latest =
+    getBiocReleaseLatestVersion(releases_data);
+
+  const bioc_release =
+    query.release === undefined
+      ? bioc_release_version_latest
+      : mapStringToBiocRelease(
+        String(query.release),
+        bioc_release_version_options,
+        bioc_release_version_latest
+      );
 
   return {
     props: {
-      releasesData,
+      package_name: query.name,
+      bioc_release: bioc_release,
+      bioc_release_version_latest:
+        bioc_release_version_latest,
+      bioc_release_version_options: bioc_release_version_options
     },
-  };
+  }
 }
