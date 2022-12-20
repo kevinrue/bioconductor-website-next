@@ -30,8 +30,10 @@ import styles from "./packages.module.css";
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
 const fetcher = (url: URL) => fetch(url).then((res) => res.json());
 
+// Function used to sort table rows on the column of package names.
+// A custom function is needed because the column contains a hyperlink, not simple text.
 // <https://react-data-table-component.netlify.app/?path=/docs/sorting-custom-column-sort--custom-column-sort>
-const linkSort = (rowA: any, rowB: any) => {
+const sortPackageLinksByName = (rowA: any, rowB: any) => {
   const a = rowA.Package.props.children.toLowerCase();
   const b = rowB.Package.props.children.toLowerCase();
   if (a > b) {
@@ -85,7 +87,7 @@ const table_columns = [
     name: "Package",
     selector: (row: any) => row.Package,
     sortable: true,
-    sortFunction: linkSort,
+    sortFunction: sortPackageLinksByName,
     maxWidth: "150px",
   },
   {
