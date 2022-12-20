@@ -131,10 +131,6 @@ const buildPackageUrl = (name: string, query: ParsedUrlQuery) => {
   return href;
 };
 
-const fillUrlTemplate = function (templateUrl: string, release: string) {
-  return templateUrl.replaceAll("${release}", release);
-};
-
 // To understand "Typing Destructured Object Parameters in TypeScript", see section
 // "Typing Immediately Destructured Parameters"
 // at <https://mariusschulz.com/blog/typing-destructured-object-parameters-in-typescript>
@@ -226,7 +222,7 @@ export default function Packages({
   ) => {
     setBiocRelease(event.target.value)
     const release = mapBiocReleaseToString(event.target.value, bioc_release_version_latest);
-    const href = fillUrlTemplate("/packages?release=${release}", release);
+    const href = "/packages?release=${release}".replaceAll("${release}", release)
     router.push(href);
   };
 

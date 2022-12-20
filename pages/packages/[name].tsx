@@ -20,10 +20,6 @@ import styles from "./package.module.css";
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
 const fetcher = (url: URL) => fetch(url).then((res) => res.json());
 
-const fillUrlTemplate = function (templateUrl: string, release: string) {
-  return templateUrl.replaceAll("${release}", release);
-};
-
 export default function Package({
   package_name,
   bioc_release,
@@ -113,7 +109,7 @@ export default function Package({
   ) => {
     setBiocRelease(event.target.value)
     const release = mapBiocReleaseToString(event.target.value, bioc_release_version_latest);
-    const href = fillUrlTemplate(`/packages/${package_name}?release=\${release}`, release);
+    const href = `/packages/${package_name}?release=\${release}`.replaceAll("${release}", release);
     router.push(href);
   };
 
