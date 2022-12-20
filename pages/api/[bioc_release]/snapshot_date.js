@@ -1,7 +1,7 @@
 // Sources:
 // <https://vercel.com/guides/loading-static-file-nextjs-api-route>
 import path from "path";
-import { promises as fs } from "fs";
+import { fs, promises } from "fs";
 
 export default async function handler(req, res) {
   const { bioc_release } = req.query;
@@ -13,8 +13,13 @@ export default async function handler(req, res) {
     "releases",
     bioc_release
   );
+  try {
+    fs.stat(biocReleaseDirectory);
+  } catch (err) {
+    throw `Snapshot date information unavailable for Bioconductor release ${bioc_release}`;
+  }
   //Read the json data file packages.json
-  const fileContents = await fs.readFile(
+  const fileContents = await promises.readFile(
     biocReleaseDirectory + "/snapshot_date.json",
     "utf8"
   );
