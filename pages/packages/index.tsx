@@ -9,13 +9,14 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import useSWR from "swr";
 // React
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 // <https://react-data-table-component.netlify.app/?path=/docs/getting-started-examples--page>
 import DataTable from "react-data-table-component";
 import { getReleasesData } from "../../lib/bioc_releases";
 import {
+  mapBiocReleaseToString,
   mapStringToBiocRelease,
   getBiocReleaseLatestVersion,
   getBiocReleaseVersion,
@@ -128,6 +129,10 @@ const buildPackageUrl = (name: string, query: ParsedUrlQuery) => {
   return href;
 };
 
+const fillUrlTemplate = function (templateUrl: string, release: string) {
+  return templateUrl.replaceAll("${release}", release);
+};
+
 // To understand "Typing Destructured Object Parameters in TypeScript", see section
 // "Typing Immediately Destructured Parameters"
 // at <https://mariusschulz.com/blog/typing-destructured-object-parameters-in-typescript>
@@ -137,6 +142,7 @@ export default function Releases({
   releasesData: { content: string };
 }) {
   const router = useRouter();
+  // if (!router.isReady) return <div>Loading router information...</div>;
 
   const query = router.query;
 
@@ -145,6 +151,7 @@ export default function Releases({
   const bioc_release_version_options = getBiocReleaseVersion(
     releases_data.sort(releaseSort)
   );
+
   const bioc_release_version_latest =
     getBiocReleaseLatestVersion(releases_data);
 
@@ -158,6 +165,9 @@ export default function Releases({
       );
 
   const [packageSearchString, setPackageSearchString] = useState("");
+
+  const [biocRelease, setBiocRelease] = useState(bioc_release);
+  useEffect(() => setBiocRelease(bioc_release), [bioc_release])
 
   // Debounce the string input on package names by 500ms
   const [packageType, setPackageType] = useState(typeOptions[0].value);
@@ -223,6 +233,15 @@ export default function Releases({
         git_last_commit_date: object.git_last_commit_date,
       };
     });
+
+  const handleChangeBiocRelease = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setBiocRelease(event.target.value)
+    const release = mapBiocReleaseToString(event.target.value, bioc_release_version_latest);
+    const href = fillUrlTemplate("/packages?release=${release}", release);
+    router.push(href);
+  };
 
   const handleChangePackageSearchString = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -323,10 +342,9 @@ export default function Releases({
             />
           </Box>
           <BiocReleaseButton
-            defaultValue={String(bioc_release)}
+            value={biocRelease}
             options={bioc_release_version_options}
-            latest={bioc_release_version_latest}
-            templateUrl="/packages?release=${release}"
+            handleChange={handleChangeBiocRelease}
           />
         </Box>
       </main>
