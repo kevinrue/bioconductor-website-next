@@ -29,3 +29,33 @@
   border-color: red;
   padding: 1rem;
 }
+
+.BannerOldRelease {
+  width: 100%;
+  /* position: sticky;
+  top: 10px; */
+  border-style: solid;
+  border-radius: 0.5rem;
+  border-width: 2px;
+  border-color: red;
+  background-color: rgb(252, 141, 141);
+  fill-opacity: 50%;
+  padding: 10px;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.BannerCurrentRelease {
+  width: 100%;
+  /* position: sticky;
+  top: 10px; */
+  border-style: solid;
+  border-radius: 0.5rem;
+  border-width: 2px;
+  border-color: green;
+  background-color: rgb(184, 241, 184);
+  fill-opacity: 50%;
+  padding: 10px;
+  margin: 5px 0;
+  text-align: center;
+}

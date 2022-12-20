@@ -1,10 +1,13 @@
+import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 import Box from "@mui/material/Box";
 import useSWR from "swr";
+import React, { useState, useEffect } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { getReleasesData } from "../../lib/bioc_releases";
 import {
+  mapBiocReleaseToString,
   mapStringToBiocRelease,
   getBiocReleaseLatestVersion,
   getBiocReleaseVersion,
@@ -17,6 +20,10 @@ import styles from "./package.module.css";
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
 const fetcher = (url: URL) => fetch(url).then((res) => res.json());
 
+const fillUrlTemplate = function (templateUrl: string, release: string) {
+  return templateUrl.replaceAll("${release}", release);
+};
+
 export default function Package({
   package_name,
   bioc_release,
@@ -28,6 +35,11 @@ export default function Package({
   bioc_release_version_latest: string,
   bioc_release_version_options: string[]
 }) {
+  const router = useRouter();
+
+  const [biocRelease, setBiocRelease] = useState(bioc_release);
+  useEffect(() => setBiocRelease(bioc_release), [bioc_release])
+
   const { data: data_packages, error: error_packages } = useSWR(
     bioc_release ? `/api/${bioc_release}/packages` : null,
     fetcher
@@ -96,6 +108,29 @@ export default function Package({
     }
   };
 
+  const handleChangeBiocRelease = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setBiocRelease(event.target.value)
+    const release = mapBiocReleaseToString(event.target.value, bioc_release_version_latest);
+    const href = fillUrlTemplate(`/packages/${package_name}?release=\${release}`, release);
+    router.push(href);
+  };
+
+  const bioc_release_banner =
+    bioc_release == bioc_release_version_latest ? (
+      <p className={styles.BannerCurrentRelease}>
+        This is the latest stable release of Bioconductor!
+      </p>
+    ) : (
+      <p className={styles.BannerOldRelease}>
+        This is <i>not</i> the latest stable release of Bioconductor. We
+        recommend keeping your installation of Bioconductor up-to-date.<br />
+        Click <Link className={styles.link} href="/packages">here</Link> to
+        see the latest stable release.
+      </p>
+    )
+
   return (
     <Layout>
       <Head>
@@ -103,6 +138,7 @@ export default function Package({
         <meta name="description" content={package_data.Description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {bioc_release_banner}
       <main className="main">
         <Box sx={{ display: "inline-flex", justifyContent: "center" }}>
           <Box
@@ -121,16 +157,6 @@ export default function Package({
               Bioconductor release {bioc_release} | R version {r_version}{" "}
               (Snapshot date: {snapshot_date})
             </p>
-            {bioc_release == bioc_release_version_latest ? (
-              <p className={styles.highlight}>
-                This is the latest stable release of Bioconductor.
-              </p>
-            ) : (
-              <p className={styles.highlight}>
-                This is <i>not</i> the latest stable release of Bioconductor. We
-                recommend keeping your installation of Bioconductor up-to-date.
-              </p>
-            )}
             <p className={styles.description}>{package_data.Description}</p>
             <h3>Installation</h3>
             To install this package, start R (version &quot;{r_version}&quot;)
@@ -156,10 +182,9 @@ export default function Package({
             </p>
           </Box>
           <BiocReleaseButton
-            defaultValue={String(bioc_release)}
+            value={String(biocRelease)}
             options={bioc_release_version_options}
-            latest={bioc_release_version_latest}
-            templateUrl={`/packages/${package_name}?release=\${release}`}
+            handleChange={handleChangeBiocRelease}
           />
         </Box>
       </main>

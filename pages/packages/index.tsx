@@ -142,7 +142,6 @@ export default function Releases({
   releasesData: { content: string };
 }) {
   const router = useRouter();
-  // if (!router.isReady) return <div>Loading router information...</div>;
 
   const query = router.query;
 
