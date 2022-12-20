@@ -30,8 +30,19 @@ import styles from "./packages.module.css";
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
 const fetcher = (url: URL) => fetch(url).then((res) => res.json());
 
+// Options for filtering Bioconductor package types.
+const packageTypeOptions = [
+  { value: "All", label: "All" },
+  { value: "Software", label: "Software" },
+  { value: "AnnotationData", label: "AnnotationData" },
+  { value: "ExperimentData", label: "ExperimentData" },
+  { value: "Workflow", label: "Workflow" },
+];
+
+// sortPackageLinksByName sorts table rows on the column of package names.
+// A custom function is needed because the column contains a hyperlink, not simple text.
 // <https://react-data-table-component.netlify.app/?path=/docs/sorting-custom-column-sort--custom-column-sort>
-const linkSort = (rowA: any, rowB: any) => {
+const sortPackageLinksByName = (rowA: any, rowB: any) => {
   const a = rowA.Package.props.children.toLowerCase();
   const b = rowB.Package.props.children.toLowerCase();
   if (a > b) {
@@ -43,49 +54,14 @@ const linkSort = (rowA: any, rowB: any) => {
   return 0;
 };
 
-const paginationComponentOptions = {
-  noRowsPerPage: true,
-};
-
-const filterRowsByPackageColumn = (name: string, pattern: string) => {
-  try {
-    var matcher = new RegExp(pattern);
-  } catch (err) {
-    return true;
-  }
-  if (matcher.test(name)) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-const filterRowsByPackageType = (
-  name: any,
-  type: string,
-  biocviews: string[]
-) => {
-  if (type == "All") {
-    return true;
-  } else {
-    const package_biocviews = biocviews[name];
-    if (package_biocviews === null) {
-      return false;
-    } else if (package_biocviews.includes(type)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-};
-
+// Definitions of columns in the <DataTable> of packages.
 const table_columns = [
   {
     id: "package",
     name: "Package",
     selector: (row: any) => row.Package,
     sortable: true,
-    sortFunction: linkSort,
+    sortFunction: sortPackageLinksByName,
     maxWidth: "150px",
   },
   {
@@ -112,14 +88,55 @@ const table_columns = [
   },
 ];
 
-const typeOptions = [
-  { value: "All", label: "All" },
-  { value: "Software", label: "Software" },
-  { value: "AnnotationData", label: "AnnotationData" },
-  { value: "ExperimentData", label: "ExperimentData" },
-  { value: "Workflow", label: "Workflow" },
-];
+// paginationComponentOptions props for the <DataTable>
+const paginationComponentOptions = {
+  noRowsPerPage: true,
+};
 
+// filterRowsByPackageName filters packages that match the name pattern.
+// * name: Package name.
+// * pattern: Pattern to match.
+const filterRowsByPackageName = (name: string, pattern: string) => {
+  try {
+    var matcher = new RegExp(pattern);
+  } catch (err) {
+    return false;
+  }
+  if (matcher.test(name)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+// filterRowsByPackageType filters packages that match the selected type.
+// * name: Package name.
+// * type: Package type.
+// * biocviews: Dictionary of BiocViews. Keys are package names. Values are character lists of tags.
+// For TypeScript typing, see <https://www.carlrippon.com/typescript-dictionary/>
+const filterRowsByPackageType = (
+  name: string,
+  type: string,
+  biocviews: { [key: string]: string[] }
+) => {
+  if (type == "All") {
+    return true;
+  } else {
+    const package_biocviews = biocviews[name];
+    if (package_biocviews === null) {
+      return false;
+    } else if (package_biocviews.includes(type)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+};
+
+// buildPackageUrl builds the URL to each package in the table
+// * name: Package name
+// * query: Query information in the URL of the current page.
+// The function builds links to landing pages that correspond to the same Bioconductor release as the current page.
 const buildPackageUrl = (name: string, query: ParsedUrlQuery) => {
   let query_string =
     query.release === undefined
@@ -129,39 +146,21 @@ const buildPackageUrl = (name: string, query: ParsedUrlQuery) => {
   return href;
 };
 
-const fillUrlTemplate = function (templateUrl: string, release: string) {
-  return templateUrl.replaceAll("${release}", release);
-};
-
 // To understand "Typing Destructured Object Parameters in TypeScript", see section
 // "Typing Immediately Destructured Parameters"
 // at <https://mariusschulz.com/blog/typing-destructured-object-parameters-in-typescript>
-export default function Releases({
-  releasesData,
+export default function Packages({
+  bioc_release,
+  bioc_release_version_latest,
+  bioc_release_version_options,
 }: {
-  releasesData: { content: string };
+  bioc_release: string,
+  bioc_release_version_latest: string,
+  bioc_release_version_options: string[]
 }) {
   const router = useRouter();
 
   const query = router.query;
-
-  const releases_data = JSON.parse(releasesData.content);
-
-  const bioc_release_version_options = getBiocReleaseVersion(
-    releases_data.sort(releaseSort)
-  );
-
-  const bioc_release_version_latest =
-    getBiocReleaseLatestVersion(releases_data);
-
-  const bioc_release =
-    query.release === undefined
-      ? bioc_release_version_latest
-      : mapStringToBiocRelease(
-        String(query.release),
-        bioc_release_version_options,
-        bioc_release_version_latest
-      );
 
   const [packageSearchString, setPackageSearchString] = useState("");
 
@@ -169,7 +168,7 @@ export default function Releases({
   useEffect(() => setBiocRelease(bioc_release), [bioc_release])
 
   // Debounce the string input on package names by 500ms
-  const [packageType, setPackageType] = useState(typeOptions[0].value);
+  const [packageType, setPackageType] = useState(packageTypeOptions[0].value);
   const debouncedPackageSearchString = useDebounce(packageSearchString, 500);
 
   //Set up SWR to run the fetcher function when calling "/api/staticdata"
@@ -212,7 +211,7 @@ export default function Releases({
 
   const table_data = JSON.parse(data_packages)
     .filter((object: any) =>
-      filterRowsByPackageColumn(object.Package, debouncedPackageSearchString)
+      filterRowsByPackageName(object.Package, debouncedPackageSearchString)
     )
     .filter((object: any) =>
       filterRowsByPackageType(object.Package, packageType, biocviews_data)
@@ -238,7 +237,7 @@ export default function Releases({
   ) => {
     setBiocRelease(event.target.value)
     const release = mapBiocReleaseToString(event.target.value, bioc_release_version_latest);
-    const href = fillUrlTemplate("/packages?release=${release}", release);
+    const href = "/packages?release=${release}".replaceAll("${release}", release)
     router.push(href);
   };
 
@@ -321,7 +320,7 @@ export default function Releases({
                   value={packageType}
                   onChange={handleChangePackageType}
                 >
-                  {typeOptions.map((option) => (
+                  {packageTypeOptions.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
                       {option.label}
                     </MenuItem>
@@ -351,13 +350,34 @@ export default function Releases({
   );
 }
 
-export async function getStaticProps() {
-  // Add the "await" keyword like this:
+export async function getServerSideProps(context: { query: { release: string }, }) {
+  const query = context.query;
+
   const releasesData = await getReleasesData();
+
+  const releases_data = JSON.parse(releasesData.content);
+
+  const bioc_release_version_options = getBiocReleaseVersion(
+    releases_data.sort(releaseSort)
+  );
+  const bioc_release_version_latest =
+    getBiocReleaseLatestVersion(releases_data);
+
+  const bioc_release =
+    query.release === undefined
+      ? bioc_release_version_latest
+      : mapStringToBiocRelease(
+        String(query.release),
+        bioc_release_version_options,
+        bioc_release_version_latest
+      );
 
   return {
     props: {
-      releasesData,
+      bioc_release: bioc_release,
+      bioc_release_version_latest:
+        bioc_release_version_latest,
+      bioc_release_version_options: bioc_release_version_options
     },
-  };
+  }
 }
