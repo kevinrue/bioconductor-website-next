@@ -368,7 +368,6 @@ export async function getServerSideProps(context: { query: { release: string }, 
       ? bioc_release_version_latest
       : mapStringToBiocRelease(
         String(query.release),
-        bioc_release_version_options,
         bioc_release_version_latest
       );
 
