@@ -342,7 +342,7 @@ export default function Releases({
             />
           </Box>
           <BiocReleaseButton
-            value={biocRelease}
+            value={String(biocRelease)}
             options={bioc_release_version_options}
             handleChange={handleChangeBiocRelease}
           />
