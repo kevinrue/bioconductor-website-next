@@ -136,32 +136,18 @@ const fillUrlTemplate = function (templateUrl: string, release: string) {
 // To understand "Typing Destructured Object Parameters in TypeScript", see section
 // "Typing Immediately Destructured Parameters"
 // at <https://mariusschulz.com/blog/typing-destructured-object-parameters-in-typescript>
-export default function Releases({
-  releasesData,
+export default function Packages({
+  bioc_release,
+  bioc_release_version_latest,
+  bioc_release_version_options,
 }: {
-  releasesData: { content: string };
+  bioc_release: string,
+  bioc_release_version_latest: string,
+  bioc_release_version_options: string[]
 }) {
   const router = useRouter();
 
   const query = router.query;
-
-  const releases_data = JSON.parse(releasesData.content);
-
-  const bioc_release_version_options = getBiocReleaseVersion(
-    releases_data.sort(releaseSort)
-  );
-
-  const bioc_release_version_latest =
-    getBiocReleaseLatestVersion(releases_data);
-
-  const bioc_release =
-    query.release === undefined
-      ? bioc_release_version_latest
-      : mapStringToBiocRelease(
-        String(query.release),
-        bioc_release_version_options,
-        bioc_release_version_latest
-      );
 
   const [packageSearchString, setPackageSearchString] = useState("");
 
@@ -351,13 +337,34 @@ export default function Releases({
   );
 }
 
-export async function getStaticProps() {
-  // Add the "await" keyword like this:
+export async function getServerSideProps(context: { query: { release: string }, }) {
+  const query = context.query;
+
   const releasesData = await getReleasesData();
+
+  const releases_data = JSON.parse(releasesData.content);
+
+  const bioc_release_version_options = getBiocReleaseVersion(
+    releases_data.sort(releaseSort)
+  );
+  const bioc_release_version_latest =
+    getBiocReleaseLatestVersion(releases_data);
+
+  const bioc_release =
+    query.release === undefined
+      ? bioc_release_version_latest
+      : mapStringToBiocRelease(
+        String(query.release),
+        bioc_release_version_options,
+        bioc_release_version_latest
+      );
 
   return {
     props: {
-      releasesData,
+      bioc_release: bioc_release,
+      bioc_release_version_latest:
+        bioc_release_version_latest,
+      bioc_release_version_options: bioc_release_version_options
     },
-  };
+  }
 }
