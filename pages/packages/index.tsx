@@ -47,11 +47,11 @@ const paginationComponentOptions = {
   noRowsPerPage: true,
 };
 
-const filterRowsByPackageColumn = (name: string, pattern: string) => {
+const filterRowsByPackageName = (name: string, pattern: string) => {
   try {
     var matcher = new RegExp(pattern);
   } catch (err) {
-    return true;
+    return false;
   }
   if (matcher.test(name)) {
     return true;
@@ -198,7 +198,7 @@ export default function Packages({
 
   const table_data = JSON.parse(data_packages)
     .filter((object: any) =>
-      filterRowsByPackageColumn(object.Package, debouncedPackageSearchString)
+      filterRowsByPackageName(object.Package, debouncedPackageSearchString)
     )
     .filter((object: any) =>
       filterRowsByPackageType(object.Package, packageType, biocviews_data)
