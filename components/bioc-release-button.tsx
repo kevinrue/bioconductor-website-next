@@ -1,13 +1,7 @@
-import { useRouter } from "next/router";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Fab from "@mui/material/Fab";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import {
-  mapBiocReleaseToString,
-  getBiocReleaseLatestVersion,
-} from "./bioc-releases";
-import { StringLiteral } from "typescript";
 
 const FabTheme = createTheme({
   components: {
@@ -44,30 +38,15 @@ const FabTheme = createTheme({
   },
 });
 
-const fillUrlTemplate = function (templateUrl: string, release: string) {
-  return templateUrl.replaceAll("${release}", release);
-};
-
 export default function BiocReleaseButton({
-  defaultValue,
+  value,
   options,
-  latest,
-  templateUrl,
+  handleChange,
 }: {
-  defaultValue: string;
+  value: string;
   options: string[];
-  latest: string;
-  templateUrl: string;
+  handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }) {
-  const router = useRouter();
-
-  const handleChangeBiocRelease = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const release = mapBiocReleaseToString(event.target.value, latest);
-    const href = fillUrlTemplate(templateUrl, release);
-    router.push(href);
-  };
 
   return (
     <ThemeProvider theme={FabTheme}>
@@ -77,8 +56,8 @@ export default function BiocReleaseButton({
           id="select-release"
           variant="standard"
           select
-          defaultValue={defaultValue}
-          onChange={handleChangeBiocRelease}
+          value={value}
+          onChange={handleChange}
         >
           {options.map((option) => (
             <MenuItem key={option} value={option}>

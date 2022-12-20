@@ -9,13 +9,14 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import useSWR from "swr";
 // React
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 // <https://react-data-table-component.netlify.app/?path=/docs/getting-started-examples--page>
 import DataTable from "react-data-table-component";
 import { getReleasesData } from "../../lib/bioc_releases";
 import {
+  mapBiocReleaseToString,
   mapStringToBiocRelease,
   getBiocReleaseLatestVersion,
   getBiocReleaseVersion,
@@ -128,6 +129,10 @@ const buildPackageUrl = (name: string, query: ParsedUrlQuery) => {
   return href;
 };
 
+const fillUrlTemplate = function (templateUrl: string, release: string) {
+  return templateUrl.replaceAll("${release}", release);
+};
+
 // To understand "Typing Destructured Object Parameters in TypeScript", see section
 // "Typing Immediately Destructured Parameters"
 // at <https://mariusschulz.com/blog/typing-destructured-object-parameters-in-typescript>
@@ -145,6 +150,7 @@ export default function Releases({
   const bioc_release_version_options = getBiocReleaseVersion(
     releases_data.sort(releaseSort)
   );
+
   const bioc_release_version_latest =
     getBiocReleaseLatestVersion(releases_data);
 
@@ -158,6 +164,9 @@ export default function Releases({
       );
 
   const [packageSearchString, setPackageSearchString] = useState("");
+
+  const [biocRelease, setBiocRelease] = useState(bioc_release);
+  useEffect(() => setBiocRelease(bioc_release), [bioc_release])
 
   // Debounce the string input on package names by 500ms
   const [packageType, setPackageType] = useState(typeOptions[0].value);
@@ -224,6 +233,15 @@ export default function Releases({
       };
     });
 
+  const handleChangeBiocRelease = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setBiocRelease(event.target.value)
+    const release = mapBiocReleaseToString(event.target.value, bioc_release_version_latest);
+    const href = fillUrlTemplate("/packages?release=${release}", release);
+    router.push(href);
+  };
+
   const handleChangePackageSearchString = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -236,6 +254,20 @@ export default function Releases({
     setPackageType(event.target.value);
   };
 
+  const bioc_release_banner =
+    bioc_release == bioc_release_version_latest ? (
+      <p className={styles.BannerCurrentRelease}>
+        This is the latest stable release of Bioconductor!
+      </p>
+    ) : (
+      <p className={styles.BannerOldRelease}>
+        This is <i>not</i> the latest stable release of Bioconductor. We
+        recommend keeping your installation of Bioconductor up-to-date.<br />
+        Click <Link className={styles.link} href="/packages">here</Link> to
+        see the latest stable release.
+      </p>
+    )
+
   return (
     <Layout>
       <Head>
@@ -246,6 +278,7 @@ export default function Releases({
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {bioc_release_banner}
       <main className="main">
         <Box
           sx={{
@@ -264,16 +297,6 @@ export default function Releases({
               Bioconductor release {bioc_release} | R version {r_version}{" "}
               (Snapshot date: {snapshot_date})
             </p>
-            {bioc_release == bioc_release_version_latest ? (
-              <p className={styles.highlight}>
-                This is the latest stable release of Bioconductor.
-              </p>
-            ) : (
-              <p className={styles.highlight}>
-                This is <i>not</i> the latest stable release of Bioconductor. We
-                recommend keeping your installation of Bioconductor up-to-date.
-              </p>
-            )}
           </Box>
           <Box>
             <fieldset className={styles.fieldset}>
@@ -318,10 +341,9 @@ export default function Releases({
             />
           </Box>
           <BiocReleaseButton
-            defaultValue={String(bioc_release)}
+            value={String(biocRelease)}
             options={bioc_release_version_options}
-            latest={bioc_release_version_latest}
-            templateUrl="/packages?release=${release}"
+            handleChange={handleChangeBiocRelease}
           />
         </Box>
       </main>
