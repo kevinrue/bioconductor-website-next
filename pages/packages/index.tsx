@@ -30,7 +30,16 @@ import styles from "./packages.module.css";
 //Write a fetcher function to wrap the native fetch function and return the result of a call to url in json format
 const fetcher = (url: URL) => fetch(url).then((res) => res.json());
 
-// Function used to sort table rows on the column of package names.
+// Options for filtering Bioconductor package types.
+const packageTypeOptions = [
+  { value: "All", label: "All" },
+  { value: "Software", label: "Software" },
+  { value: "AnnotationData", label: "AnnotationData" },
+  { value: "ExperimentData", label: "ExperimentData" },
+  { value: "Workflow", label: "Workflow" },
+];
+
+// sortPackageLinksByName sorts table rows on the column of package names.
 // A custom function is needed because the column contains a hyperlink, not simple text.
 // <https://react-data-table-component.netlify.app/?path=/docs/sorting-custom-column-sort--custom-column-sort>
 const sortPackageLinksByName = (rowA: any, rowB: any) => {
@@ -45,42 +54,7 @@ const sortPackageLinksByName = (rowA: any, rowB: any) => {
   return 0;
 };
 
-const paginationComponentOptions = {
-  noRowsPerPage: true,
-};
-
-const filterRowsByPackageName = (name: string, pattern: string) => {
-  try {
-    var matcher = new RegExp(pattern);
-  } catch (err) {
-    return false;
-  }
-  if (matcher.test(name)) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-const filterRowsByPackageType = (
-  name: any,
-  type: string,
-  biocviews: string[]
-) => {
-  if (type == "All") {
-    return true;
-  } else {
-    const package_biocviews = biocviews[name];
-    if (package_biocviews === null) {
-      return false;
-    } else if (package_biocviews.includes(type)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-};
-
+// Definitions of columns in the <DataTable> of packages.
 const table_columns = [
   {
     id: "package",
@@ -114,14 +88,55 @@ const table_columns = [
   },
 ];
 
-const typeOptions = [
-  { value: "All", label: "All" },
-  { value: "Software", label: "Software" },
-  { value: "AnnotationData", label: "AnnotationData" },
-  { value: "ExperimentData", label: "ExperimentData" },
-  { value: "Workflow", label: "Workflow" },
-];
+// paginationComponentOptions props for the <DataTable>
+const paginationComponentOptions = {
+  noRowsPerPage: true,
+};
 
+// filterRowsByPackageName filters packages that match the name pattern.
+// * name: Package name.
+// * pattern: Pattern to match.
+const filterRowsByPackageName = (name: string, pattern: string) => {
+  try {
+    var matcher = new RegExp(pattern);
+  } catch (err) {
+    return false;
+  }
+  if (matcher.test(name)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+// filterRowsByPackageType filters packages that match the selected type.
+// * name: Package name.
+// * type: Package type.
+// * biocviews: Dictionary of BiocViews. Keys are package names. Values are character lists of tags.
+// For TypeScript typing, see <https://www.carlrippon.com/typescript-dictionary/>
+const filterRowsByPackageType = (
+  name: string,
+  type: string,
+  biocviews: { [key: string]: string[] }
+) => {
+  if (type == "All") {
+    return true;
+  } else {
+    const package_biocviews = biocviews[name];
+    if (package_biocviews === null) {
+      return false;
+    } else if (package_biocviews.includes(type)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+};
+
+// buildPackageUrl builds the URL to each package in the table
+// * name: Package name
+// * query: Query information in the URL of the current page.
+// The function builds links to landing pages that correspond to the same Bioconductor release as the current page.
 const buildPackageUrl = (name: string, query: ParsedUrlQuery) => {
   let query_string =
     query.release === undefined
@@ -153,7 +168,7 @@ export default function Packages({
   useEffect(() => setBiocRelease(bioc_release), [bioc_release])
 
   // Debounce the string input on package names by 500ms
-  const [packageType, setPackageType] = useState(typeOptions[0].value);
+  const [packageType, setPackageType] = useState(packageTypeOptions[0].value);
   const debouncedPackageSearchString = useDebounce(packageSearchString, 500);
 
   //Set up SWR to run the fetcher function when calling "/api/staticdata"
@@ -305,7 +320,7 @@ export default function Packages({
                   value={packageType}
                   onChange={handleChangePackageType}
                 >
-                  {typeOptions.map((option) => (
+                  {packageTypeOptions.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
                       {option.label}
                     </MenuItem>
