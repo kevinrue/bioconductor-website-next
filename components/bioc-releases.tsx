@@ -15,15 +15,13 @@ export const releaseSort = (
 
 export const mapStringToBiocRelease = (
   query: string,
-  releases: string[],
   latest: string
 ) => {
   if (query == "latest") {
     return latest;
-  } else if (releases.includes(query)) {
-    return query;
   } else {
-    return null;
+    // Return query as-is, even if invalid
+    return query;
   }
 };
 

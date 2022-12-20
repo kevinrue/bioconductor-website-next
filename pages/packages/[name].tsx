@@ -14,6 +14,7 @@ import {
   releaseSort,
 } from "../../components/bioc-releases";
 import Layout from "../../components/layout";
+import BiocReleaseBanner from "../../components/BiocReleaseBanner";
 import BiocReleaseButton from "../../components/bioc-release-button";
 import styles from "./package.module.css";
 
@@ -113,20 +114,6 @@ export default function Package({
     router.push(href);
   };
 
-  const bioc_release_banner =
-    bioc_release == bioc_release_version_latest ? (
-      <p className={styles.BannerCurrentRelease}>
-        This is the latest stable release of Bioconductor!
-      </p>
-    ) : (
-      <p className={styles.BannerOldRelease}>
-        This is <i>not</i> the latest stable release of Bioconductor. We
-        recommend keeping your installation of Bioconductor up-to-date.<br />
-        Click <Link className={styles.link} href="/packages">here</Link> to
-        see the latest stable release.
-      </p>
-    )
-
   return (
     <Layout>
       <Head>
@@ -134,7 +121,7 @@ export default function Package({
         <meta name="description" content={package_data.Description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {bioc_release_banner}
+      <BiocReleaseBanner bioc_release={bioc_release} bioc_release_version_latest={bioc_release_version_latest} />
       <main className="main">
         <Box sx={{ display: "inline-flex", justifyContent: "center" }}>
           <Box
@@ -206,7 +193,6 @@ export async function getServerSideProps(context: { query: { release: string, na
       ? bioc_release_version_latest
       : mapStringToBiocRelease(
         String(query.release),
-        bioc_release_version_options,
         bioc_release_version_latest
       );
 
