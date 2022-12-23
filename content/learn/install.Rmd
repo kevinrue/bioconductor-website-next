@@ -1,10 +1,10 @@
 ---
-title: "Get started"
+title: "Install Bioconductor for the first time"
 description: |
   Welcome to the Bioconductor community!
 
   This guide details how to install the latest release of Bioconductor on your
-  computer.
+  computer for the first time.
 edited: "2022-11-29"
 compiled: "`r Sys.Date()`"
 output:
@@ -40,17 +40,41 @@ r_major_minor <- gsub(
 Welcome to the Bioconductor community!
 
 This guide details how to install the latest release of Bioconductor on your
-computer.
+computer for the first time.
 
-## Pre-requisites
+This process is different from updating your Bioconductor installation, which will be described in a separate guide (coming soon).
 
-### Install *R*
+## Install *R*
 
 The current release of Bioconductor is version `r bioc_major_minor`; it works with <i class="fab fa-r-project"></i> version `r r_major_minor`.
 Users of older <i class="fab fa-r-project"></i> versions must update their installation to take advantage of new features and to access packages that have been added to Bioconductor since the last release.
 
-Follow the instructions for your operating system in [this episode][bioc-intro-setup] of the Carpentries lesson "Introduction to data analysis with R and Bioconductor".
-The page also contains information to check which version of <i class="fab fa-r-project"></i> you are using; if you already have the correct version, you may not need to do anything!
+### Windows
+
+- Navigate to the [CRAN][cran-website] website.
+- Follow the links 'Download R for Windows' and 'install R for the first time'.
+- Click the link 'Download R-x.x.x for Windows' (`x.x.x` being the latest version of <i class="fab fa-r-project"></i>).
+- Run the `.exe` file that was just downloaded.
+
+### macOS
+
+- Navigate to the [CRAN][cran-website] website.
+- Follow the link 'Download R for macOS'.
+- Click on the `.pkg` file to download the latest <i class="fab fa-r-project"></i> version.
+- Double click on the downloaded file to install <i class="fab fa-r-project"></i>.
+
+Additionally:
+
+- It is also a good idea to install [XQuartz][xquartz] (needed by some packages).
+
+### Linux
+
+- Navigate to the [CRAN][cran-website] website.
+- Next to the link 'Download R for Linux', click on the name of your Linux distribution.
+- Follow the instructions on the web page.
+
+The [CRAN][cran-website] web pages provide information to get the most recent version of <i class="fab fa-r-project"></i> for common distributions.
+For most distributions, you could use your package manager (e.g., for Debian/Ubuntu run `sudo apt-get install r-base`, and for Fedora sudo `yum install R`), but we don’t recommend this approach as the versions provided by this are usually out of date.
 
 ## Install the BiocManager package
 
@@ -91,3 +115,4 @@ You are ready to install the latest version of more Bioconductor packages!
 
 [bioc-intro-setup]: https://carpentries-incubator.github.io/bioc-intro/setup.html
 [cran-website]: https://cran.r-project.org/
+[xquartz]: https://www.xquartz.org/
