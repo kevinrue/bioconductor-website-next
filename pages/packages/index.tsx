@@ -23,6 +23,7 @@ import {
   releaseSort,
 } from "../../components/bioc-releases";
 import useDebounce from "../../lib/useDebounce";
+import Loading from "../../components/loading";
 import BiocReleaseBanner from "../../components/BiocReleaseBanner";
 import BiocReleaseButton from "../../components/bioc-release-button";
 import Layout from "../../components/layout";
@@ -192,18 +193,18 @@ export default function Packages({
   );
 
   //Handle the error state
-  if (error_packages) return <div>Failed to load package information.</div>;
-  if (error_biocviews) return <div>Failed to load BiocViews information.</div>;
+  if (error_packages) return <Loading />;
+  if (error_biocviews) return <Loading />;
   if (error_snapshot_date)
-    return <div>Failed to load snapshot date information.</div>;
-  if (error_r_version) return <div>Failed to load R version information.</div>;
+    return <Loading />;
+  if (error_r_version) return <Loading />;
 
   //Handle the loading state
-  if (!data_packages) return <div>Loading package information...</div>;
-  if (!data_biocviews) return <div>Loading BiocViews information...</div>;
+  if (!data_packages) return <Loading />;
+  if (!data_biocviews) return <Loading />;
   if (!data_snapshot_date)
-    return <div>Loading snapshot date information...</div>;
-  if (!data_r_version) return <div>Loading R version information...</div>;
+    return <Loading />;
+  if (!data_r_version) return <Loading />;
 
   const snapshot_date = JSON.parse(data_snapshot_date).snapshot_date;
   const r_version = JSON.parse(data_r_version).r_version;
