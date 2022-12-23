@@ -61,7 +61,7 @@ export default function Learn() {
             <h3 id="beginners-tutorials">Tutorials</h3>
             <ul>
               <li>
-                <Link href={`${router.asPath}/get-started`}>Get started</Link>
+                <Link href={`${router.asPath}/install`}>Install Bioconductor for the first time</Link>
               </li>
             </ul>
             <h3 id="beginners-videos">Videos</h3>
