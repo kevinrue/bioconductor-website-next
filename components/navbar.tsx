@@ -57,6 +57,9 @@ export default function NavigationBar() {
             <Nav.Item className={styles.link}>
               <Nav.Link href="/packages">Packages</Nav.Link>
             </Nav.Item>
+            <Nav.Item className={styles.link}>
+              <Nav.Link href="/biocviews">BiocViews</Nav.Link>
+            </Nav.Item>
             <NavDropdown
               className={styles.navlink}
               title="Blog"
