@@ -145,27 +145,6 @@ export default function Packages({
     setPackageType(nodeIds)
   }
 
-  const biocviews_tree = <TreeView
-    aria-label="file system navigator"
-    defaultCollapseIcon={<ExpandMoreIcon />}
-    defaultExpandIcon={<ChevronRightIcon />}
-    sx={{
-      maxHeight: "600px",
-      flexGrow: 1,
-      width: 250,
-      overflowY: 'auto',
-      borderStyle: "solid",
-      borderColor: "lightgrey",
-      padding: "5px 10px",
-    }}
-    onNodeSelect={handleTreeViewSelect}
-  >
-    {build_subtree(biocviews_edges, "Software")}
-    {build_subtree(biocviews_edges, "AnnotationData")}
-    {build_subtree(biocviews_edges, "ExperimentData")}
-    {build_subtree(biocviews_edges, "Workflow")}
-  </TreeView>
-
   // filterRowsByBiocview filters packages that match the selected type.
   // * name: Package name.
   // * type: Package type.
@@ -219,27 +198,73 @@ export default function Packages({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="main">
-        <Box sx={{ display: "inline-flex", justifyContent: "center" }}>
+        <Box sx={{
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: 'wrap'
+        }}>
           <Box
-            component={Grid}
-            display={{ xs: "none", lg: "block" }}
+            display="flex"
             sx={{
-              position: "sticky",
-              alignSelf: "flex-start",
-              textAlign: "left",
-              top: "6rem",
-              width: "100%",
-              margin: "65px 15px",
-              maxWidth: "250px",
+              margin: {
+                xs: "20px 15px",
+                md: "30px 15px",
+                lg: "60px 15px",
+              },
+              width: {
+                xs: "100%",
+                md: "100%",
+                lg: "250px",
+              },
+              maxWidth: {
+                xs: "100%",
+                md: "800px",
+                lg: "800px",
+              },
             }}
           >
-            {biocviews_tree}
+            <TreeView
+              aria-label="biocviews navigator"
+              defaultCollapseIcon={<ExpandMoreIcon />}
+              defaultExpandIcon={<ChevronRightIcon />}
+              sx={{
+                width: "100%",
+                maxHeight: {
+                  xs: "300px",
+                  md: "500px",
+                  lg: "500px",
+                },
+                flexGrow: 1,
+                overflowY: 'auto',
+                borderStyle: "solid",
+                borderColor: "lightgrey",
+                padding: "10px 5px",
+              }}
+              onNodeSelect={handleTreeViewSelect}
+            >
+              {build_subtree(biocviews_edges, "Software")}
+              {build_subtree(biocviews_edges, "AnnotationData")}
+              {build_subtree(biocviews_edges, "ExperimentData")}
+              {build_subtree(biocviews_edges, "Workflow")}
+            </TreeView>
           </Box>
           <Box
             sx={{
-              width: "100%",
-              maxWidth: "850px",
-              margin: "0 15px",
+              width: {
+                xs: "100%",
+                sm: "800px",
+                lg: "850px",
+              },
+              maxWidth: {
+                xs: "550px",
+                sm: "850px",
+                lg: "850px",
+              },
+              margin: {
+                xs: "0px 5px",
+                md: "0px 5px",
+                lg: "0px 5px",
+              },
             }}
           >
             <h1>BiocViews</h1>
@@ -255,7 +280,7 @@ export default function Packages({
           </Box>
         </Box>
       </main>
-    </Layout>
+    </Layout >
   );
 }
 
