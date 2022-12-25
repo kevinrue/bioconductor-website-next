@@ -10,6 +10,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import TreeItem from '@mui/lab/TreeItem';
 import useSWR from "swr";
 // React
+import React, { useState } from "react";
 import DataTable from "react-data-table-component";
 import { getReleasesData } from "../../lib/bioc_releases";
 import {
@@ -90,6 +91,8 @@ export default function Packages({
 
   const query = router.query;
 
+  const [packageType, setPackageType] = useState('');
+
   //Set up SWR to run the fetcher function when calling "/api/staticdata"
   //There are 3 possible states: (1) loading when data is null (2) ready when the data is returned (3) error when there was an error fetching the data
   const { data: data_biocviews_edges, error: error_biocviews_edges } = useSWR(
@@ -100,16 +103,24 @@ export default function Packages({
     bioc_release ? `/api/${bioc_release}/packages` : null,
     fetcher
   );
+  const { data: data_biocviews, error: error_biocviews } = useSWR(
+    bioc_release ? `/api/${bioc_release}/biocviews` : null,
+    fetcher
+  );
 
   //Handle the error state
   if (error_biocviews_edges) return <Loading />;
   if (error_packages) return <Loading />;
+  if (error_biocviews) return <Loading />;
 
   //Handle the loading state
   if (!data_biocviews_edges) return <Loading />;
   if (!data_packages) return <Loading />;
+  if (!data_biocviews) return <Loading />;
 
   const biocviews_edges = JSON.parse(data_biocviews_edges);
+
+  const biocviews_data = JSON.parse(data_biocviews);
 
   const build_subtree = (edges: any, node: string) => {
     const subnodes = edges[node];
@@ -129,6 +140,11 @@ export default function Packages({
     }
   };
 
+  const handleTreeViewSelect = (event: React.SyntheticEvent, nodeIds: string) => {
+    console.log(nodeIds);
+    setPackageType(nodeIds)
+  }
+
   const biocviews_tree = <TreeView
     aria-label="file system navigator"
     defaultCollapseIcon={<ExpandMoreIcon />}
@@ -142,6 +158,7 @@ export default function Packages({
       borderColor: "lightgrey",
       padding: "5px 10px",
     }}
+    onNodeSelect={handleTreeViewSelect}
   >
     {build_subtree(biocviews_edges, "Software")}
     {build_subtree(biocviews_edges, "AnnotationData")}
@@ -149,7 +166,34 @@ export default function Packages({
     {build_subtree(biocviews_edges, "Workflow")}
   </TreeView>
 
+  // filterRowsByBiocview filters packages that match the selected type.
+  // * name: Package name.
+  // * type: Package type.
+  // * biocviews: Dictionary of BiocViews. Keys are package names. Values are character lists of tags.
+  // For TypeScript typing, see <https://www.carlrippon.com/typescript-dictionary/>
+  const filterRowsByBiocview = (
+    name: string,
+    type: string,
+    biocviews: { [key: string]: string[] }
+  ) => {
+    if (type === '') {
+      return true;
+    } else {
+      const package_biocviews = biocviews[name];
+      if (package_biocviews === null) {
+        return false;
+      } else if (package_biocviews.includes(type)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  };
+
   const table_data = JSON.parse(data_packages)
+    .filter((object: any) =>
+      filterRowsByBiocview(object.Package, packageType, biocviews_data)
+    )
     .map((object: any) => {
       return {
         Package: (
