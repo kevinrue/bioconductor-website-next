@@ -122,6 +122,19 @@ export default function Packages({
 
   const biocviews_data = JSON.parse(data_biocviews);
 
+  const countPackageWithBiocview = (name: string, biocviews: { [key: string]: string[] }) => {
+    const hits = Object.entries(biocviews).filter(([key, value]) => {
+      if (value === null) {
+        return (false)
+      } else if (value.includes(name)) {
+        return (true)
+      } else {
+        return (false)
+      }
+    })
+    return (hits.length)
+  }
+
   const build_subtree = (edges: any, node: string) => {
     const subnodes = edges[node];
 
@@ -130,20 +143,44 @@ export default function Packages({
         return (build_subtree(edges, subnode));
       });
       return (
-        <TreeItem nodeId={node} label={node}>
+        <TreeItem nodeId={node} label={node + " (" + countPackageWithBiocview(node, biocviews_data) + ")"}>
           {subtree}
         </TreeItem >
       )
 
     } else {
-      return (<TreeItem nodeId={node} label={node} />)
+      return (<TreeItem nodeId={node} label={node + " (" + countPackageWithBiocview(node, biocviews_data) + ")"} />)
     }
   };
 
   const handleTreeViewSelect = (event: React.SyntheticEvent, nodeIds: string) => {
-    console.log(nodeIds);
     setPackageType(nodeIds)
   }
+
+  const biocviews_tree = <TreeView
+    aria-label="biocviews navigator"
+    defaultCollapseIcon={<ExpandMoreIcon />}
+    defaultExpandIcon={<ChevronRightIcon />}
+    sx={{
+      width: "100%",
+      maxHeight: {
+        xs: "300px",
+        md: "500px",
+        lg: "500px",
+      },
+      flexGrow: 1,
+      overflowY: 'auto',
+      borderStyle: "solid",
+      borderColor: "lightgrey",
+      padding: "10px 5px",
+    }}
+    onNodeSelect={handleTreeViewSelect}
+  >
+    {build_subtree(biocviews_edges, "Software")}
+    {build_subtree(biocviews_edges, "AnnotationData")}
+    {build_subtree(biocviews_edges, "ExperimentData")}
+    {build_subtree(biocviews_edges, "Workflow")}
+  </TreeView>;
 
   // filterRowsByBiocview filters packages that match the selected type.
   // * name: Package name.
@@ -209,44 +246,24 @@ export default function Packages({
               margin: {
                 xs: "20px 15px",
                 md: "30px 15px",
-                lg: "60px 15px",
+                lg: "60px 30px",
+                xl: "60px 30px",
               },
               width: {
                 xs: "100%",
                 md: "100%",
                 lg: "250px",
+                xl: "300px",
               },
               maxWidth: {
                 xs: "100%",
                 md: "800px",
                 lg: "800px",
+                xl: "800px",
               },
             }}
           >
-            <TreeView
-              aria-label="biocviews navigator"
-              defaultCollapseIcon={<ExpandMoreIcon />}
-              defaultExpandIcon={<ChevronRightIcon />}
-              sx={{
-                width: "100%",
-                maxHeight: {
-                  xs: "300px",
-                  md: "500px",
-                  lg: "500px",
-                },
-                flexGrow: 1,
-                overflowY: 'auto',
-                borderStyle: "solid",
-                borderColor: "lightgrey",
-                padding: "10px 5px",
-              }}
-              onNodeSelect={handleTreeViewSelect}
-            >
-              {build_subtree(biocviews_edges, "Software")}
-              {build_subtree(biocviews_edges, "AnnotationData")}
-              {build_subtree(biocviews_edges, "ExperimentData")}
-              {build_subtree(biocviews_edges, "Workflow")}
-            </TreeView>
+            {biocviews_tree}
           </Box>
           <Box
             sx={{
