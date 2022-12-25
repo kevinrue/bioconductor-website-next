@@ -133,7 +133,15 @@ export default function Packages({
     aria-label="file system navigator"
     defaultCollapseIcon={<ExpandMoreIcon />}
     defaultExpandIcon={<ChevronRightIcon />}
-    sx={{ height: "100%", flexGrow: 1, maxWidth: 200, overflowY: 'auto' }}
+    sx={{
+      maxHeight: "600px",
+      flexGrow: 1,
+      width: 250,
+      overflowY: 'auto',
+      borderStyle: "solid",
+      borderColor: "lightgrey",
+      padding: "5px 10px",
+    }}
   >
     {build_subtree(biocviews_edges, "Software")}
     {build_subtree(biocviews_edges, "AnnotationData")}
@@ -178,7 +186,7 @@ export default function Packages({
               top: "6rem",
               width: "100%",
               margin: "65px 15px",
-              maxWidth: "200px",
+              maxWidth: "250px",
             }}
           >
             {biocviews_tree}
